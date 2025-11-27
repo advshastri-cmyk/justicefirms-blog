@@ -1,0 +1,29 @@
+{% extends "layouts/base.njk" %}
+{% block content %}
+<article class="article-container" itemscope itemtype="https://schema.org/Article">
+  <header class="article-header">
+    <h1 itemprop="headline">{{ title }}</h1>
+    <p class="meta">Published on <time datetime="{{ date | date: '%Y-%m-%d' }}">{{ date | readableDate }}</time> • {{ category }}</p>
+  </header>
+
+  {% include "components/author-box.njk" with {author: author} %}
+
+  <div class="article-body" itemprop="articleBody">
+    {{ content | safe }}
+  </div>
+
+  <div class="share-box">
+    <span>Share:</span>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ site.url }}{{ url }}">LinkedIn</a>
+    <a href="https://twitter.com/intent/tweet?url={{ site.url }}{{ url }}&text={{ title | urlEncode }}">Twitter</a>
+    <a href="https://api.whatsapp.com/send?text={{ site.url }}{{ url }}">WhatsApp</a>
+  </div>
+
+  {% include "partials/related.njk" %}
+  <div class="cta-box">
+    <h3>Consult an Expert Today</h3>
+    <p>For case-specific advice, contact our legal team.</p>
+    <a class="cta-btn" href="https://justicefirms.com/contact" target="_blank" rel="noopener">Contact Us</a>
+  </div>
+</article>
+{% endblock %}
