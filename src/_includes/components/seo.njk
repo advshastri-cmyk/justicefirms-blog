@@ -1,0 +1,16 @@
+{% set p_title = (title) ? (title ~ " — " ~ site.title) : site.title %}
+<title>{{ p_title }}</title>
+<meta name="description" content="{{ description or site.description }}">
+<link rel="canonical" href="{{ canonical or (site.url ~ (page.url or '/')) }}">
+
+<meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:title" content="{{ p_title }}">
+<meta property="og:description" content="{{ description or site.description }}">
+<meta property="og:url" content="{{ canonical or (site.url ~ (page.url or '/')) }}">
+<meta property="og:type" content="{{ page.template ? 'article' : 'website' }}">
+
+{# og image if generated #}
+{% if page.fileSlug %}
+<meta property="og:image" content="{{ site.url }}/_og/{{ page.fileSlug }}.png">
+<meta property="twitter:image" content="{{ site.url }}/_og/{{ page.fileSlug }}.png">
+{% endif %}
