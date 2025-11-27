@@ -1,0 +1,74 @@
+/* General Styling for Justice Firms Blog */
+
+/* Body और मुख्य टेक्स्ट का फ़ॉन्ट और रंग */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8; /* हल्का ग्रे बैकग्राउंड */
+    color: #333; /* गहरा ग्रे टेक्स्ट */
+}
+
+/* हेडर (Top Bar) स्टाइलिंग */
+header {
+    background-color: #004080; /* गहरा नीला */
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.2em;
+}
+
+header p {
+    margin-top: 5px;
+    font-size: 1.1em;
+}
+
+/* मुख्य सामग्री (Main Content Area) */
+main {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* लेखों की सूची या बॉक्स */
+section {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-left: 5px solid #004080; /* नीली साइडलाइन */
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+section h3 a {
+    color: #004080; /* लिंक का रंग गहरा नीला */
+    text-decoration: none;
+    font-size: 1.5em;
+    transition: color 0.3s;
+}
+
+section h3 a:hover {
+    color: #007bff; /* होवर पर हल्का नीला */
+}
+
+/* फ़ुटर स्टाइलिंग */
+footer {
+    background-color: #333; /* गहरा ग्रे फ़ुटर */
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+    font-size: 0.9em;
+}
+
+footer a {
+    color: #87ceeb; /* फ़ुटर लिंक के लिए हल्का नीला */
+    text-decoration: none;
+}
