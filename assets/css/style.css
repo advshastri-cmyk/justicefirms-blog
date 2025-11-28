@@ -312,6 +312,55 @@ a:hover {
   padding-left: 14px;
   font-size: 0.85rem;
 }
+/* ---------- Author box ---------- */
+
+.author-box {
+  max-width: 780px;
+  margin: 20px auto 0;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.author-avatar-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background: #050816;
+  color: #f9fafb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.author-text {
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.author-name {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.author-title {
+  font-size: 0.82rem;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.author-note {
+  margin: 4px 0 0;
+  font-size: 0.8rem;
+  color: #6b7280;
+}
 
 /* Post footer share bar */
 
