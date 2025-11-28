@@ -11,124 +11,126 @@ author: "Adv. Shankar Shastri"
   Bail Conditions · {{ page.date | date: "%d %b %Y" }}
 </div>
 
-<h1>जमानत की शर्तें — बदलाव, उल्लंघन और राहत कैसे मिलती है?</h1>
+<h1>जमानत की शर्तें — बदलाव, उल्लंघन और राहत कैसे मिलती है? | BNSS 2023 Legal Guide</h1>
+
+<div class="series-nav">
+<strong>📚 Bail Law Mastery Series:</strong><br>
+1) <a href="/criminal-law/rights/2025/11/29/bnss-regular-anticipatory-bail/">Regular vs Anticipatory Bail</a> ·
+2) <a href="/criminal-law/rights/2025/11/30/default-bail-under-bnss-2023/">Default Bail</a> ·
+3) <a href="/criminal-law/rights/2025/12/02/anticipatory-bail-strategy-2025-guide/">Anticipatory Bail Strategy</a> ·
+4) <a href="/criminal-law/family/2025/12/03/bail-in-498a-cruelty-domestic-violence-cases/">Matrimonial Cases Bail</a> ·
+5) <a href="/criminal-law/rights/2025/12/04/bail-cancellation-law-bnss-2023/">Bail Cancellation</a> ·
+6) <a href="/criminal-law/rights/2025/12/05/bail-conditions-violation-relief/">Bail Conditions & Relief</a> ·
+7) <a href="/criminal-law/drafting/2025/12/06/bail-application-drafting-guide/">Bail Drafting Guide</a> ·
+8) <a href="/criminal-law/procedure/2025/12/07/custody-remand-law-bnss-2023/">Custody & Remand under BNSS</a>
+</div>
 
 <p>
-जमानत का मतलब केवल रिहाई नहीं है —  
-बल्कि एक <strong>नियंत्रित और सशर्त स्वतंत्रता</strong> है।
+जमानत का मतलब केवल रिहाई नहीं —  
+बल्कि एक <strong>सशर्त और नियम-आधारित स्वतंत्रता</strong> है।
 </p>
 
 <p>
-BNSS 2023 ने Bail Conditions को अधिक स्पष्ट और संतुलित रूप दिया है,
-ताकि न्यायिक प्रक्रिया सुरक्षित रहे और आरोपी की स्वतंत्रता भी बनी रहे।
-</p>
-
-<hr>
-
-<h2>1. जमानत की सामान्य शर्तें कौन सी होती हैं?</h2>
-
-<ul>
-<li>गवाहों/पीड़ितों से संपर्क नहीं करेंगे</li>
-<li>जांच अधिकारी को सहयोग करेंगे</li>
-<li>पते/फोन नंबर में बदलाव पर सूचना देंगे</li>
-<li>देश छोड़ने के लिए पहले अनुमति लेंगे</li>
-<li>अदालत में नियत तारीखों पर उपस्थित रहेंगे</li>
-</ul>
-
-<p>
-इनका उद्देश्य — <strong>निष्पक्ष सुनवाई की रक्षा</strong> करना।
+BNSS 2023 ने जमानत की शर्तों को और <strong>कानूनी, तकनीकी और व्यवहारिक</strong> रूप से मजबूत किया है,
+ताकि न तो आरोपी को अनावश्यक दंड मिले और न ही न्याय प्रक्रिया प्रभावित हो।
 </p>
 
 <hr>
 
-<h2>2. BNSS 2023 में विशेष परिवर्तन</h2>
+<h2>1. सामान्य जमानत शर्तें</h2>
 
 <ul>
-<li>Electronic Monitoring का उपयोग बढ़ा</li>
-<li>Arrest Memo Tracking से उल्लंघन का प्रूफ आसान</li>
-<li>पीड़ित/गवाह सुरक्षा को प्राथमिकता</li>
-<li>Hard Bail Conditions भी समय-समय पर राहतयोग्य</li>
+<li>गवाहों/पीड़ित से संपर्क न करना</li>
+<li>जांच अधिकारी को पूरा सहयोग देना</li>
+<li>निवास/मोबाइल नंबर में बदलाव की सूचना देना</li>
+<li>देश छोड़ने के लिए कोर्ट की अनुमति लेना</li>
+<li>सभी Court Dates पर उपस्थित रहना</li>
+</ul>
+
+<p><strong>Safeguard = Fair Trial Guarantee</strong></p>
+
+<hr>
+
+<h2>2. BNSS 2023 — नए बदलाव</h2>
+
+<ul>
+<li>Electronic Monitoring का प्रावधान</li>
+<li>Arrest Memo Tracking → Violation Proof आसान</li>
+<li>पीड़ित और गवाह सुरक्षा पर प्राथमिक ध्यान</li>
+<li>कठोर शर्तें → बदलने योग्य परिस्थितियों के अनुसार</li>
 </ul>
 
 <p>
-कानून संवेदनशील भी है और सख्त भी।
+<strong>Law = Strict + Humane</strong>
 </p>
 
 <hr>
 
-<h2>3. Bail Modification — शर्तें कैसे कम/बदली जाती हैं?</h2>
+<h2>3. Bail Modification — शर्तें कैसे बदली जाती हैं?</h2>
 
-<p>
-अदालत यह देखती है:
+<p><strong>Application Before Same Court</strong> या  
+<strong>Higher Court में Revision</strong> यदि उचित कारण हों।
 </p>
+
+<p>Grounds Courts accept:</p>
 
 <ul>
-<li>आरोपी का अच्छा व्यवहार</li>
-<li>जांच पूरी/आगे का खतरा कम</li>
-<li>व्यावसायिक/परिवारिक कठिनाइयाँ (Ex: Passport / Travel Issue)</li>
+<li>आरोपी का अब तक अनुशासित व्यवहार</li>
+<li>Investigation progress — खतरा कम</li>
+<li>व्यावसायिक/परिवारिक कठिनाइयाँ</li>
+<li>Passport/Travel आवश्यकताएँ Genuine होना</li>
 </ul>
 
-<p>
-<strong>Application Before Same Court</strong> (जिसने जमानत दी थी)  
-या  
-<strong>ऊपरी अदालत</strong> यदि उचित कारण हो।
-</p>
-
-<p><strong>Case Example:</strong> बच्चों की परीक्षा / मेडिकल Treatment के लिए permission दी गई।</p>
+<p><strong>Case Example:</strong> Child Education / Medical Treatment → Relaxation Granted</p>
 
 <hr>
 
 <h2>4. शर्तें तोड़ने पर क्या होता है?</h2>
 
 <ul>
-<li>जमानत की समीक्षा</li>
-<li>सख्त शर्तें लगना</li>
-<li>वारंट जारी</li>
-<li>जमानत रद्द (Serious Cases)</li>
+<li>Warning + Stricter Conditions</li>
+<li>Non-cooperation → Summon/Warrant</li>
+<li><strong>Intentional Violation → Bail Cancellation</strong></li>
 </ul>
 
-<p><strong>बदनीयती दिखाई तो → Immediate Custody possible</strong></p>
+<p><strong>Misuse of Liberty → Immediate Custody Possible</strong></p>
 
 <hr>
 
-<h2>5. Court किन स्थितियों में कठोर राहत नहीं देती?</h2>
+<h2>5. किन मामलों में राहत मुश्किल हो जाती है?</h2>
 
 <ul>
-<li>पीड़ित को प्रत्यक्ष खतरा</li>
-<li>साक्ष्य से छेड़छाड़</li>
-<li>Repeated non-appearance</li>
-<li>हिंसात्मक या संगठित अपराध</li>
+<li>पीड़ित/गवाह की सुरक्षा को खतरा</li>
+<li>Evidence Tampering</li>
+<li>Repeated Absconding</li>
+<li>संगठित/हिंसात्मक अपराध</li>
 </ul>
 
-<p>
-<strong>अपराध + जोखिम = सख्त प्रतिबंध</strong>
-</p>
+<p><strong>Risk Appreciation → Court Priority</strong></p>
 
 <hr>
 
-<h2>6. वकीलों के लिए Drafting Strategy</h2>
+<h2>6. Drafting Strategy — Defence Lawyers</h2>
 
 <ul>
-<li>Grounds बदल चुके हों — वह स्पष्ट लिखें</li>
-<li>बॉन्ड बढ़ाने/नए Surety का प्रस्ताव दें</li>
-<li>आगे के सहयोग का written assurance</li>
-<li>Family care/employment hardship पर focus</li>
+<li>Behaviour Compliance Report Annex करें</li>
+<li>Cooperation History Highlight करें</li>
+<li>New Circumstances clearly explain करें</li>
+<li>Less-Invasive Monitoring Option Offer करें</li>
 </ul>
 
-<p><strong>Key Tip:</strong> “Repeated compliance” को Highlight करें</p>
+<p><strong>Key Principle:</strong> Proof of Good Conduct → Best Argument</p>
 
 <hr>
 
-<h2>7. Practical Examples</h2>
+<h2>7. Practical Scenarios</h2>
 
-<p><strong>Example-1 — Travel Permission</strong></p>
-<p>Job requirement, air-ticket + itinerary attach करें → Usually granted</p>
-
-<p><strong>Example-2 — Reporting Interval</strong></p>
-<p>Monthly report → Changed to once in 2 months after cooperation</p>
-
-<p><strong>Example-3 — Phone Restriction</strong></p>
-<p>Digital Forensics खत्म → Electronics वापस करने के आदेश</p>
+<table>
+<tr><th>Situation</th><th>Likely Court View</th></tr>
+<tr><td>Job Travel Abroad</td><td>Permission Allowed if itinerary attached</td></tr>
+<tr><td>Weekly Reporting → Monthly Request</td><td>Granted after cooperation record</td></tr>
+<tr><td>Seized Items Return</td><td>Forensic Completed → Allowed</td></tr>
+</table>
 
 <hr>
 
@@ -136,13 +138,12 @@ BNSS 2023 ने Bail Conditions को अधिक स्पष्ट और �
 
 <p>
 जमानत की शर्तों का उद्देश्य —  
-<strong>स्वतंत्रता, न्याय प्रक्रिया और समाज सुरक्षा का संतुलन</strong> बनाए रखना है।
+<strong>आरोपी की स्वतंत्रता, न्याय प्रक्रिया और समाज सुरक्षा</strong>
+तीनों का संतुलन बनाए रखना है।
 </p>
 
-<p>
-<strong>जमानत मिलना पहला कदम है —  
-जमानत को बनाए रखना असली कानूनी समझ है।</strong>
-</p>
+<p><strong>जमानत मिलना पहला कदम है —  
+जमानत बनाए रखना असली कानूनी समझ है।</strong></p>
 
 <div class="author-box">
   <div class="author-avatar-circle">SS</div>
@@ -150,9 +151,21 @@ BNSS 2023 ने Bail Conditions को अधिक स्पष्ट और �
     <div class="author-name">Adv. Shankar Shastri</div>
     <div class="author-title">Advocate & Legal Consultant, JusticeFirms</div>
     <div class="author-note">
-      यह लेख केवल सामान्य जानकारी पर आधारित है। किसी भी मामले में व्यक्तिगत सलाह आवश्यक है।
+      यह जानकारी सामान्य मार्गदर्शन हेतु है। विशेष परिस्थितियों में कानूनी सलाह आवश्यक है।
     </div>
   </div>
+</div>
+
+<div class="series-nav">
+<strong>📚 Bail Law Mastery Series:</strong><br>
+1) <a href="/criminal-law/rights/2025/11/29/bnss-regular-anticipatory-bail/">Regular vs Anticipatory Bail</a> ·
+2) <a href="/criminal-law/rights/2025/11/30/default-bail-under-bnss-2023/">Default Bail</a> ·
+3) <a href="/criminal-law/rights/2025/12/02/anticipatory-bail-strategy-2025-guide/">Anticipatory Bail Strategy</a> ·
+4) <a href="/criminal-law/family/2025/12/03/bail-in-498a-cruelty-domestic-violence-cases/">Matrimonial Cases Bail</a> ·
+5) <a href="/criminal-law/rights/2025/12/04/bail-cancellation-law-bnss-2023/">Bail Cancellation</a> ·
+6) <a href="/criminal-law/rights/2025/12/05/bail-conditions-violation-relief/">Bail Conditions & Relief</a> ·
+7) <a href="/criminal-law/drafting/2025/12/06/bail-application-drafting-guide/">Bail Drafting Guide</a> ·
+8) <a href="/criminal-law/procedure/2025/12/07/custody-remand-law-bnss-2023/">Custody & Remand under BNSS</a>
 </div>
 
 </div>
