@@ -1,815 +1,319 @@
 ---
 layout: default
-title: "FIR & Bail Rights in India: A Practical Guide under BNSS 2023"
+title: "FIR & Bail Rights in India – A Practical Guide under BNSS 2023"
 categories: [Criminal Law, Rights]
 ---
 
 <style>
-  /* WRAPPER */
-  .fir-bnss-page {
-    max-width: 1120px;
+  /* ================================
+     Guardian-Style Legal Article
+     ================================ */
+
+  body {
+    background: #f2f3f5;
+  }
+
+  .article-wrap {
+    max-width: 960px;
     margin: 0 auto;
-    padding: 24px 16px 48px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    color: #000000; /* PURE BLACK TEXT */
-    background: #f3f4f6;
+    padding: 32px 16px 48px;
+    font-family: Georgia, "Times New Roman", serif;
   }
 
-  @media (min-width: 768px) {
-    .fir-bnss-page {
-      padding: 40px 16px 64px;
-    }
-  }
-
-  /* GRID LAYOUT */
-  .fir-bnss-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  @media (min-width: 960px) {
-    .fir-bnss-grid {
-      grid-template-columns: minmax(0, 2.1fr) minmax(260px, 0.9fr);
-      align-items: flex-start;
-      gap: 24px;
-    }
-  }
-
-  /* MAIN CARD */
-  .fir-main-card {
-    background: #ffffff;
-    border-radius: 18px;
-    padding: 24px 20px 28px;
-    border: 1px solid #d1d5db;
-    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
-  }
-
-  @media (min-width: 768px) {
-    .fir-main-card {
-      padding: 28px 28px 34px;
-    }
+  .article-content {
+    max-width: 720px;
   }
 
   /* META + TITLE */
-  .fir-post-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 14px;
-    align-items: center;
+  .meta {
+    font-family: system-ui;
     font-size: 13px;
-    color: #111827;
-    margin-bottom: 10px;
-  }
-
-  .fir-meta-dot {
-    width: 4px;
-    height: 4px;
-    border-radius: 999px;
-    background: #6b7280;
-  }
-
-  .fir-meta-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 10px;
-    border-radius: 999px;
-    border: 1px solid #1d4ed8;
-    background: #dbeafe;
-    color: #111827;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-size: 11px;
-  }
-
-  .fir-post-title {
-    font-family: "Georgia", "Times New Roman", serif;
-    font-size: clamp(26px, 3.4vw, 34px);
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    font-weight: 700;
-    color: #000000;
-    margin-bottom: 8px;
-  }
-
-  .fir-post-subtitle {
-    font-size: 14px;
-    color: #111827;
-    max-width: 660px;
-    margin-bottom: 18px;
-  }
-
-  .fir-tag-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 18px;
-  }
-
-  .fir-tag-chip {
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 4px 9px;
-    border-radius: 999px;
-    border: 1px solid #9ca3af;
-    color: #000000;
-    background: #e5e7eb;
-  }
-
-  .fir-intro-callout {
-    border-radius: 12px;
-    padding: 12px 14px;
-    background: #fef3c7;
-    border-left: 4px solid #b45309;
-    font-size: 13px;
-    color: #111827;
-    margin-bottom: 24px;
-  }
-
-  .fir-intro-callout strong {
-    color: #92400e;
-  }
-
-  /* BODY */
-  .fir-post-body {
-    font-size: 15px;
-    line-height: 1.7;
-    color: #111827;
-  }
-
-  .fir-post-body p {
-    margin-bottom: 14px;
-  }
-
-  .fir-post-body h2 {
-    font-family: "Georgia", "Times New Roman", serif;
-    font-size: 20px;
-    margin-top: 26px;
-    margin-bottom: 8px;
-    padding-bottom: 3px;
-    border-bottom: 2px solid #111827;
-    color: #000000;
-  }
-
-  .fir-post-body h3 {
-    font-size: 16px;
-    margin-top: 20px;
+    color: #444;
     margin-bottom: 6px;
-    font-weight: 600;
-    color: #000000;
+  }
+  .meta span+span::before {
+    content: " · ";
+    color: #777;
   }
 
-  .fir-section-label {
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: #6b7280;
-    margin-bottom: 4px;
-  }
-
-  .fir-divider {
-    border: none;
-    border-top: 1px solid #e5e7eb;
-    margin: 20px 0;
-  }
-
-  .fir-inline-highlight {
-    padding: 1px 7px;
-    border-radius: 999px;
-    background: #dbeafe;
+  .kicker {
+    font-family: system-ui;
     font-size: 12px;
-    font-weight: 500;
-    color: #1e40af;
-  }
-
-  /* KEY POINTS */
-  .fir-key-points {
-    display: grid;
-    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #c81e1e;
     margin-bottom: 8px;
   }
 
-  .fir-key-point-item {
-    display: flex;
-    gap: 10px;
-    font-size: 14px;
-    align-items: flex-start;
-  }
-
-  .fir-key-point-bullet {
-    margin-top: 2px;
-    min-width: 20px;
-    height: 20px;
-    border-radius: 999px;
-    border: 1px solid #1d4ed8;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
+  h1 {
+    font-size: 35px;
+    line-height: 1.15;
+    margin: 6px 0 10px;
+    color: #111;
     font-weight: 700;
-    color: #1d4ed8;
-    background: #eff6ff;
   }
 
-  .fir-key-point-text strong {
-    font-weight: 600;
-    color: #000000;
+  .standfirst {
+    font-family: system-ui;
+    font-size: 17px;
+    line-height: 1.7;
+    color: #222;
+    margin-bottom: 18px;
+    max-width: 650px;
   }
 
-  .fir-tip-block,
-  .fir-note-block {
-    margin: 16px 0;
-    padding: 12px 14px;
-    border-radius: 10px;
-    font-size: 13px;
-    border: 1px solid #d1d5db;
-    background: #f9fafb;
-    color: #111827;
-  }
-
-  .fir-tip-block strong,
-  .fir-note-block strong {
-    display: inline-block;
-    margin-bottom: 2px;
-    font-size: 11px;
-    letter-spacing: 0.14em;
+  /* TAGS */
+  .tags {
+    font-family: system-ui;
+    font-size: 12px;
+    color: #555;
     text-transform: uppercase;
+    letter-spacing: .11em;
+    margin-bottom: 22px;
+  }
+  .tags span+span::before {
+    content: " • ";
+    padding: 0 6px;
+    color: #999;
   }
 
-  .fir-tip-block {
-    border-color: #2563eb;
-    background: #dbeafe;
+  .hr-top {
+    border: none;
+    border-top: 3px solid #111;
+    width: 48px;
+    margin: 0 0 24px 0;
   }
 
-  .fir-tip-block strong {
-    color: #1d4ed8;
+  /* BODY TEXT */
+  .content {
+    font-family: system-ui;
+    font-size: 17px;
+    line-height: 1.78;
+    color: #111;
   }
 
-  .fir-note-block {
-    border-color: #ea580c;
-    background: #fffbeb;
+  .content h2 {
+    font-family: Georgia;
+    font-size: 23px;
+    margin-top: 32px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 6px;
+    color: #111;
   }
 
-  .fir-note-block strong {
-    color: #b45309;
+  .content h3 {
+    font-size: 19px;
+    margin-top: 20px;
+    color: #000;
   }
 
-  .fir-checklist {
-    margin: 10px 0 4px;
-    padding-left: 0;
-    list-style: none;
+  .content p {
+    margin: 12px 0 14px;
   }
 
-  .fir-checklist li {
-    display: flex;
-    gap: 8px;
-    align-items: flex-start;
-    font-size: 14px;
+  .content ul {
+    margin: 10px 0 18px 22px;
+  }
+
+  .content li {
     margin-bottom: 6px;
   }
 
-  .fir-check-icon {
-    margin-top: 2px;
-    width: 18px;
-    height: 18px;
-    border-radius: 999px;
-    border: 1px solid #15803d;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    font-weight: 700;
-    color: #166534;
-    background: #dcfce7;
-    flex-shrink: 0;
+  .soft-hr {
+    border: none;
+    border-top: 1px solid #e3e3e3;
+    margin: 26px 0;
   }
 
-  .fir-strong {
-    font-weight: 600;
-    color: #000000;
+  /* BLOCKQUOTE */
+  blockquote {
+    margin: 16px 0;
+    padding: 12px 16px;
+    border-left: 4px solid #0044cc;
+    background: #eef2f7;
+    font-size: 16px;
+    color: #2a2a2a;
+  }
+
+  blockquote strong {
+    color: #111;
   }
 
   /* TABLE */
-  .fir-table-wrap {
-    margin: 10px 0 16px;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid #d1d5db;
-    background: #f9fafb;
-  }
-
-  .fir-table-scroll {
-    width: 100%;
+  .table-wrap {
+    margin: 10px 0 18px;
     overflow-x: auto;
   }
-
-  .fir-table-modern {
+  table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 14px;
-  }
-
-  .fir-table-modern th,
-  .fir-table-modern td {
-    padding: 8px 10px;
-    border-bottom: 1px solid #e5e7eb;
-  }
-
-  .fir-table-modern th {
-    text-align: left;
-    background: #111827;
-    font-weight: 600;
-    color: #ffffff;
-  }
-
-  .fir-table-modern tr:last-child td {
-    border-bottom: none;
-  }
-
-  .fir-table-modern tr:nth-child(even) td {
-    background: #f3f4f6;
-  }
-
-  /* METRICS + TIMELINE */
-  .fir-metrics-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin: 8px 0 4px;
-    font-size: 12px;
-    color: #111827;
-  }
-
-  .fir-metric-pill {
-    padding: 4px 9px;
-    border-radius: 999px;
-    background: #e5e7eb;
-    border: 1px solid #cbd5e1;
-  }
-
-  .fir-metric-pill strong {
-    font-weight: 600;
-    color: #000000;
-  }
-
-  .fir-timeline-list {
-    margin: 8px 0;
-    padding-left: 0;
-    list-style: none;
-  }
-
-  .fir-timeline-list li {
-    position: relative;
-    padding-left: 20px;
-    font-size: 14px;
-    margin-bottom: 6px;
-    color: #111827;
-  }
-
-  .fir-timeline-list li::before {
-    content: "";
-    position: absolute;
-    left: 6px;
-    top: 8px;
-    width: 7px;
-    height: 7px;
-    border-radius: 999px;
-    background: #facc15;
-  }
-
-  /* FAQ */
-  .fir-faq-grid {
-    display: grid;
-    gap: 12px;
-    margin-top: 10px;
-  }
-
-  .fir-faq-card {
-    border-radius: 10px;
-    border: 1px solid #d1d5db;
-    padding: 10px 12px;
-    background: #f9fafb;
-  }
-
-  .fir-faq-q {
-    font-size: 14px;
-    font-weight: 600;
-    color: #000000;
-    margin-bottom: 4px;
-  }
-
-  .fir-faq-a {
-    font-size: 13px;
-    color: #111827;
-  }
-
-  .fir-faq-list-inline {
-    font-size: 13px;
-    margin-top: 4px;
-  }
-
-  .fir-faq-list-inline li {
-    margin-left: 18px;
-  }
-
-  /* CONCLUSION */
-  .fir-conclusion-block {
-    margin-top: 24px;
-    padding: 14px 14px 12px;
-    border-radius: 12px;
-    border: 1px solid #111827;
-    background: #111827;
-    color: #f9fafb;
-  }
-
-  .fir-conclusion-quote {
     font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 8px;
   }
-
-  .fir-author-footnote {
-    margin-top: 8px;
-    font-size: 12px;
-    color: #e5e7eb;
+  table th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
   }
-
-  /* SIDEBAR */
-  .fir-sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  th {
+    background: #111;
+    color: #fff;
   }
-
-  @media (min-width: 960px) {
-    .fir-sidebar-sticky {
-      position: sticky;
-      top: 90px;
-    }
-  }
-
-  .fir-sidebar-card {
-    border-radius: 16px;
-    padding: 16px 14px;
-    background: #020617;
-    color: #ffffff;
-    border: 1px solid #facc15;
-    box-shadow: 0 16px 30px rgba(15, 23, 42, 0.6);
-  }
-
-  .fir-sidebar-card h3 {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 4px;
-    color: #ffffff;
-  }
-
-  .fir-sidebar-card p {
-    font-size: 13px;
-    margin-bottom: 10px;
-    color: #e5e7eb;
-  }
-
-  .fir-sidebar-list {
-    list-style: none;
-    padding-left: 0;
-    margin: 8px 0 0;
-    font-size: 13px;
-    color: #e5e7eb;
-  }
-
-  .fir-sidebar-list li {
-    margin-bottom: 5px;
-    display: flex;
-    gap: 6px;
-    align-items: flex-start;
-  }
-
-  .fir-sidebar-bullet {
-    width: 6px;
-    height: 6px;
-    border-radius: 999px;
-    background: #facc15;
-    margin-top: 6px;
-    flex-shrink: 0;
-  }
-
-  .fir-sidebar-cta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 10px;
-    padding: 7px 12px;
-    border-radius: 999px;
-    background: #facc15;
-    color: #1f2933;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    text-decoration: none;
-  }
-
-  .fir-sidebar-cta:hover {
-    background: #eab308;
-  }
-
-  .fir-sidebar-subtle {
-    border-radius: 14px;
-    padding: 14px 14px;
-    background: #111827;
-    color: #e5e7eb;
-    border: 1px solid #9ca3af;
-    font-size: 13px;
-  }
-
-  .fir-sidebar-subtle strong {
-    color: #facc15;
+  tr:nth-child(even) td {
+    background: #f7f7f7;
   }
 </style>
 
-<div class="fir-bnss-page">
-  <div class="fir-bnss-grid">
-    <!-- MAIN ARTICLE -->
-    <article class="fir-main-card">
-      <header>
-        <div class="fir-post-meta">
-          <span>{{ page.date | date: "%d %b %Y" }}</span>
-          <span class="fir-meta-dot"></span>
-          <span>Criminal Law and Citizen Rights</span>
-          <span class="fir-meta-pill">BNSS 2023 · Guide</span>
-        </div>
+<div class="article-wrap">
+  <article class="article-content">
 
-        <h1 class="fir-post-title">FIR & Bail Rights in India: A Practical Guide under BNSS 2023</h1>
-        <p class="fir-post-subtitle">
-          A clear, citizen-focused explainer on how FIR, arrest and bail work under the Bharatiya Nagarik Suraksha Sanhita, 2023 — and what to do if you or a loved one are suddenly facing a criminal case.
-        </p>
+    <div class="meta">
+      <span>{{ page.date | date: "%d %b %Y" }}</span>
+      <span>Legal Rights · India</span>
+    </div>
 
-        <div class="fir-tag-row">
-          <span class="fir-tag-chip">FIR</span>
-          <span class="fir-tag-chip">Arrest</span>
-          <span class="fir-tag-chip">Bail</span>
-          <span class="fir-tag-chip">BNSS 2023</span>
-        </div>
+    <div class="kicker">BNSS 2023 Explainer</div>
 
-        <div class="fir-intro-callout">
-          Legal troubles often come unannounced. A sudden complaint, a police call, an arrest — these moments test more than courage; they test awareness. With the introduction of the
-          <strong>Bharatiya Nagarik Suraksha Sanhita, 2023 (BNSS)</strong>, India has modernised its criminal procedural framework to strengthen citizens’ rights and improve access to justice.
-        </div>
-      </header>
+    <h1>FIR & Bail Rights in India: A Practical Guide under BNSS 2023</h1>
 
-      <section class="fir-post-body">
-        <div class="fir-section-label">Section 01</div>
-        <h2>FIR — Your First Step Toward Justice</h2>
+    <p class="standfirst">
+      A clear guide for citizens to understand how FIR, arrest and bail work in India under the new Bharatiya Nagarik Suraksha Sanhita — and what steps to take if a legal case arises suddenly.
+    </p>
 
-        <p>
-          An FIR (First Information Report) is the foundation of the criminal justice process. Under BNSS, the emphasis is on
-          <span class="fir-inline-highlight">time-bound, digital and accountable registration</span>
-          of complaints.
-        </p>
+    <div class="tags">
+      <span>FIR</span><span>Bail</span><span>BNSS</span><span>Citizen Rights</span>
+    </div>
 
-        <div class="fir-key-points">
-          <div class="fir-key-point-item">
-            <div class="fir-key-point-bullet">1</div>
-            <div class="fir-key-point-text">
-              <strong>Mandatory registration in cognizable offences:</strong><br>
-              Police must register an FIR when information clearly discloses a cognizable offence.
-            </div>
-          </div>
-          <div class="fir-key-point-item">
-            <div class="fir-key-point-bullet">2</div>
-            <div class="fir-key-point-text">
-              <strong>Zero FIR and e-FIR continue:</strong><br>
-              A complaint can be filed at any police station, irrespective of jurisdiction, and in many states through online or e-FIR systems.
-            </div>
-          </div>
-          <div class="fir-key-point-item">
-            <div class="fir-key-point-bullet">3</div>
-            <div class="fir-key-point-text">
-              <strong>If police refuse to register:</strong><br>
-              You may escalate the matter to senior police officers or approach the jurisdictional Magistrate.
-            </div>
-          </div>
-        </div>
+    <hr class="hr-top">
 
-        <div class="fir-tip-block">
-          <strong>Practical Tip</strong><br>
-          Preserve your written complaint, date and time details, CCTV footage, call recordings, WhatsApp chats, emails and any other digital proof — all of these can support your FIR and later court proceedings.
-        </div>
+    <div class="content">
 
-        <hr class="fir-divider">
+      <p>
+        Legal troubles often come unannounced. A sudden complaint, a police call, an arrest —
+        these moments test more than courage; they test awareness.
+      </p>
+      <p>
+        With the introduction of <strong>Bharatiya Nagarik Suraksha Sanhita (BNSS) 2023</strong>,
+        India aims to make the criminal process more transparent and citizen-friendly.
+      </p>
 
-        <div class="fir-section-label">Section 02</div>
-        <h2>Arrest — Transparency, Not Fear</h2>
+      <hr class="soft-hr">
 
-        <p>
-          Arrest does not mean punishment. It is only a step in investigation. BNSS seeks to make this step more transparent and accountable.
-        </p>
+      <h2>FIR — Your First Step Toward Justice</h2>
 
-        <ul class="fir-checklist">
-          <li>
-            <span class="fir-check-icon">✓</span>
-            <span><strong>Reason of arrest:</strong> Police must disclose the reason of arrest and the specific offence involved.</span>
-          </li>
-          <li>
-            <span class="fir-check-icon">✓</span>
-            <span><strong>Intimation to family:</strong> A family member or a nominated person must be informed immediately.</span>
-          </li>
-          <li>
-            <span class="fir-check-icon">✓</span>
-            <span><strong>Digital and forensic procedures:</strong> In serious offences, BNSS encourages use of digital records and forensic evidence to reduce arbitrariness.</span>
-          </li>
-        </ul>
+      <p>BNSS ensures:</p>
+      <ul>
+        <li>FIR must be registered in <strong>cognizable offences</strong></li>
+        <li><strong>Zero FIR</strong>: Complaint from any police station</li>
+        <li><strong>e-FIR</strong> available in many states</li>
+        <li>Refusal? → Approach senior police or Magistrate</li>
+      </ul>
 
-        <div class="fir-note-block">
-          <strong>Rights Matter</strong><br>
-          If lawful procedure is not followed — such as not being produced before a Magistrate within 24 hours — the arrest can be challenged before the court.
-        </div>
+      <blockquote>
+        <strong>Tip:</strong> Preserve timestamps, CCTV, call logs, WhatsApp chats — they strengthen your case.
+      </blockquote>
 
-        <hr class="fir-divider">
+      <hr class="soft-hr">
 
-        <div class="fir-section-label">Section 03</div>
-        <h2>Bail — Freedom Is a Rule, Jail an Exception</h2>
+      <h2>Arrest — Transparency, Not Fear</h2>
 
-        <h3>When can bail be granted?</h3>
+      <p>Police must strictly follow procedure:</p>
+      <ul>
+        <li>Inform reason and exact offence</li>
+        <li>Inform family/nominated person immediately</li>
+        <li>Digital + forensic checks in serious cases</li>
+      </ul>
 
-        <div class="fir-table-wrap">
-          <div class="fir-table-scroll">
-            <table class="fir-table-modern">
-              <tr>
-                <th>Type of Offence</th>
-                <th>Bail Status</th>
-              </tr>
-              <tr>
-                <td>Bailable</td>
-                <td>Right to bail — generally to be granted immediately upon compliance with conditions.</td>
-              </tr>
-              <tr>
-                <td>Non-bailable</td>
-                <td>Court has discretion to grant bail after assessing the facts and circumstances of the case.</td>
-              </tr>
-            </table>
-          </div>
-        </div>
+      <blockquote>If procedure is violated, arrest can be challenged before court.</blockquote>
 
-        <h3>Documents and details needed for a smooth bail process</h3>
+      <hr class="soft-hr">
 
-        <ul class="fir-checklist">
-          <li><span class="fir-check-icon">✓</span><span>Copy of FIR and arrest memo</span></li>
-          <li><span class="fir-check-icon">✓</span><span>Identity and address proof</span></li>
-          <li><span class="fir-check-icon">✓</span><span>Surety details and bail bond readiness</span></li>
-          <li><span class="fir-check-icon">✓</span><span>Guidance from an experienced criminal law practitioner</span></li>
-        </ul>
+      <h2>Bail — Freedom Is a Rule, Jail an Exception</h2>
 
-        <p>Court usually weighs multiple factors before granting bail:</p>
-        <div class="fir-metrics-row">
-          <span class="fir-metric-pill"><strong>Severity</strong> of the offence</span>
-          <span class="fir-metric-pill"><strong>Flight risk</strong> and likelihood of absconding</span>
-          <span class="fir-metric-pill"><strong>Witness influence</strong> or tampering with evidence</span>
-          <span class="fir-metric-pill"><strong>Financial and social roots</strong> in the community</span>
-        </div>
+      <h3>When can bail be granted?</h3>
 
-        <hr class="fir-divider">
-
-        <div class="fir-section-label">Section 04</div>
-        <h2>Recent Judicial Approach (2024–2025)</h2>
-
-        <p>Recent court decisions continue to emphasise personal liberty and fair process:</p>
-
-        <ul class="fir-timeline-list">
-          <li><strong>“Bail is a rule; jail is an exception”</strong> — reaffirmed in multiple judgments, especially in long-pending trials.</li>
-          <li><strong>Case pendency alone</strong> is not a valid excuse to indefinitely deny bail.</li>
-          <li><strong>Forensic checks</strong> and digital evidence are encouraged to minimise false arrests and malicious prosecution.</li>
-          <li><strong>Magistrate production within 24 hours:</strong> The accused must be produced before a Magistrate within 24 hours of arrest, except in special circumstances permitted by law.</li>
-        </ul>
-
-        <hr class="fir-divider">
-
-        <div class="fir-section-label">Section 05</div>
-        <h2>If Arrested or FIR Is Filed — What Should You Do?</h2>
-
-        <ul class="fir-checklist">
-          <li><span class="fir-check-icon">✓</span><span>Stay calm and politely ask for the <span class="fir-strong">reason of arrest</span>.</span></li>
-          <li><span class="fir-check-icon">✓</span><span>Secure a copy or at least key details of the FIR (police station, FIR number, sections).</span></li>
-          <li><span class="fir-check-icon">✓</span><span>Contact a lawyer immediately — avoid giving detailed statements without legal advice.</span></li>
-          <li><span class="fir-check-icon">✓</span><span>Prepare and file a <span class="fir-strong">bail application</span> without delay.</span></li>
-          <li><span class="fir-check-icon">✓</span><span>Avoid discussing the case on social media or WhatsApp groups.</span></li>
-          <li><span class="fir-check-icon">✓</span><span>Inform trusted family members so they can arrange surety and documents.</span></li>
-        </ul>
-
-        <hr class="fir-divider">
-
-        <div class="fir-section-label">Section 06</div>
-        <h2>Frequently Asked Questions</h2>
-
-        <div class="fir-faq-grid">
-          <div class="fir-faq-card">
-            <div class="fir-faq-q">Is FIR mandatory when a complaint is filed?</div>
-            <div class="fir-faq-a">
-              Yes — if the complaint discloses a cognizable offence, the police are generally bound to register an FIR.
-            </div>
-          </div>
-
-          <div class="fir-faq-card">
-            <div class="fir-faq-q">Can police arrest without warrant?</div>
-            <div class="fir-faq-a">
-              Yes, in cognizable offences police may arrest without a warrant, but your rights must be explained and BNSS procedures must be followed.
-            </div>
-          </div>
-
-          <div class="fir-faq-card">
-            <div class="fir-faq-q">Does arrest mean certain jail time?</div>
-            <div class="fir-faq-a">
-              No. Arrest is not conviction. Bail is available in most cases unless law specifically restricts it (for example, in certain special statutes).
-            </div>
-          </div>
-
-          <div class="fir-faq-card">
-            <div class="fir-faq-q">Difference between Anticipatory and Regular Bail?</div>
-            <div class="fir-faq-a">
-              <ul class="fir-faq-list-inline">
-                <li><strong>Anticipatory Bail:</strong> Sought before arrest, based on apprehension of arrest.</li>
-                <li><strong>Regular Bail:</strong> Sought after arrest while the case is pending.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="fir-faq-card">
-            <div class="fir-faq-q">How long after bail is granted will release happen?</div>
-            <div class="fir-faq-a">
-              After completion of jail and court formalities, release generally happens the same day or within a few hours, depending on local practice.
-            </div>
-          </div>
-
-          <div class="fir-faq-card">
-            <div class="fir-faq-q">Did BNSS change bail principles?</div>
-            <div class="fir-faq-a">
-              No. The core principles remain — liberty is the norm. BNSS mainly aims to make the process more citizen-friendly, digital and transparent.
-            </div>
-          </div>
-
-          <div class="fir-faq-card">
-            <div class="fir-faq-q">What if the FIR is false?</div>
-            <div class="fir-faq-a">
-              Collect evidence, secure bail as early as possible, consider filing a petition for quashing before the High Court, and explore appropriate counter-proceedings in law against malicious complaints.
-            </div>
-          </div>
-        </div>
-
-        <hr class="fir-divider">
-
-        <div class="fir-section-label">Section 07</div>
-        <h2>Conclusion — Know Your Rights</h2>
-
-        <div class="fir-conclusion-block">
-          <p class="fir-conclusion-quote">
-            <strong>Every individual is presumed innocent until proven guilty.</strong>
-          </p>
-          <p>
-            BNSS 2023 does not replace justice — it is designed to <span class="fir-strong">accelerate</span> it. The more you understand your
-            rights, the less intimidating the criminal process becomes.
-          </p>
-          <p class="fir-strong" style="margin-top:6px;">
-            Law protects those who know how to invoke it.
-          </p>
-          <p class="fir-author-footnote">
-            This guide is a general explainer and does not constitute formal legal advice. For case-specific guidance, consult a qualified advocate.
-          </p>
-        </div>
-      </section>
-    </article>
-
-    <!-- SIDEBAR -->
-    <aside class="fir-sidebar">
-      <div class="fir-sidebar-sticky">
-        <div class="fir-sidebar-card">
-          <h3>Need Help With FIR or Bail?</h3>
-          <p>
-            Early legal advice can change the entire direction of your case. Do not wait for the next police call or court date.
-          </p>
-          <ul class="fir-sidebar-list">
-            <li><span class="fir-sidebar-bullet"></span><span>Review of FIR and arrest memo</span></li>
-            <li><span class="fir-sidebar-bullet"></span><span>Strategy for anticipatory or regular bail</span></li>
-            <li><span class="fir-sidebar-bullet"></span><span>Guidance on rights during interrogation</span></li>
-          </ul>
-          <a href="#contact" class="fir-sidebar-cta">Schedule a Consultation</a>
-        </div>
-
-        <div class="fir-sidebar-subtle" style="margin-top:14px;">
-          <strong>Emergency Checklist</strong>
-          <p style="margin-top:6px;">
-            If someone has just been detained:
-          </p>
-          <ul class="fir-sidebar-list">
-            <li><span class="fir-sidebar-bullet"></span><span>Note police station name and phone number</span></li>
-            <li><span class="fir-sidebar-bullet"></span><span>Ask for arrest memo and sections applied</span></li>
-            <li><span class="fir-sidebar-bullet"></span><span>Call a trusted family member and your lawyer</span></li>
-          </ul>
-        </div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Type of Offence</th>
+            <th>Bail Status</th>
+          </tr>
+          <tr>
+            <td>Bailable</td>
+            <td>Immediate right to bail</td>
+          </tr>
+          <tr>
+            <td>Non-bailable</td>
+            <td>Granted by court after assessment</td>
+          </tr>
+        </table>
       </div>
-    </aside>
-  </div>
+
+      <h3>Documents Needed</h3>
+      <ul>
+        <li>Copy of FIR / arrest memo</li>
+        <li>ID & Address proof</li>
+        <li>Sureties & bail bond readiness</li>
+        <li>Criminal lawyer support</li>
+      </ul>
+
+      <p>Court evaluates: <strong>severity · flight risk · witness influence · roots in society</strong></p>
+
+      <hr class="soft-hr">
+
+      <h2>Recent Court Approach (2024–2025)</h2>
+      <ul>
+        <li><strong>"Bail is the rule; jail is the exception."</strong></li>
+        <li>Pendency ≠ denial of bail</li>
+        <li>Digital evidence to prevent false arrests</li>
+        <li>Accused must be produced before Magistrate within 24 hours</li>
+      </ul>
+
+      <hr class="soft-hr">
+
+      <h2>If Arrested or FIR Filed — Do This</h2>
+      <ul>
+        <li>Stay calm — ask for reason of arrest</li>
+        <li>Get FIR number, sections applied</li>
+        <li>Contact a lawyer immediately</li>
+        <li>Apply bail quickly</li>
+        <li>No social media statements</li>
+        <li>Inform family for documentation</li>
+      </ul>
+
+      <hr class="soft-hr">
+
+      <h2>FAQs</h2>
+
+      <h3>Is FIR mandatory?</h3>
+      <p>Yes — for cognizable offences.</p>
+
+      <h3>Can police arrest without warrant?</h3>
+      <p>Yes, but rights must be explained.</p>
+
+      <h3>Does arrest = jail?</h3>
+      <p>No — bail available in most cases.</p>
+
+      <h3>Anticipatory vs Regular Bail?</h3>
+      <ul>
+        <li><strong>Anticipatory:</strong> before arrest</li>
+        <li><strong>Regular:</strong> after arrest</li>
+      </ul>
+
+      <h3>Release after bail?</h3>
+      <p>Same day or within hours (after paperwork).</p>
+
+      <h3>If FIR is false?</h3>
+      <p>Secure bail → file for quashing → counter case if needed.</p>
+
+      <hr class="soft-hr">
+
+      <h2>Conclusion — Know Your Rights</h2>
+
+      <blockquote>
+        <strong>Presumption of innocence is a fundamental right.</strong><br><br>
+        BNSS 2023 doesn't slow justice — it speeds up access to justice.<br><br>
+        <strong>The more you know the law, the more law protects you.</strong>
+      </blockquote>
+
+    </div>
+  </article>
 </div>
