@@ -1,0 +1,13 @@
+/* Basic overrides and typographic polish */
+:root{
+  --gold:#C5A059; --muted:#6B7280; --charcoal:#071023;
+  --max-width:900px;
+}
+body{font-family:Inter,system-ui, -apple-system, "Segoe UI", Roboto, Arial; color:var(--charcoal); background: #fff;}
+h1,h2,h3,h4{font-family: "Playfair Display", serif; color:var(--charcoal); margin-top:0;}
+a{color:var(--gold); text-decoration:none;}
+a:hover{text-decoration:underline;}
+img{max-width:100%; display:block;}
+main{max-width:var(--max-width); margin:0 auto; padding:24px;}
+.tag{background:rgba(197,160,89,0.08); padding:6px 10px; border-radius:999px; color:#7b5e2b; font-weight:600;}
+blockquote{border-left:4px solid var(--gold); padding:12px 18px; background:#fffaf6;}
