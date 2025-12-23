@@ -1,0 +1,15 @@
+{
+  "name": "JusticeFirms Blog",
+  "short_name": "JusticeFirms",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FBF8F3",
+  "theme_color": "#0B0C0D",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
