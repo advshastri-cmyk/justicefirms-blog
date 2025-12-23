@@ -47,34 +47,88 @@
   </script>
 
   <style>
-    html,body { background: linear-gradient(180deg,#fbf8f3 0%,#fff 100%); color:#071023; font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial; }
-    .glass { background: rgba(11,12,13,0.82); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
-    .card { background: #ffffffcc; border-radius: 14px; box-shadow: 0 18px 40px rgba(2,6,23,0.12); overflow: hidden; transition: transform .28s, box-shadow .28s; }
-    .card:hover { transform: translateY(-8px); box-shadow: 0 28px 60px rgba(2,6,23,0.16); }
-    .cover { min-height:160px; background:linear-gradient(135deg,#071023 0%,rgba(197,160,89,0.12) 100%); display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.95); font-family: Playfair Display, serif; font-size:40px; }
+    :root {
+      --gold: #C5A059;
+      --charcoal: #0B0C0D;
+      --muted: #6B7280;
+      --parchment: #FBF8F3;
+    }
+
+    html,body {
+      background: linear-gradient(180deg,var(--parchment) 0%,#fff 100%);
+      color:#071023;
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* Navigation / glass */
+    .glass { background: rgba(11,12,13,0.78); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: #fff; }
+    .glass a { color: rgba(255,255,255,0.9); }
+    .glass .text-gold { color: var(--gold); }
+
+    /* Hero */
+    .hero-gradient {
+      background-image:
+        linear-gradient(180deg, rgba(11,12,13,0.52), rgba(11,12,13,0.36)),
+        url('https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=2000&q=80');
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      color: #fff;
+    }
+    @media (max-width:640px) {
+      .hero-gradient { background-position: center top; }
+    }
+
+    /* Cards */
+    .card {
+      background: rgba(255,255,255,0.98);
+      border-radius: 14px;
+      box-shadow: 0 14px 40px rgba(2,6,23,0.10);
+      overflow: hidden;
+      transition: transform .28s, box-shadow .28s;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 28px 60px rgba(2,6,23,0.14); }
+
+    /* Improved cover handling: use <img> for precise cropping */
+    .cover { position: relative; min-height: 180px; width: 100%; overflow: hidden; display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#071023,#C5A059); }
+    .cover img { width:100%; height:100%; object-fit:cover; object-position:center center; display:block; }
+    .cover .cover-fallback { position:absolute; inset:0; display:flex;align-items:center;justify-content:center;font-family:Playfair Display,serif;color:rgba(255,255,255,0.95); font-size:36px; }
+
+    /* Prose & reader */
     .prose { font-family: Inter, sans-serif; color:#0b1220; line-height:1.85; }
     .prose h1,h2,h3,h4 { font-family: Playfair Display, serif; color:#071023; }
-    .cta-primary { background: linear-gradient(90deg,#C5A059,#b08a45); color:#071023; }
-    .tag { background: rgba(197,160,89,0.10); color:#7b5e2b; padding:6px 10px; border-radius:999px; font-weight:600; font-size:12px; }
-    .sticky-cta { position: fixed; left: 50%; transform: translateX(-50%); bottom: 18px; z-index: 60; }
-    @media (max-width:640px) { .cover { font-size:28px; min-height:120px; } }
-  </style>
+    .modal-backdrop { background: rgba(2,6,23,0.45); backdrop-filter: blur(4px); }
 
-  <!-- JSON-LD Organization (for SEO) -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"LegalService",
-    "name":"JusticeFirms",
-    "url":"https://justicefirms.com",
-    "logo":"https://justicefirms.com/logo.png",
-    "sameAs":[
-      "https://www.linkedin.com/in/justicefirms",
-      "https://twitter.com/justicefirms"
-    ],
-    "contactPoint":[{"@type":"ContactPoint","contactType":"customer service","url":"https://justicefirms.com/contact"}]
-  }
-  </script>
+    /* CTA buttons */
+    .cta-primary { background: linear-gradient(90deg,var(--gold),#b08a45); color:#071023; }
+    .cta-ghost { border:1px solid rgba(11,12,13,0.06); color:#071023; background:transparent; }
+
+    /* Tags */
+    .tag { background: rgba(197,160,89,0.10); color:#7b5e2b; padding:6px 10px; border-radius:999px; font-weight:600; font-size:12px; }
+
+    /* small screens tweaks */
+    @media (max-width:640px) {
+      .cover { min-height:140px; }
+      .cover .cover-fallback { font-size:28px; }
+    }
+
+    /* Reader modal content improvements */
+    .reader-header { display:flex; align-items:center; gap:1rem; justify-content:space-between; flex-wrap:wrap; }
+    .reader-actions { display:flex; gap:.5rem; align-items:center; }
+
+    /* Utility */
+    .text-muted { color: var(--muted); }
+    .font-serif { font-family: Playfair Display, serif; }
+
+    /* small helper for copy feedback */
+    .copied-toast { position: fixed; left:50%; transform: translateX(-50%); bottom: 90px; background:#071023;color:white;padding:8px 14px;border-radius:8px;opacity:0;transition:opacity .2s;z-index:9999 }
+    .copied-toast.show { opacity:1; }
+  </style>
 </head>
 <body class="antialiased">
 
@@ -83,7 +137,7 @@
     <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
       <a href="https://justicefirms.com" class="flex items-center gap-4">
         <div style="width:46px;height:46px;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;">
-          <span style="font-family:Playfair Display;font-weight:700;color:#C5A059;font-size:18px;">JF</span>
+          <span style="font-family:Playfair Display;font-weight:700;color:var(--gold);font-size:18px;">JF</span>
         </div>
         <div>
           <div class="font-serif text-lg text-gold">JusticeFirms</div>
@@ -109,10 +163,10 @@
     <div class="max-w-6xl mx-auto px-6">
       <div class="bg-white/6 rounded-2xl p-10 shadow-lg" style="backdrop-filter: blur(6px);">
         <p class="text-gold text-xs uppercase tracking-widest">Law insights that convert clients</p>
-        <h1 class="font-serif text-4xl md:text-6xl leading-tight mt-4" style="color:#071023;">
-          Practical legal analysis<br><span style="font-style:italic;color:#7b5e2b">that brings clients to JusticeFirms.</span>
+        <h1 class="font-serif text-4xl md:text-6xl leading-tight mt-4" style="color:#fff;">
+          Practical legal analysis<br><span style="font-style:italic;color:#fff9e6">that brings clients to JusticeFirms.</span>
         </h1>
-        <p class="mt-6 text-muted max-w-2xl">Concise case summaries, step‑by‑step practice notes and client-facing guidance so people searching for help find your firm and contact you.</p>
+        <p class="mt-6 text-white/90 max-w-2xl">Concise case summaries, step‑by‑step practice notes and client‑facing guidance so people searching for help find your firm and contact you.</p>
         <div class="mt-8 flex gap-3">
           <a class="px-5 py-3 rounded-full cta-primary font-semibold" href="https://justicefirms.com/contact">Book a consultation</a>
           <a class="px-5 py-3 rounded-full border cta-ghost font-semibold" href="https://justicefirms.com#services">See practice areas</a>
@@ -148,14 +202,19 @@
   <!-- Reader modal -->
   <div id="reader" class="fixed inset-0 z-50 hidden items-start justify-center py-12 px-4 modal-backdrop">
     <div class="max-w-3xl w-full bg-white rounded-2xl shadow-2xl overflow-auto">
-      <div class="p-6 border-b flex items-start justify-between">
-        <div>
-          <h2 id="readerTitle" class="font-serif text-2xl"></h2>
-          <div id="readerMeta" class="text-sm text-muted mt-1"></div>
-        </div>
-        <div class="flex items-center gap-3">
-          <a id="readerCTA" class="px-4 py-2 rounded-full cta-primary" href="https://justicefirms.com/contact" target="_blank" rel="noopener">Book Consultation</a>
-          <button onclick="closeReader()" class="text-sm text-muted">Close</button>
+      <div class="p-6 border-b">
+        <div class="reader-header">
+          <div>
+            <h2 id="readerTitle" class="font-serif text-2xl"></h2>
+            <div id="readerMeta" class="text-sm text-muted mt-1"></div>
+          </div>
+          <div class="reader-actions">
+            <button id="copyLinkBtn" class="text-sm text-muted" title="Copy article link">Copy</button>
+            <button id="shareBtn" class="text-sm text-muted" title="Share">Share</button>
+            <a id="readerPageLink" class="text-sm text-muted" href="#" target="_blank" rel="noopener" title="Open article page">Open page</a>
+            <a id="readerCTA" class="px-4 py-2 rounded-full cta-primary" href="https://justicefirms.com/contact" target="_blank" rel="noopener">Book Consultation</a>
+            <button id="closeReaderBtn" class="text-sm text-muted">Close</button>
+          </div>
         </div>
       </div>
       <div id="readerContent" class="p-8 prose"></div>
@@ -168,6 +227,8 @@
     </div>
   </div>
 
+  <div id="copiedToast" class="copied-toast">Link copied</div>
+
   <!-- Sticky CTA -->
   <div class="sticky-cta hidden md:flex">
     <a href="https://justicefirms.com/contact" class="px-5 py-3 rounded-full cta-primary font-semibold shadow-lg">Free case evaluation →</a>
@@ -176,8 +237,11 @@
   <!-- Card template -->
   <template id="cardTemplate">
     <article class="card">
-      <div class="cover"></div>
-      <div class="p-6">
+      <div class="cover">
+        <img class="cover-img" alt="" loading="lazy" />
+        <div class="cover-fallback">JF</div>
+      </div>
+      <div class="p-6 flex-1 flex flex-col">
         <div class="flex items-center justify-between mb-3">
           <div class="flex items-center gap-3">
             <span class="tag">LEGAL</span>
@@ -187,8 +251,11 @@
         </div>
         <h3 class="font-serif text-2xl title">Title</h3>
         <p class="text-sm text-muted excerpt mt-3">Excerpt</p>
-        <div class="mt-5 flex items-center justify-between">
-          <button class="readBtn text-sm text-gold font-semibold">Read article →</button>
+        <div class="mt-5 flex items-center justify-between mt-auto">
+          <div>
+            <button class="readBtn text-sm text-gold font-semibold">Read article →</button>
+            <button class="editBtn text-sm text-muted ml-3 hidden">Edit</button>
+          </div>
           <div class="text-xs text-muted author">by Advocate</div>
         </div>
       </div>
@@ -222,6 +289,10 @@
             <textarea id="excerpt" class="w-full border rounded p-3" rows="3"></textarea>
           </div>
           <div>
+            <label class="text-xs text-muted">Cover image URL (optional)</label>
+            <input id="coverUrl" class="w-full border rounded p-3" placeholder="https://..." />
+          </div>
+          <div>
             <label class="text-xs text-muted">Content (Markdown allowed)</label>
             <textarea id="content" class="w-full border rounded p-3 mono" rows="8"></textarea>
           </div>
@@ -246,13 +317,40 @@
   <script>
     lucide.createIcons();
 
-    // --- data + storage keys
+    /* ---------- data + helpers ---------- */
     const KEY = 'JF_BLOG_v1';
-    const SAMPLE = []; // fallback (will be populated from articles.json via fetch below)
+    const SAMPLE = []; // fallback (populated from articles.json)
     const uid = ()=> 'a'+Math.random().toString(36).slice(2,9);
     const readTime = txt => Math.max(1, Math.round((txt||'').split(/\s+/).length / 200));
 
-    // try to import /articles.json into localStorage if not present
+    function slugify(s){
+      if(!s) return '';
+      return s.toString().toLowerCase().trim()
+        .replace(/[\u2019\u2018\u201C\u201D]/g,'')
+        .replace(/[^a-z0-9]+/g,'-')
+        .replace(/^-+|-+$/g,'');
+    }
+
+    function loadArticles(){
+      try {
+        const raw = localStorage.getItem(KEY);
+        if (!raw) { localStorage.setItem(KEY, JSON.stringify(SAMPLE)); return SAMPLE.slice(); }
+        const arr = JSON.parse(raw);
+        // ensure each item has slug
+        arr.forEach(a => { if(!a.slug) a.slug = slugify(a.title || a.id); });
+        return arr;
+      } catch(e){
+        console.warn('loadArticles error', e);
+        return SAMPLE.slice();
+      }
+    }
+    function saveArticles(list){
+      // ensure slugs
+      list.forEach(a => { if(!a.slug) a.slug = slugify(a.title || a.id); });
+      localStorage.setItem(KEY, JSON.stringify(list));
+    }
+
+    /* ---------- import articles.json if present ---------- */
     (function importArticlesJson(){
       if (typeof fetch === 'undefined') return;
       try {
@@ -261,25 +359,23 @@
             .then(r => { if (!r.ok) throw new Error('no articles.json'); return r.json(); })
             .then(data => {
               if (Array.isArray(data) && data.length) {
+                // normalize slugs
+                data.forEach(a => { if(!a.slug) a.slug = slugify(a.title || a.id); });
                 localStorage.setItem(KEY, JSON.stringify(data));
-                renderArticles(document.getElementById('search').value || '');
+                setTimeout(()=> renderArticles(document.getElementById('search')?.value || ''), 200);
               }
             }).catch(()=>{ /* ignore */ });
         }
       } catch(e){ console.warn(e); }
     })();
 
-    function loadArticles(){
-      try {
-        const raw = localStorage.getItem(KEY);
-        if (!raw) { localStorage.setItem(KEY, JSON.stringify(SAMPLE)); return SAMPLE.slice(); }
-        return JSON.parse(raw);
-      } catch(e){ return SAMPLE.slice(); }
-    }
-    function saveArticles(list){ localStorage.setItem(KEY, JSON.stringify(list)); }
-
-    // render articles grid
+    /* ---------- rendering ---------- */
     const grid = document.getElementById('articlesGrid');
+    const template = document.getElementById('cardTemplate');
+
+    // admin mode: enable edit buttons if URL has ?admin=1 or localStorage flag
+    const adminEnabled = (new URLSearchParams(location.search).get('admin') === '1') || (localStorage.getItem('JF_ADMIN') === '1');
+
     function renderArticles(q=''){
       const data = loadArticles().filter(a=>{
         if(!q) return true;
@@ -289,41 +385,87 @@
 
       grid.innerHTML = '';
       if (data.length === 0) {
-        grid.innerHTML = `<div class="col-span-3 text-center text-muted">No articles yet. Use GitHub to add articles (articles.json) or open editor (admin)</div>`;
+        grid.innerHTML = `<div class="col-span-3 text-center text-muted">No articles yet. Add articles.json to the repo or use the editor (admin).</div>`;
         return;
       }
 
       data.forEach(a=>{
-        const tpl = document.getElementById('cardTemplate').content.cloneNode(true);
+        const tpl = template.content.cloneNode(true);
         const coverEl = tpl.querySelector('.cover');
-        if(a.cover) coverEl.style.background = `url('${a.cover}') center/cover`;
-        else coverEl.style.background = `linear-gradient(135deg,#071023,#C5A059)`;
+        const img = tpl.querySelector('.cover-img');
+        const fallback = tpl.querySelector('.cover-fallback');
+
+        if(a.cover && a.cover.trim()){
+          img.src = a.cover;
+          img.alt = a.title || 'Article cover';
+          img.onload = ()=> { fallback.style.display = 'none'; };
+          img.onerror = ()=> { img.style.display='none'; fallback.style.display = 'flex'; };
+        } else {
+          img.style.display = 'none';
+          fallback.textContent = (a.title || 'JF').split(' ').slice(0,2).map(s=>s[0]).join('').toUpperCase();
+          fallback.style.display = 'flex';
+        }
+
         tpl.querySelector('.title').textContent = a.title;
         tpl.querySelector('.excerpt').textContent = a.excerpt || '';
-        tpl.querySelector('.date').textContent = new Date(a.date).toLocaleDateString();
+        tpl.querySelector('.date').textContent = a.date ? new Date(a.date).toLocaleDateString() : '';
         tpl.querySelector('.author').textContent = a.author || 'JusticeFirms';
         tpl.querySelector('.tag').textContent = (a.category || 'Article').split('·')[0].trim().toUpperCase();
         tpl.querySelector('.readtime').textContent = '· ' + readTime(a.content) + ' min';
-        tpl.querySelector('.readBtn').addEventListener('click', ()=> openArticle(a.id));
+
+        // read button handler
+        tpl.querySelector('.readBtn').addEventListener('click', ()=> openArticle(a.id || a.slug));
+        // allow clicking on cover to open
+        coverEl.addEventListener('click', ()=> openArticle(a.id || a.slug));
+
+        // edit button (admin)
+        const editBtn = tpl.querySelector('.editBtn');
+        if(adminEnabled){
+          editBtn.classList.remove('hidden');
+          editBtn.addEventListener('click', (e)=>{
+            e.stopPropagation();
+            openEditor(a.id || a.slug);
+          });
+        }
+
         grid.appendChild(tpl);
       });
     }
 
-    // article reader
+    /* ---------- reader (modal) ---------- */
     const reader = document.getElementById('reader');
     const readerTitle = document.getElementById('readerTitle');
     const readerMeta = document.getElementById('readerMeta');
     const readerContent = document.getElementById('readerContent');
+    const readerPageLink = document.getElementById('readerPageLink');
+    const copyLinkBtn = document.getElementById('copyLinkBtn');
+    const shareBtn = document.getElementById('shareBtn');
+    const copiedToast = document.getElementById('copiedToast');
+    const closeReaderBtn = document.getElementById('closeReaderBtn');
+
+    let currentArticleId = null;
+
     function openArticle(id){
-      const a = loadArticles().find(x=>x.id===id);
+      // find by id or slug
+      const list = loadArticles();
+      const a = list.find(x => x.id === id || x.slug === id);
       if(!a) return;
+      currentArticleId = a.id || a.slug;
+      // push hash
+      try { history.pushState({article:currentArticleId}, '', '#!'+(a.id || a.slug)); } catch(e){}
       readerTitle.textContent = a.title;
-      readerMeta.innerHTML = `${new Date(a.date).toLocaleDateString()} · ${a.category} · <span class="text-muted">${a.author || 'JusticeFirms'}</span>`;
+      readerMeta.innerHTML = `${a.date ? new Date(a.date).toLocaleDateString() : ''} · ${a.category || ''} · <span class="text-muted">${a.author || 'JusticeFirms'}</span>`;
       readerContent.innerHTML = DOMPurify.sanitize(marked.parse(a.content || ''));
+
+      // set page link (slug-based) — assumes static pages use slug or id as filename
+      const slug = a.slug || slugify(a.title || a.id);
+      readerPageLink.href = '/' + slug + (slug ? '.html' : '');
+      readerPageLink.style.display = 'inline';
+
       reader.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
 
-      // add per-article JSON-LD
+      // JSON-LD for article (helps SEO when modal opened)
       const ld = {
         "@context":"https://schema.org",
         "@type":"BlogPosting",
@@ -338,64 +480,184 @@
       script.textContent = JSON.stringify(ld);
       document.head.appendChild(script);
     }
-    function closeReader(){ reader.classList.add('hidden'); document.body.style.overflow = ''; const old = document.getElementById('article-jsonld'); if(old) old.remove(); }
 
-    // editor (local admin)
+    function closeReader(noHistory){
+      reader.classList.add('hidden');
+      document.body.style.overflow = '';
+      currentArticleId = null;
+      const old = document.getElementById('article-jsonld'); if(old) old.remove();
+      // clean hash if present
+      try {
+        if (!noHistory && location.hash && location.hash.startsWith('#!')) history.pushState({}, '', location.pathname + location.search);
+      } catch(e){}
+    }
+
+    closeReaderBtn.addEventListener('click', ()=> closeReader());
+
+    // copy link
+    copyLinkBtn.addEventListener('click', async ()=>{
+      const url = location.origin + location.pathname + '#!' + (currentArticleId || '');
+      try {
+        await navigator.clipboard.writeText(url);
+        showCopiedToast();
+      } catch(e) {
+        // fallback
+        const ta = document.createElement('textarea'); ta.value = url; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); showCopiedToast(); } catch(err) { alert('Copy failed. URL: ' + url); }
+        ta.remove();
+      }
+    });
+
+    function showCopiedToast(){
+      copiedToast.classList.add('show');
+      setTimeout(()=> copiedToast.classList.remove('show'), 1500);
+    }
+
+    // share
+    shareBtn.addEventListener('click', ()=>{
+      const url = location.origin + location.pathname + '#!' + (currentArticleId || '');
+      const a = loadArticles().find(x => x.id === currentArticleId || x.slug === currentArticleId);
+      const title = a ? a.title : document.title;
+      if(navigator.share){
+        navigator.share({ title, url }).catch(()=>{});
+      } else {
+        // fallback: open twitter
+        const tw = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+        window.open(tw, '_blank', 'noopener');
+      }
+    });
+
+    // open page link target: readerPageLink -> opens in new tab (already set href above)
+
+    /* ---------- deep-link & history ---------- */
+    (function enableDeepLinks(){
+      function openFromHash(){
+        if (location.hash && location.hash.startsWith('#!')){
+          const id = location.hash.slice(2);
+          setTimeout(()=> {
+            if (id) openArticle(id);
+          }, 200);
+        }
+      }
+      window.addEventListener('popstate', ()=> {
+        if (location.hash && location.hash.startsWith('#!')) {
+          const id = location.hash.slice(2);
+          openArticle(id);
+        } else {
+          closeReader(true);
+        }
+      });
+      window.addEventListener('load', openFromHash);
+    })();
+
+    /* ---------- editor (local) ---------- */
     const editorModal = document.getElementById('editorModal');
     const articleForm = document.getElementById('articleForm');
     const livePreview = document.getElementById('livePreview');
-    document.getElementById('closeEditor').addEventListener('click', ()=> editorModal.classList.add('hidden'));
-    document.getElementById('saveClose').addEventListener('click', ()=> { articleForm.dispatchEvent(new Event('submit')); editorModal.classList.add('hidden'); });
+
+    function openEditor(id){
+      editorModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      if(!id){
+        document.getElementById('articleId').value = '';
+        document.getElementById('title').value = '';
+        document.getElementById('category').value = '';
+        document.getElementById('date').value = '';
+        document.getElementById('excerpt').value = '';
+        document.getElementById('coverUrl').value = '';
+        document.getElementById('content').value = '';
+        livePreview.innerHTML = '';
+        return;
+      }
+      const list = loadArticles();
+      const a = list.find(x => x.id === id || x.slug === id);
+      if(!a) return;
+      document.getElementById('articleId').value = a.id || a.slug;
+      document.getElementById('title').value = a.title || '';
+      document.getElementById('category').value = a.category || '';
+      document.getElementById('date').value = a.date || '';
+      document.getElementById('excerpt').value = a.excerpt || '';
+      document.getElementById('coverUrl').value = a.cover || '';
+      document.getElementById('content').value = a.content || '';
+      livePreview.innerHTML = DOMPurify.sanitize(marked.parse(a.content || ''));
+    }
+
+    document.getElementById('closeEditor').addEventListener('click', ()=> { editorModal.classList.add('hidden'); document.body.style.overflow=''; });
 
     articleForm.addEventListener('input', ()=> {
       livePreview.innerHTML = DOMPurify.sanitize(marked.parse(document.getElementById('content').value || ''));
     });
 
+    document.getElementById('saveClose').addEventListener('click', ()=> {
+      articleForm.dispatchEvent(new Event('submit'));
+      editorModal.classList.add('hidden');
+    });
+
     articleForm.addEventListener('submit', (e)=>{
       e.preventDefault();
       const id = document.getElementById('articleId').value || uid();
-      const obj = {
-        id,
-        title: document.getElementById('title').value,
-        category: document.getElementById('category').value,
-        date: document.getElementById('date').value || new Date().toISOString().slice(0,10),
-        excerpt: document.getElementById('excerpt').value,
-        content: document.getElementById('content').value,
-        author: "JusticeFirms"
-      };
+      const title = document.getElementById('title').value.trim();
+      const category = document.getElementById('category').value.trim();
+      const date = document.getElementById('date').value || new Date().toISOString().slice(0,10);
+      const excerpt = document.getElementById('excerpt').value.trim();
+      const cover = document.getElementById('coverUrl').value.trim();
+      const content = document.getElementById('content').value;
+      if(!title){ alert('Title required'); return; }
+
       const list = loadArticles();
-      const idx = list.findIndex(x=>x.id===id);
-      if(idx>-1) list[idx]=obj; else list.push(obj);
+      const slug = slugify(title);
+      const payload = { id, slug, title, category, date, excerpt, cover, content, author: "JusticeFirms" };
+      const idx = list.findIndex(x => x.id === id || x.slug === id);
+      if(idx > -1) list[idx] = payload; else list.push(payload);
       saveArticles(list);
       renderArticles(document.getElementById('search').value);
-      alert('Article saved locally. For public persistent publishing, edit articles.json in the repo (GitHub).');
+      alert('Article saved locally. To publish globally edit articles.json in the repo (recommended).');
     });
 
-    // search
+    /* ---------- search ---------- */
     document.getElementById('search').addEventListener('input', (e)=> renderArticles(e.target.value));
 
-    // close reader when clicking backdrop
-    reader.addEventListener('click', (e)=> { if(e.target===reader) closeReader(); });
+    /* ---------- keyboard shortcuts ---------- */
+    document.addEventListener('keydown', (e)=>{
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'n'){ // Ctrl/Cmd+N open editor
+        e.preventDefault();
+        // enable admin mode automatically if keyboard used
+        localStorage.setItem('JF_ADMIN', '1');
+        openEditor();
+      }
+      if (e.key === 'Escape'){
+        closeReader();
+        editorModal.classList.add('hidden');
+        document.body.style.overflow='';
+      }
+    });
 
-    // initial render
+    /* ---------- close reader on backdrop click ---------- */
+    reader.addEventListener('click', (e)=> { if (e.target === reader) closeReader(); });
+
+    /* ---------- initial render & import fallback ---------- */
     window.addEventListener('load', ()=> {
-      // If localStorage empty, try to fetch articles.json (import handled above)
-      if(!localStorage.getItem(KEY)) {
-        // fallback sample to avoid empty UI
+      // if no articles in localStorage, import may have put them; otherwise initialize a friendly sample
+      if(!localStorage.getItem(KEY)){
         localStorage.setItem(KEY, JSON.stringify([
           {
             id:"sample-1",
+            slug:"welcome-justicefirms",
             title:"Welcome to JusticeFirms — How we help clients",
             date: (new Date()).toISOString().slice(0,10),
             category:"About",
             author:"JusticeFirms",
             excerpt:"A short note on how we convert article readers into clients — include clear CTAs on every article.",
-            content:"### How we can help\n\nEvery article ends with a direct link to our contact page: https://justicefirms.com/contact"
+            content:"### How we can help\n\nEvery article ends with a direct link to our contact page: https://justicefirms.com/contact\n\nWe advise ending each article with 'How we can help' and a clear link to the relevant service."
           }
         ]));
       }
       renderArticles();
-      lucide.createIcons();
+      // open article if hash present (deep-link)
+      if(location.hash && location.hash.startsWith('#!')){
+        const id = location.hash.slice(2);
+        if(id) openArticle(id);
+      }
     });
   </script>
 
