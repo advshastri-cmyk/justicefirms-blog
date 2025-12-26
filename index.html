@@ -333,7 +333,7 @@
 
   const grid = document.getElementById('articlesGrid');
   const tpl = document.getElementById('cardTemplate');
-    function renderArticles() {
+       function renderArticles() {
   let all = loadArticles();
 
   if (currentQuery) {
@@ -365,25 +365,24 @@
     grid.appendChild(node);
   });
 
-  // ये लाइन अब पूरी तरह सही है
+  // सही Showing टेक्स्ट
   const total = all.length;
-  const shownFrom = start + 1;
-  const shownTo = start + pageItems.length;
+  const shownFrom = total === 0 ? 0 : start + 1;
+  const shownTo = Math.min(end, total);
   document.getElementById('pageInfo').textContent = `Showing \( {shownFrom}- \){shownTo} of ${total}`;
 
   // Load More बटन
   const loadMoreBtn = document.getElementById('loadMoreBtn');
-  if (shownTo >= total) {
+  if (shownTo >= total || total === 0) {
     loadMoreBtn.classList.add('hidden');
   } else {
     loadMoreBtn.classList.remove('hidden');
   }
 
-  // Prev/Next बटन
+  // Prev और Next बटन डिसेबल/एनेबल — ये अब परफेक्ट काम करेंगे
   document.getElementById('prevPage').disabled = currentPage <= 1;
   document.getElementById('nextPage').disabled = shownTo >= total;
 }
-    
     function openArticle(id){
     const articles = loadArticles();
     const article = articles.find(a => a.id === id);
@@ -400,21 +399,24 @@
     document.getElementById('reader').classList.add('hidden');
     document.body.style.overflow = '';
   };
-document.getElementById('prevPage').onclick = () => { 
-  if(currentPage > 1) { 
-    currentPage--; 
-    renderArticles(); 
-  } 
+document.getElementById('prevPage').onclick = () => {
+  if (currentPage > 1) {
+    currentPage--;
+    renderArticles();
+    window.scrollTo(0, 0); // ऑप्शनल: टॉप पर स्क्रॉल
+  }
 };
 
-document.getElementById('nextPage').onclick = () => { 
-  currentPage++; 
-  renderArticles(); 
+document.getElementById('nextPage').onclick = () => {
+  currentPage++;
+  renderArticles();
+  window.scrollTo(0, 0); // ऑप्शनल
 };
 
-document.getElementById('loadMoreBtn').onclick = () => { 
-  currentPage++; 
-  renderArticles(); 
+document.getElementById('loadMoreBtn').onclick = () => {
+  currentPage++;
+  renderArticles();
+  window.scrollTo(0, 0); // ऑप्शनल
 };
   
   // Load articles from articles.json
