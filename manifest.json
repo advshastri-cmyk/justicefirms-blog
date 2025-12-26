@@ -1,15 +1,30 @@
 {
-  "name": "JusticeFirms Blog",
+  "name": "JusticeFirms Journal",
   "short_name": "JusticeFirms",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FBF8F3",
-  "theme_color": "#0B0C0D",
+  "background_color": "#FDFDFB",
+  "theme_color": "#D4AF37",
+  "orientation": "portrait-primary",
+  "description": "Practical legal insights on Indian criminal, NDPS, POCSO, cyber law and more — by experienced advocates at JusticeFirms.",
   "icons": [
     {
       "src": "/favicon.svg",
       "sizes": "any",
-      "type": "image/svg+xml"
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
