@@ -333,10 +333,10 @@
 
   const grid = document.getElementById('articlesGrid');
   const tpl = document.getElementById('cardTemplate');
-function renderArticles() {
+ function renderArticles() {
   let all = loadArticles();
 
-  // सर्च फिल्टर (अगर सर्च इनपुट यूज कर रहे हैं तो काम करेगा)
+  // सर्च अगर एक्टिव है
   if (currentQuery) {
     all = all.filter(a => 
       a.title.toLowerCase().includes(currentQuery.toLowerCase()) ||
@@ -345,14 +345,13 @@ function renderArticles() {
     );
   }
 
-  // लेटेस्ट आर्टिकल्स ऊपर दिखाने के लिए सॉर्ट
+  // सबसे नया आर्टिकल ऊपर
   all.sort((a, b) => new Date(b.date) - new Date(a.date));
 
   const start = (currentPage - 1) * PAGE_SIZE;
   const end = start + PAGE_SIZE;
   const pageItems = all.slice(start, end);
 
-  // ग्रिड क्लियर करके नए कार्ड्स ऐड करें
   grid.innerHTML = '';
   pageItems.forEach(a => {
     const node = tpl.content.cloneNode(true);
@@ -368,24 +367,24 @@ function renderArticles() {
     grid.appendChild(node);
   });
 
-  // पेज इनफो सही दिखाएं (जैसे Showing 1-12 of 51)
+  // ये लाइन सही कर दें — यही "Showing..." की समस्या थी
   const total = all.length;
-  const shownEnd = pageItems.length < PAGE_SIZE ? total : end;
-  document.getElementById('pageInfo').textContent = `Showing \( {start + 1}- \){start + pageItems.length} of ${total}`;
+  const shownFrom = start + 1;
+  const shownTo = start + pageItems.length;
+  document.getElementById('pageInfo').textContent = `Showing \( {shownFrom}- \){shownTo} of ${total}`;
 
   // Load More बटन दिखाएं/छुपाएं
   const loadMoreBtn = document.getElementById('loadMoreBtn');
-  if (end >= total) {
+  if (shownTo >= total) {
     loadMoreBtn.classList.add('hidden');
   } else {
     loadMoreBtn.classList.remove('hidden');
   }
 
-  // Prev/Next बटन डिसेबल/एनेबल
+  // Prev और Next बटन डिसेबल/एनेबल
   document.getElementById('prevPage').disabled = currentPage <= 1;
-  document.getElementById('nextPage').disabled = end >= total;
+  document.getElementById('nextPage').disabled = shownTo >= total;
 }
- 
   function openArticle(id){
     const articles = loadArticles();
     const article = articles.find(a => a.id === id);
@@ -402,11 +401,23 @@ function renderArticles() {
     document.getElementById('reader').classList.add('hidden');
     document.body.style.overflow = '';
   };
+document.getElementById('prevPage').onclick = () => { 
+  if(currentPage > 1) { 
+    currentPage--; 
+    renderArticles(); 
+  } 
+};
 
-  document.getElementById('prevPage').onclick = () => { if(currentPage > 1) { currentPage--; renderArticles(); } };
-  document.getElementById('nextPage').onclick = () => { currentPage++; renderArticles(); };
-  document.getElementById('loadMoreBtn').onclick = () => { currentPage++; renderArticles(); };
+document.getElementById('nextPage').onclick = () => { 
+  currentPage++; 
+  renderArticles(); 
+};
 
+document.getElementById('loadMoreBtn').onclick = () => { 
+  currentPage++; 
+  renderArticles(); 
+};
+  
   // Load articles from articles.json
   if (!localStorage.getItem(KEY)) {
     fetch('/articles.json')
