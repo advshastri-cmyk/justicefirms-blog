@@ -333,122 +333,107 @@
 
   const grid = document.getElementById('articlesGrid');
   const tpl = document.getElementById('cardTemplate');
-       function renderArticles() {
+      function renderArticles() {
   let all = loadArticles();
 
+  // 1. Filter articles based on search query
   if (currentQuery) {
+    const q = currentQuery.toLowerCase();
     all = all.filter(a => 
-      a.title.toLowerCase().includes(currentQuery.toLowerCase()) ||
-      a.excerpt.toLowerCase().includes(currentQuery.toLowerCase()) ||
-      (a.content || '').toLowerCase().includes(currentQuery.toLowerCase())
+      a.title.toLowerCase().includes(q) ||
+      a.excerpt.toLowerCase().includes(q) ||
+      (a.content || '').toLowerCase().includes(q)
     );
   }
 
+  // 2. Sort by date (Newest first)
   all.sort((a, b) => new Date(b.date) - new Date(a.date));
 
+  // 3. Pagination Logic
   const start = (currentPage - 1) * PAGE_SIZE;
   const end = start + PAGE_SIZE;
   const pageItems = all.slice(start, end);
 
+  // 4. Render Cards
   grid.innerHTML = '';
   pageItems.forEach(a => {
     const node = tpl.content.cloneNode(true);
     const cover = node.querySelector('.cover');
+    
     if (a.cover) cover.style.backgroundImage = `url('${a.cover}')`;
+    
     node.querySelector('.title').textContent = a.title;
     node.querySelector('.excerpt').textContent = a.excerpt;
-    node.querySelector('.date').textContent = new Date(a.date).toLocaleDateString('en-IN', {day: 'numeric', month: 'short', year: 'numeric'});
-    node.querySelector('.readtime').textContent = '· ' + readTime(a.content) + ' min read';
-    const readBtn = node.querySelector('.readBtn');
-    readBtn.onclick = () => openArticle(a.id);
+    node.querySelector('.date').textContent = new Date(a.date).toLocaleDateString('en-IN', {
+      day: 'numeric', 
+      month: 'short', 
+      year: 'numeric'
+    });
+    node.querySelector('.readtime').textContent = `· ${readTime(a.content)} min read`;
+    
+    // Click Handlers
+    node.querySelector('.readBtn').onclick = () => openArticle(a.id);
     cover.onclick = () => openArticle(a.id);
+    
     grid.appendChild(node);
   });
 
-  // सही Showing टेक्स्ट
+  // 5. Update Status Text (FIXED SYNTAX)
   const total = all.length;
   const shownFrom = total === 0 ? 0 : start + 1;
   const shownTo = Math.min(end, total);
-  document.getElementById('pageInfo').textContent = `Showing \( {shownFrom}- \){shownTo} of ${total}`;
+  
+  // Use standard backticks and ${} for variables
+  document.getElementById('pageInfo').textContent = `Showing ${shownFrom}-${shownTo} of ${total}`;
 
-  // Load More बटन
+  // 6. Button Visibility & State
   const loadMoreBtn = document.getElementById('loadMoreBtn');
-  if (shownTo >= total || total === 0) {
-    loadMoreBtn.classList.add('hidden');
-  } else {
-    loadMoreBtn.classList.remove('hidden');
-  }
+  loadMoreBtn.classList.toggle('hidden', shownTo >= total || total === 0);
 
-  // Prev और Next बटन डिसेबल/एनेबल — ये अब परफेक्ट काम करेंगे
   document.getElementById('prevPage').disabled = currentPage <= 1;
   document.getElementById('nextPage').disabled = shownTo >= total;
 }
-    function openArticle(id){
-    const articles = loadArticles();
-    const article = articles.find(a => a.id === id);
-    if(!article) return;
 
-    document.getElementById('readerTitle').textContent = article.title;
-    document.getElementById('readerMeta').innerHTML = `${article.date} • ${article.category} • by ${article.author}`;
-    document.getElementById('readerContent').innerHTML = DOMPurify.sanitize(marked.parse(article.content));
-    document.getElementById('reader').classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-  }
+// --- Reader Functionality ---
+function openArticle(id) {
+  const articles = loadArticles();
+  const article = articles.find(a => a.id === id);
+  if (!article) return;
 
-  document.getElementById('closeReaderBtn').onclick = () => {
-    document.getElementById('reader').classList.add('hidden');
-    document.body.style.overflow = '';
-  };
+  document.getElementById('readerTitle').textContent = article.title;
+  document.getElementById('readerMeta').innerHTML = `${article.date} • ${article.category} • by ${article.author}`;
+  
+  // Ensure marked and DOMPurify are loaded via CDN in your HTML
+  document.getElementById('readerContent').innerHTML = DOMPurify.sanitize(marked.parse(article.content));
+  
+  document.getElementById('reader').classList.remove('hidden');
+  document.body.style.overflow = 'hidden'; // Prevent background scrolling
+}
+
+document.getElementById('closeReaderBtn').onclick = () => {
+  document.getElementById('reader').classList.add('hidden');
+  document.body.style.overflow = '';
+};
+
+// --- Navigation Event Listeners ---
 document.getElementById('prevPage').onclick = () => {
   if (currentPage > 1) {
     currentPage--;
     renderArticles();
-    window.scrollTo(0, 0); // ऑप्शनल: टॉप पर स्क्रॉल
+    document.getElementById('articlesGridSection').scrollIntoView({ behavior: 'smooth' });
   }
 };
 
 document.getElementById('nextPage').onclick = () => {
   currentPage++;
   renderArticles();
-  window.scrollTo(0, 0); // ऑप्शनल
+  document.getElementById('articlesGridSection').scrollIntoView({ behavior: 'smooth' });
 };
 
 document.getElementById('loadMoreBtn').onclick = () => {
   currentPage++;
   renderArticles();
-  window.scrollTo(0, 0); // ऑप्शनल
 };
-  
-  // Load articles from articles.json
-  if (!localStorage.getItem(KEY)) {
-    fetch('/articles.json')
-      .then(r => r.ok ? r.json() : Promise.reject())
-      .then(data => {
-        localStorage.setItem(KEY, JSON.stringify(data));
-        initApp();
-      })
-      .catch(() => {
-        // Fallback welcome article
-        const fallback = [{
-          id: "welcome",
-          title: "Welcome to JusticeFirms Journal",
-          date: "2025-12-26",
-          category: "Introduction",
-          author: "JusticeFirms Team",
-          excerpt: "Your trusted source for practical legal insights.",
-          content: "<h3>Welcome!</h3><p>We provide clear, actionable articles on Indian law.</p><p><a href='https://justicefirms.com/contact'>Contact us</a></p>",
-          cover: "https://images.unsplash.com/photo-1450101498861-cb244d0ab672?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-        }];
-        localStorage.setItem(KEY, JSON.stringify(fallback));
-        initApp();
-      });
-  } else {
-    initApp();
-  }
-
-  function initApp() {
-    renderArticles();
-  }
   </script>
 </body>
 </html>
