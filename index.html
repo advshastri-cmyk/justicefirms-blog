@@ -10,6 +10,9 @@
   <meta property="og:title" content="JusticeFirms Journal — Practical Insights on Indian Law" />
   <meta property="og:description" content="High-search legal awareness articles in English and Hindi by experienced advocates at JusticeFirms." />
   <meta property="og:type" content="website" />
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow">
+  <meta name="author" content="JusticeFirms Journal">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1040,6 +1043,49 @@
       stroke-linejoin: round;
     }
   </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LegalService",
+  "name": "JusticeFirms Journal",
+  "url": "https://justicefirms.com",
+  "logo": "https://justicefirms.com/icon-512.png",
+  "description": "JusticeFirms Journal provides practical legal insights on Indian criminal law, family law, NDPS, POCSO, cyber law and civil matters.",
+  "areaServed": {
+    "@type": "Country",
+    "name": "India"
+  },
+  "knowsAbout": [
+    "Anticipatory Bail",
+    "Section 498A IPC",
+    "Divorce Law",
+    "Maintenance",
+    "NDPS Act",
+    "POCSO Act",
+    "Cyber Crime",
+    "Section 482 CrPC"
+  ],
+  "provider": {
+    "@type": "Organization",
+    "name": "JusticeFirms",
+    "url": "https://justicefirms.com"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "JusticeFirms Journal",
+  "url": "https://justicefirms.com",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://justicefirms.com/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
 </head>
 <body>
   <a class="sr-only" href="#main">Skip to content</a>
@@ -1309,22 +1355,37 @@
 
         <div class="experts-grid">
           <div class="expert-card">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=face" alt="Adv. Ganga Shankar Shastri" class="expert-image">
+            <img 
+  src="ganga.jpg"
+  alt="Adv. Ganga Shankar Shastri"
+  class="expert-image"
+  loading="lazy"
+  decoding="async">
             <h3>Adv. Ganga Shankar Shastri</h3>
             <p class="expert-spec">Criminal Law</p>
             <p class="expert-bio">Practicing advocate with extensive experience in criminal trials, bail matters and High Court litigation.</p>
           </div>
 
           <div class="expert-card">
-            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&fit=crop&crop=face" alt="Adv. Minakshi Sharma" class="expert-image">
-            <h3>Adv. Minakshi Sharma</h3>
+            <img 
+  src="minakshi.jpg"
+  alt="Adv. Minakshi Shastri"
+  class="expert-image"
+  loading="lazy"
+  decoding="async">
+            <h3>Adv. Minakshi Shastri</h3>
             <p class="expert-spec">Family Law</p>
             <p class="expert-bio">Expert in matrimonial disputes, divorce proceedings, and child custody matters with 15+ years experience.</p>
           </div>
 
           <div class="expert-card">
-            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop&crop=face" alt="Adv. Rajesh Kumar" class="expert-image">
-            <h3>Adv. Rajesh Kumar</h3>
+            <img 
+  src="shivani.jpg"
+  alt="Adv. Shivani Shastri"
+  class="expert-image"
+  loading="lazy"
+  decoding="async">
+            <h3>Adv. Shivani Shastri</h3>
             <p class="expert-spec">Cyber & IT Law</p>
             <p class="expert-bio">Specialist in cyber crimes, data protection, and IT Act cases with expertise in digital forensics.</p>
           </div>
@@ -1501,5 +1562,20 @@
       observer.observe(card);
     });
   </script>
+  <!-- Service Worker Registration -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker
+        .register('/sw.js')
+        .then(reg => {
+          console.log('Service Worker registered:', reg.scope);
+        })
+        .catch(err => {
+          console.error('Service Worker registration failed:', err);
+        });
+    });
+  }
+</script>
 </body>
 </html>
