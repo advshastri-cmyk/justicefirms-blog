@@ -1594,5 +1594,47 @@
     });
   }
 </script>
+  <script>
+fetch('./articles.json')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('articles.json not found');
+    }
+    return response.json();
+  })
+  .then(data => {
+    const grid = document.getElementById('articlesGrid');
+    grid.innerHTML = '';
+
+    data.articles.forEach(article => {
+      const card = document.createElement('article');
+      card.className = 'article-card';
+
+      card.innerHTML = `
+        <span class="article-category">${article.category.primary}</span>
+        <h3>${article.title}</h3>
+        <p class="article-excerpt">${article.excerpt}</p>
+
+        <div class="article-meta">
+          <div class="article-meta-item">
+            <span>${article.author.name}</span>
+          </div>
+          <div class="article-meta-item">
+            <span>${article.reading_time}</span>
+          </div>
+        </div>
+      `;
+
+      card.onclick = () => {
+        window.location.href = article.slug;
+      };
+
+      grid.appendChild(card);
+    });
+  })
+  .catch(error => {
+    console.error('Error loading articles:', error);
+  });
+</script>
 </body>
 </html>
