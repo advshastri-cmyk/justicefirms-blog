@@ -1,105 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Homepage -->
   <url>
-    <loc>https://blog.justicefirms.com/</loc>
-    <lastmod>2025-12-26</lastmod>
+    <loc>https://justicefirms.com/</loc>
+    <lastmod>2026-01-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Journal Sections -->
   <url>
-    <loc>https://blog.justicefirms.com/ndps-section-52a-sampling-procedure</loc>
-    <lastmod>2025-12-24</lastmod>
+    <loc>https://justicefirms.com/#articles</loc>
+    <lastmod>2026-01-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://justicefirms.com/#topics</loc>
+    <lastmod>2026-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://justicefirms.com/#experts</loc>
+    <lastmod>2026-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Articles (Journal URLs – Recommended structure) -->
+  <url>
+    <loc>https://justicefirms.com/articles/anticipatory-bail-section-438-crpc</loc>
+    <lastmod>2026-01-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
-    <loc>https://blog.justicefirms.com/age-determination-pocso-cases-jj-act</loc>
-    <lastmod>2025-12-22</lastmod>
+    <loc>https://justicefirms.com/articles/section-498a-ipc-rights-remedies</loc>
+    <lastmod>2026-01-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
-    <loc>https://blog.justicefirms.com/punishment-hacking-data-theft-india</loc>
-    <lastmod>2025-12-18</lastmod>
+    <loc>https://justicefirms.com/articles/cyber-fraud-it-act-legal-recourse</loc>
+    <lastmod>2026-01-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
-    <loc>https://blog.justicefirms.com/mandatory-reporting-pocso-section-19</loc>
-    <lastmod>2025-12-15</lastmod>
+    <loc>https://justicefirms.com/articles/maintenance-laws-india-crpc-hma</loc>
+    <lastmod>2026-01-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
-    <loc>https://blog.justicefirms.com/cyber-stalking-laws-india-ipc-it-act</loc>
-    <lastmod>2025-12-12</lastmod>
+    <loc>https://justicefirms.com/articles/ndps-bail-provisions-defense</loc>
+    <lastmod>2026-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
-    <loc>https://blog.justicefirms.com/ndps-search-seizure-without-warrant-section-42</loc>
-    <lastmod>2025-12-05</lastmod>
+    <loc>https://justicefirms.com/articles/child-custody-laws-best-interest</loc>
+    <lastmod>2025-12-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
-    <loc>https://blog.justicefirms.com/getting-bail-pocso-cases-high-court</loc>
-    <lastmod>2025-12-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://blog.justicefirms.com/legal-action-against-phishing-vishing</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://blog.justicefirms.com/ndps-quantity-table-small-commercial</loc>
-    <lastmod>2025-11-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://blog.justicefirms.com/procedure-inside-pocso-special-court</loc>
-    <lastmod>2025-11-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://blog.justicefirms.com/identity-theft-laws-india-66c</loc>
-    <lastmod>2025-11-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://blog.justicefirms.com/conscious-possession-ndps-legal-definition</loc>
-    <lastmod>2025-11-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://blog.justicefirms.com/online-defamation-legal-remedies-india</loc>
-    <lastmod>2025-11-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://blog.justicefirms.com/medical-examination-victim-section-27-pocso</loc>
-    <lastmod>2025-10-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://blog.justicefirms.com/crypto-scams-legal-recourse-india</loc>
-    <lastmod>2025-10-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://blog.justicefirms.com/ndps-conviction-appeal-high-court</loc>
-    <lastmod>2025-10-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
+
 </urlset>
