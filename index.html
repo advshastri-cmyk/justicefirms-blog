@@ -1265,6 +1265,14 @@
       </button>
     </div>
   </div>
+  <div class="load-more-wrap">
+  <button class="btn-load-more" id="loadMoreBtn" aria-label="Load more legal articles" style="display: none;">
+    Load More Articles
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+      <path d="M5 12h14M12 5l7 7-7 7"/>
+    </svg>
+  </button>
+</div>
 </section>
    
     <!-- Experts -->
@@ -1503,47 +1511,78 @@
     });
   }
 </script>
-  <script>
-fetch('/articles.json')  // ← Root se load karega (sabse reliable)
-  .then(response => {
+<script>
+async function loadArticles() {
+  const grid = document.getElementById('articlesGrid');
+  if (!grid) return;
+
+  // Show premium skeleton loading
+  grid.innerHTML = `
+    <div class="loading-skeleton">
+      ${Array(6).fill().map(() => `
+        <div class="skeleton-card">
+          <div class="skeleton-image"></div>
+          <div class="skeleton-text">
+            <div class="skeleton-line short"></div>
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line medium"></div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  try {
+    const response = await fetch('/articles.json', {
+      cache: 'no-cache',
+      headers: { 'Accept': 'application/json' }
+    });
+
     if (!response.ok) {
-      throw new Error(`articles.json load failed - Status: ${response.status}`);
+      throw new Error(`Articles load failed — ${response.status}`);
     }
-    return response.json();
-  })
-  .then(data => {
-    const grid = document.getElementById('articlesGrid');
-    grid.innerHTML = '';  // Purana fallback ya hardcoded hata do
 
-    data.articles.forEach(article => {
+    const { articles } = await response.json();
+
+    // Clear skeleton
+    grid.innerHTML = '';
+
+    articles.forEach((article, index) => {
       const card = document.createElement('article');
-      card.className = 'article-card';
+      card.className = 'article-card premium-card';
+      card.style.animationDelay = `${index * 80}ms`;
 
-      // Featured badge agar chahiye (future mein JSON mein "featured": true add kar sakte ho)
-      const featuredBadge = article.featured ? '<span class="article-featured">Featured</span>' : '';
+      const featuredBadge = article.featured 
+        ? '<span class="featured-badge">Featured</span>' 
+        : '';
 
       card.innerHTML = `
         ${featuredBadge}
-        <span class="article-category">${article.category.primary}</span>
-        <h3>${article.title}</h3>
-        <p class="article-excerpt">${article.excerpt}</p>
+        <span class="article-category">${article.category?.primary || 'General'}</span>
+        
+        <h3 class="article-title">${article.title}</h3>
+        
+        <p class="article-excerpt">${article.excerpt || 'Read this important legal insight...'}</p>
+        
         <div class="article-meta">
-          <div class="article-meta-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
+          <div class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
             </svg>
-            <span>${article.author.name}</span>
+            <span>${article.author?.name || 'Justice Team'}</span>
           </div>
-          <div class="article-meta-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+          
+          <div class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 6v6l4 2"></path>
             </svg>
-            <span>${article.reading_time}</span>
+            <span>${article.reading_time || '5 min read'}</span>
           </div>
         </div>
       `;
 
-      // Click pe slug pe redirect (relative slug assume kar raha)
       card.style.cursor = 'pointer';
       card.addEventListener('click', () => {
         window.location.href = `/${article.slug}`;
@@ -1551,16 +1590,29 @@ fetch('/articles.json')  // ← Root se load karega (sabse reliable)
 
       grid.appendChild(card);
     });
-  })
-  .catch(error => {
+
+    // Show "Load More" button if needed
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    if (loadMoreBtn && articles.length > 6) {
+      loadMoreBtn.style.display = 'inline-flex';
+    }
+
+  } catch (error) {
     console.error('Error loading articles:', error);
-    document.getElementById('articlesGrid').innerHTML = `
-      <p style="text-align:center; color:#e74c3c; grid-column: 1 / -1; padding: 60px 20px;">
-        Unable to load articles right now.<br>
-        Please check your connection or <a href="https://justicefirms.com/contact" style="color:var(--gold);">contact us</a>.
-      </p>
+
+    grid.innerHTML = `
+      <div class="error-message">
+        <div class="error-icon">⚠</div>
+        <h3>Unable to load articles</h3>
+        <p>Please check your connection or try again later.<br>
+        You can also <a href="/contact" class="contact-link">contact us</a> for assistance.</p>
+      </div>
     `;
-  });
+  }
+}
+
+// Start loading when page is ready
+document.addEventListener('DOMContentLoaded', loadArticles);
 </script>
 </body>
 </html>
