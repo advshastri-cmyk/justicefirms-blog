@@ -1583,10 +1583,9 @@ async function loadArticles() {
         </div>
       `;
 
-      // FIXED: Added .html extension so it works on GitHub Pages
       card.style.cursor = 'pointer';
       card.addEventListener('click', () => {
-        window.location.href = `/${article.slug}.html`;
+        window.location.href = `/${article.slug}.html`;  // ← यहाँ .html जोड़ा गया है (यह 404 फिक्स करेगा)
       });
 
       grid.appendChild(card);
