@@ -1406,49 +1406,38 @@
         moonIcon.style.display = 'block';
       }
     });
+// ✅ UPDATED SEARCH (Dynamic Articles Compatible)
+function enableSearch() {
+  const searchInput = document.getElementById('searchInput');
+  if (!searchInput) return;
 
-    // Search functionality
-    const searchInput = document.getElementById('searchInput');
-    const articleCards = document.querySelectorAll('.article-card');
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase().trim();
 
-    searchInput.addEventListener('input', (e) => {
-      const query = e.target.value.toLowerCase();
-      
-      articleCards.forEach(card => {
-        const title = card.querySelector('h3').textContent.toLowerCase();
-        const excerpt = card.querySelector('.article-excerpt').textContent.toLowerCase();
-        const category = card.querySelector('.article-category').textContent.toLowerCase();
-        
-        if (title.includes(query) || excerpt.includes(query) || category.includes(query)) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = query === '' ? 'flex' : 'none';
-        }
-      });
+    document.querySelectorAll('.article-card').forEach(card => {
+      const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+      const excerpt = card.querySelector('.article-excerpt')?.textContent.toLowerCase() || '';
+      const category = card.querySelector('.article-category')?.textContent.toLowerCase() || '';
+
+      const match =
+        title.includes(query) ||
+        excerpt.includes(query) ||
+        category.includes(query);
+
+      card.style.display = match || query === '' ? 'flex' : 'none';
     });
+  });
 
-    // Tag click handling
-    const tags = document.querySelectorAll('.tag');
-    tags.forEach(tag => {
-      tag.addEventListener('click', () => {
-        searchInput.value = tag.textContent;
-        searchInput.dispatchEvent(new Event('input'));
-        document.getElementById('articles').scrollIntoView({ behavior: 'smooth' });
-      });
+  // ✅ Tag click handling (FIXED)
+  document.querySelectorAll('.tag').forEach(tag => {
+    tag.addEventListener('click', () => {
+      searchInput.value = tag.textContent.trim();
+      searchInput.dispatchEvent(new Event('input'));
+      document.getElementById('articles')
+        ?.scrollIntoView({ behavior: 'smooth' });
     });
-
-    // Load more button (demo)
-    const loadMoreBtn = document.getElementById('loadMoreBtn');
-    loadMoreBtn.addEventListener('click', () => {
-      loadMoreBtn.textContent = 'Loading...';
-      setTimeout(() => {
-        loadMoreBtn.innerHTML = 'No More Articles <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
-        loadMoreBtn.disabled = true;
-        loadMoreBtn.style.opacity = '0.6';
-        loadMoreBtn.style.cursor = 'default';
-      }, 1000);
-    });
-
+  });
+}
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
@@ -1503,6 +1492,9 @@ let allArticles = [];
 let visibleCount = 0;
 const PER_PAGE = 6;
 
+/* ===============================
+   LOAD ARTICLES
+================================ */
 async function loadArticles() {
   const grid = document.getElementById('articlesGrid');
   if (!grid) return;
@@ -1516,6 +1508,8 @@ async function loadArticles() {
 
     allArticles = data.articles || [];
     grid.innerHTML = '';
+    visibleCount = 0;
+
     renderArticles();
     enableSearch();
 
@@ -1526,6 +1520,9 @@ async function loadArticles() {
   }
 }
 
+/* ===============================
+   RENDER + LOAD MORE
+================================ */
 function renderArticles() {
   const grid = document.getElementById('articlesGrid');
   const slice = allArticles.slice(visibleCount, visibleCount + PER_PAGE);
@@ -1533,6 +1530,7 @@ function renderArticles() {
   slice.forEach(article => {
     const card = document.createElement('article');
     card.className = 'article-card';
+
     card.innerHTML = `
       <span class="article-category">${article.category?.primary || ''}</span>
       <h3>${article.title}</h3>
@@ -1542,37 +1540,79 @@ function renderArticles() {
         <span>${article.reading_time || ''}</span>
       </div>
     `;
+
     card.onclick = () => {
       window.location.href = './' + article.slug + '.html';
     };
+
+    // animation init
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    card.style.transition = 'all 0.6s ease';
+
+    observer.observe(card);
     grid.appendChild(card);
   });
 
   visibleCount += slice.length;
 
-  const btnWrap = document.getElementById('loadMoreWrap');
-  if (btnWrap) {
-    btnWrap.style.display =
-      visibleCount < allArticles.length ? 'block' : 'none';
+  const btn = document.getElementById('loadMoreBtn');
+  if (btn) {
+    btn.style.display =
+      visibleCount < allArticles.length ? 'inline-flex' : 'none';
   }
 }
 
-document.getElementById('loadMoreBtn')?.addEventListener('click', renderArticles);
-
+/* ===============================
+   SEARCH + TAG FILTER
+================================ */
 function enableSearch() {
   const input = document.getElementById('searchInput');
   if (!input) return;
 
   input.addEventListener('input', () => {
-    const q = input.value.toLowerCase();
+    const q = input.value.toLowerCase().trim();
     document.querySelectorAll('.article-card').forEach(card => {
-      card.style.display = card.innerText.toLowerCase().includes(q)
-        ? 'flex'
-        : 'none';
+      card.style.display =
+        card.innerText.toLowerCase().includes(q) ? 'flex' : 'none';
+    });
+  });
+
+  document.querySelectorAll('.tag').forEach(tag => {
+    tag.addEventListener('click', () => {
+      input.value = tag.textContent.trim();
+      input.dispatchEvent(new Event('input'));
+      document.getElementById('articles')
+        ?.scrollIntoView({ behavior: 'smooth' });
     });
   });
 }
 
+/* ===============================
+   INTERSECTION OBSERVER
+================================ */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+      observer.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+});
+
+/* ===============================
+   LOAD MORE BUTTON
+================================ */
+document.getElementById('loadMoreBtn')
+  ?.addEventListener('click', renderArticles);
+
+/* ===============================
+   INIT
+================================ */
 document.addEventListener('DOMContentLoaded', loadArticles);
 </script>
 </body>
