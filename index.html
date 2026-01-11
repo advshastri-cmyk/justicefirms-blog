@@ -1585,7 +1585,7 @@ async function loadArticles() {
 
       card.style.cursor = 'pointer';
       card.addEventListener('click', () => {
-        window.location.href = `/${article.slug}.html`;  // ← यहाँ .html जोड़ा गया है (यह 404 फिक्स करेगा)
+        window.location.href = `/${article.slug}.html`;  // ← FIXED: .html added here
       });
 
       grid.appendChild(card);
