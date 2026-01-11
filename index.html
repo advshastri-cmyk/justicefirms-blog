@@ -1242,20 +1242,22 @@
 <!-- Articles -->
 <section id="articles" class="articles">
   <div class="container">
+
     <div class="section-header">
       <p class="section-label">Legal Insights</p>
       <h2 class="section-title">Latest Practical Articles</h2>
-      <p class="section-desc">In-depth analysis and practical guidance from experienced legal practitioners</p>
-    </div>
-
-    <div class="articles-grid" id="articlesGrid">
-      <!-- Dynamic articles will be inserted here by JavaScript -->
-      <!-- Fallback message if JS fails -->
-      <p style="text-align: center; color: var(--muted); grid-column: 1 / -1; padding: 40px 0;">
-        Loading articles... If nothing appears, please refresh or enable JavaScript.
+      <p class="section-desc">
+        In-depth analysis and practical guidance from experienced legal practitioners
       </p>
     </div>
 
+    <div class="articles-grid" id="articlesGrid">
+      <p style="text-align:center;color:var(--muted);grid-column:1/-1;padding:40px 0;">
+        Loading articles...
+      </p>
+    </div>
+
+    <!-- Load More (ONLY ONE) -->
     <div class="load-more-wrap">
       <button class="btn-load-more" id="loadMoreBtn" aria-label="Load more legal articles">
         Load More Articles
@@ -1264,15 +1266,8 @@
         </svg>
       </button>
     </div>
+
   </div>
-  <div class="load-more-wrap">
-  <button class="btn-load-more" id="loadMoreBtn" aria-label="Load more legal articles" style="display: none;">
-    Load More Articles
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-      <path d="M5 12h14M12 5l7 7-7 7"/>
-    </svg>
-  </button>
-</div>
 </section>
    
     <!-- Experts -->
