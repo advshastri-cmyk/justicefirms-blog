@@ -1510,13 +1510,13 @@ function enableSearch() {
     });
   }
 </script>
-<script>
+  <script>
 let allArticles = [];
 let visibleCount = 0;
 const PER_PAGE = 6;
 
 /* ===============================
-   INTERSECTION OBSERVER (For Animations)
+   ANIMATION OBSERVER
 ================================ */
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
@@ -1535,14 +1535,14 @@ async function loadArticles() {
   const grid = document.getElementById('articlesGrid');
   if (!grid) return;
 
-  grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--gold)">Loading articles...</p>';
+  grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--gold)">Journal Articles loading...</p>';
 
   try {
     const res = await fetch('articles.json');
     const data = await res.json();
 
-    // Handling both formats: { "articles": [...] } OR just [...]
-    allArticles = Array.isArray(data) ? data : (data.articles || []);
+    // Aapke JSON ke hisaab se: data.articles
+    allArticles = data.articles || [];
     
     grid.innerHTML = '';
     visibleCount = 0;
@@ -1551,13 +1551,13 @@ async function loadArticles() {
     enableSearch();
 
   } catch (err) {
-    console.error("Error loading JSON:", err);
-    grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:red">Unable to load articles. Please check articles.json file.</p>';
+    console.error("Fetch Error:", err);
+    grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:red">Error: articles.json file missing or invalid.</p>';
   }
 }
 
 /* ===============================
-   RENDER ARTICLES (With Pagination)
+   RENDER ARTICLES
 ================================ */
 function renderArticles() {
   const grid = document.getElementById('articlesGrid');
@@ -1567,34 +1567,33 @@ function renderArticles() {
     const card = document.createElement('article');
     card.className = 'article-card';
     
-    // Yahan humne inline styles add kiye hain taaki content barabar dikhe
-    card.style.display = 'flex';
-    card.style.flexDirection = 'column';
-    card.style.padding = '24px';
-    card.style.cursor = 'pointer';
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(30px)';
-    card.style.transition = 'all 0.6s ease';
-
-    // Categories aur Data check
-    const category = article.category?.primary || article.category || 'Legal Insight';
-    const author = article.author?.name || article.author || 'Justice Firm';
-
+    // Design matching your JSON (Cover + Category + Title)
     card.innerHTML = `
-      <span class="article-category">${category}</span>
-      <h3 style="margin: 10px 0;">${article.title}</h3>
-      <p class="article-excerpt" style="flex-grow:1; margin-bottom:15px;">${article.excerpt || ''}</p>
-      <div class="article-meta" style="display:flex; justify-content:space-between; font-size:12px; opacity:0.7;">
-        <span>BY ${author.toUpperCase()}</span>
-        <span>${article.reading_time || '5 min read'}</span>
+      <div class="article-image">
+        <img src="${article.cover}" alt="${article.title}" loading="lazy">
+      </div>
+      <div style="padding: 24px; display: flex; flex-direction: column; flex-grow: 1;">
+        <span class="article-category">${article.category.primary} • ${article.category.secondary}</span>
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; margin: 10px 0;">${article.title}</h3>
+        <p class="article-excerpt" style="font-size: 14px; color: var(--muted); margin-bottom: 20px;">${article.excerpt}</p>
+        <div class="article-meta" style="margin-top: auto; font-size: 12px; display: flex; justify-content: space-between;">
+          <span>${article.author.name}</span>
+          <span>${article.reading_time}</span>
+        </div>
       </div>
     `;
 
+    // Click behavior (Slugs se URL banana)
     card.onclick = () => {
-      // Slug use karein ya seedha link
-      const target = article.slug ? `./${article.slug}.html` : (article.link || '#');
-      window.location.href = target;
+      window.location.href = `./${article.slug}.html`;
     };
+
+    // Animation Settings
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    card.style.transition = 'all 0.5s ease-out';
+    card.style.display = 'flex';
+    card.style.flexDirection = 'column';
 
     grid.appendChild(card);
     observer.observe(card);
@@ -1602,18 +1601,15 @@ function renderArticles() {
 
   visibleCount += slice.length;
 
-  // Load More Button Visibility
-  const btn = document.getElementById('loadMoreBtn');
-  const wrap = document.getElementById('loadMoreWrap');
-  if (btn) {
-    const hasMore = visibleCount < allArticles.length;
-    btn.style.display = hasMore ? 'inline-flex' : 'none';
-    if(wrap) wrap.style.display = hasMore ? 'block' : 'none';
+  // Load More Button Logic
+  const btnWrap = document.getElementById('loadMoreWrap');
+  if (btnWrap) {
+    btnWrap.style.display = (visibleCount < allArticles.length) ? 'block' : 'none';
   }
 }
 
 /* ===============================
-   SEARCH & TAG FILTERING
+   SEARCH & TAGS
 ================================ */
 function enableSearch() {
   const input = document.getElementById('searchInput');
@@ -1624,12 +1620,12 @@ function enableSearch() {
     const cards = document.querySelectorAll('.article-card');
     
     cards.forEach(card => {
-      const isVisible = card.innerText.toLowerCase().includes(q);
-      card.style.display = isVisible ? 'flex' : 'none';
+      const text = card.innerText.toLowerCase();
+      card.style.display = text.includes(q) ? 'flex' : 'none';
     });
   });
 
-  // Tag clicks handle karna
+  // Tag support
   document.querySelectorAll('.tag').forEach(tag => {
     tag.addEventListener('click', () => {
       input.value = tag.textContent.trim();
@@ -1639,9 +1635,6 @@ function enableSearch() {
   });
 }
 
-/* ===============================
-   EVENTS & INIT
-================================ */
 document.getElementById('loadMoreBtn')?.addEventListener('click', renderArticles);
 document.addEventListener('DOMContentLoaded', loadArticles);
 </script>
