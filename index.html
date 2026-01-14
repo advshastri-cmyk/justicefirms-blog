@@ -1264,29 +1264,27 @@ body.dark .article-meta {
         </div>
       </div>
     </section>
-    
-<section id="articles" class="articles">
+       <section id="articles" class="articles">
   <div class="container">
-
     <div class="section-header">
       <p class="section-label">Legal Insights</p>
       <h2 class="section-title">Latest Practical Articles</h2>
       <p class="section-desc">
-        In-depth analysis and practical guidance from experienced legal practitioners
+        Explore our library of 40+ practitioner-authored legal guides.
       </p>
     </div>
 
-    <div class="articles-grid" id="articlesGrid"></div>
-
-    <div class="load-more-wrap" id="loadMoreWrap" style="display:none;">
-      <button class="btn-load-more" id="loadMoreBtn">
-        Load More Articles
-      </button>
+    <div class="articles-grid" id="articlesGrid">
+      <p style="text-align: center; grid-column: 1/-1;">Loading articles...</p>
     </div>
 
+    <div class="load-more-wrap">
+      <button class="btn-load-more" onclick="window.location.reload()">
+        Refresh Journal
+      </button>
+    </div>
   </div>
 </section>
-   
     <!-- Experts -->
     <section id="experts" class="experts">
       <div class="container">
@@ -1518,103 +1516,7 @@ let visibleCount = 0;
 const PER_PAGE = 6;
 
 /* ===============================
-   LOAD ARTICLES
-================================ */
-async function loadArticles() {
-  const grid = document.getElementById('articlesGrid');
-  if (!grid) return;
-
-  grid.innerHTML =
-    '<p style="grid-column:1/-1;text-align:center;color:#888">Loading articles...</p>';
-
-  try {
-    const res = await fetch('articles.json');
-    const data = await res.json();
-
-    allArticles = data.articles || [];
-    grid.innerHTML = '';
-    visibleCount = 0;
-
-    renderArticles();
-    enableSearch();
-
-  } catch (err) {
-    console.error(err);
-    grid.innerHTML =
-      '<p style="grid-column:1/-1;text-align:center;color:red">Unable to load articles</p>';
-  }
-}
-
-/* ===============================
-   RENDER + LOAD MORE
-================================ */
-function renderArticles() {
-  const grid = document.getElementById('articlesGrid');
-  const slice = allArticles.slice(visibleCount, visibleCount + PER_PAGE);
-
-  slice.forEach(article => {
-    const card = document.createElement('article');
-    card.className = 'article-card';
-
-    card.innerHTML = `
-      <span class="article-category">${article.category?.primary || ''}</span>
-      <h3>${article.title}</h3>
-      <p class="article-excerpt">${article.excerpt || ''}</p>
-      <div class="article-meta">
-        <span>${article.author?.name || ''}</span>
-        <span>${article.reading_time || ''}</span>
-      </div>
-    `;
-
-    card.onclick = () => {
-      window.location.href = './' + article.slug + '.html';
-    };
-
-    // animation init
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(30px)';
-    card.style.transition = 'all 0.6s ease';
-
-    observer.observe(card);
-    grid.appendChild(card);
-  });
-
-  visibleCount += slice.length;
-
-  const btn = document.getElementById('loadMoreBtn');
-  if (btn) {
-    btn.style.display =
-      visibleCount < allArticles.length ? 'inline-flex' : 'none';
-  }
-}
-
-/* ===============================
-   SEARCH + TAG FILTER
-================================ */
-function enableSearch() {
-  const input = document.getElementById('searchInput');
-  if (!input) return;
-
-  input.addEventListener('input', () => {
-    const q = input.value.toLowerCase().trim();
-    document.querySelectorAll('.article-card').forEach(card => {
-      card.style.display =
-        card.innerText.toLowerCase().includes(q) ? 'flex' : 'none';
-    });
-  });
-
-  document.querySelectorAll('.tag').forEach(tag => {
-    tag.addEventListener('click', () => {
-      input.value = tag.textContent.trim();
-      input.dispatchEvent(new Event('input'));
-      document.getElementById('articles')
-        ?.scrollIntoView({ behavior: 'smooth' });
-    });
-  });
-}
-
-/* ===============================
-   INTERSECTION OBSERVER
+   INTERSECTION OBSERVER (For Animations)
 ================================ */
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
@@ -1624,20 +1526,123 @@ const observer = new IntersectionObserver(entries => {
       observer.unobserve(entry.target);
     }
   });
-}, {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px'
-});
+}, { threshold: 0.1 });
 
 /* ===============================
-   LOAD MORE BUTTON
+   LOAD ARTICLES FROM JSON
 ================================ */
-document.getElementById('loadMoreBtn')
-  ?.addEventListener('click', renderArticles);
+async function loadArticles() {
+  const grid = document.getElementById('articlesGrid');
+  if (!grid) return;
+
+  grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--gold)">Loading articles...</p>';
+
+  try {
+    const res = await fetch('articles.json');
+    const data = await res.json();
+
+    // Handling both formats: { "articles": [...] } OR just [...]
+    allArticles = Array.isArray(data) ? data : (data.articles || []);
+    
+    grid.innerHTML = '';
+    visibleCount = 0;
+
+    renderArticles();
+    enableSearch();
+
+  } catch (err) {
+    console.error("Error loading JSON:", err);
+    grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:red">Unable to load articles. Please check articles.json file.</p>';
+  }
+}
 
 /* ===============================
-   INIT
+   RENDER ARTICLES (With Pagination)
 ================================ */
+function renderArticles() {
+  const grid = document.getElementById('articlesGrid');
+  const slice = allArticles.slice(visibleCount, visibleCount + PER_PAGE);
+
+  slice.forEach(article => {
+    const card = document.createElement('article');
+    card.className = 'article-card';
+    
+    // Yahan humne inline styles add kiye hain taaki content barabar dikhe
+    card.style.display = 'flex';
+    card.style.flexDirection = 'column';
+    card.style.padding = '24px';
+    card.style.cursor = 'pointer';
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    card.style.transition = 'all 0.6s ease';
+
+    // Categories aur Data check
+    const category = article.category?.primary || article.category || 'Legal Insight';
+    const author = article.author?.name || article.author || 'Justice Firm';
+
+    card.innerHTML = `
+      <span class="article-category">${category}</span>
+      <h3 style="margin: 10px 0;">${article.title}</h3>
+      <p class="article-excerpt" style="flex-grow:1; margin-bottom:15px;">${article.excerpt || ''}</p>
+      <div class="article-meta" style="display:flex; justify-content:space-between; font-size:12px; opacity:0.7;">
+        <span>BY ${author.toUpperCase()}</span>
+        <span>${article.reading_time || '5 min read'}</span>
+      </div>
+    `;
+
+    card.onclick = () => {
+      // Slug use karein ya seedha link
+      const target = article.slug ? `./${article.slug}.html` : (article.link || '#');
+      window.location.href = target;
+    };
+
+    grid.appendChild(card);
+    observer.observe(card);
+  });
+
+  visibleCount += slice.length;
+
+  // Load More Button Visibility
+  const btn = document.getElementById('loadMoreBtn');
+  const wrap = document.getElementById('loadMoreWrap');
+  if (btn) {
+    const hasMore = visibleCount < allArticles.length;
+    btn.style.display = hasMore ? 'inline-flex' : 'none';
+    if(wrap) wrap.style.display = hasMore ? 'block' : 'none';
+  }
+}
+
+/* ===============================
+   SEARCH & TAG FILTERING
+================================ */
+function enableSearch() {
+  const input = document.getElementById('searchInput');
+  if (!input) return;
+
+  input.addEventListener('input', () => {
+    const q = input.value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.article-card');
+    
+    cards.forEach(card => {
+      const isVisible = card.innerText.toLowerCase().includes(q);
+      card.style.display = isVisible ? 'flex' : 'none';
+    });
+  });
+
+  // Tag clicks handle karna
+  document.querySelectorAll('.tag').forEach(tag => {
+    tag.addEventListener('click', () => {
+      input.value = tag.textContent.trim();
+      input.dispatchEvent(new Event('input'));
+      document.getElementById('articles')?.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+}
+
+/* ===============================
+   EVENTS & INIT
+================================ */
+document.getElementById('loadMoreBtn')?.addEventListener('click', renderArticles);
 document.addEventListener('DOMContentLoaded', loadArticles);
 </script>
 </body>
