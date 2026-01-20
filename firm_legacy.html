@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Legacy & Vision — JusticeFirms</title>
+    <meta name="description" content="From the historic halls of the Allahabad High Court to the digital frontier. The story of JusticeFirms." />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            /* Palette: Midnight Luxury */
+            --bg-body: #020617;
+            --bg-glass: rgba(15, 23, 42, 0.85);
+            --bg-card: rgba(30, 41, 59, 0.4);
+            
+            --primary: #ffffff;
+            --secondary: #94a3b8;
+            
+            --accent-gold: #d4af37;
+            --accent-tech: #38bdf8;
+            
+            --border-color: rgba(255, 255, 255, 0.08);
+            
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            
+            --container-width: 1200px;
+        }
+
+        html.light-mode {
+            --bg-body: #f8fafc;
+            --bg-glass: rgba(255, 255, 255, 0.9);
+            --bg-card: #ffffff;
+            --primary: #0f172a;
+            --secondary: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-body);
+            color: var(--primary);
+            font-family: var(--font-sans);
+            line-height: 1.7;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        h1, h2, h3, h4 { font-family: var(--font-serif); }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 24px; }
+        .mono { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-tech); }
+
+        /* --- Nav --- */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: var(--bg-glass); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .nav-inner { height: 90px; display: flex; align-items: center; justify-content: space-between; }
+        .brand { font-family: var(--font-serif); font-size: 1.75rem; font-weight: 700; display: flex; gap: 8px; text-decoration: none; color: inherit; }
+        .brand span { color: var(--accent-gold); }
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-link { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--secondary); text-decoration: none; transition: 0.3s; }
+        .nav-link:hover { color: var(--primary); }
+
+        /* --- Hero --- */
+        .legacy-hero {
+            padding: 200px 0 140px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            background: linear-gradient(180deg, rgba(2,6,23,0) 0%, rgba(212, 175, 55, 0.05) 100%);
+        }
+        .hero-label { font-family: var(--font-serif); font-style: italic; color: var(--accent-gold); font-size: 1.2rem; margin-bottom: 16px; display: block; }
+        .hero-title { font-size: clamp(3rem, 5vw, 4.5rem); line-height: 1.1; margin-bottom: 32px; }
+        .hero-desc { max-width: 700px; margin: 0 auto; color: var(--secondary); font-size: 1.1rem; }
+
+        /* --- Timeline Section --- */
+        .timeline-section { padding: 120px 0; }
+        .timeline-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding-left: 40px;
+        }
+        /* Vertical Line */
+        .timeline-container::before {
+            content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px;
+            background: linear-gradient(to bottom, transparent, var(--accent-gold), transparent);
+        }
+
+        .timeline-item { position: relative; margin-bottom: 80px; opacity: 0; transform: translateY(20px); transition: 0.6s ease; }
+        .timeline-item.visible { opacity: 1; transform: translateY(0); }
+
+        .timeline-dot {
+            position: absolute; left: -44px; top: 0; width: 9px; height: 9px;
+            background: var(--accent-gold); border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2);
+        }
+        
+        .year-label { font-family: var(--font-mono); color: var(--accent-tech); margin-bottom: 8px; display: block; }
+        .t-title { font-size: 1.75rem; margin-bottom: 16px; }
+        .t-desc { color: var(--secondary); }
+
+        /* --- Quote / Philosophy --- */
+        .philosophy-section {
+            background: var(--bg-card);
+            padding: 100px 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .quote-icon { color: var(--accent-gold); margin-bottom: 32px; opacity: 0.5; }
+        .big-quote {
+            font-family: var(--font-serif); font-size: 2.5rem; line-height: 1.3;
+            max-width: 900px; margin: 0 auto 40px;
+        }
+        .quote-author { font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9rem; color: var(--secondary); }
+
+        /* --- Offices Map (Stylized) --- */
+        .offices-section { padding: 120px 0; }
+        .offices-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 60px; }
+        
+        .office-card {
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            transition: 0.3s;
+            position: relative; overflow: hidden;
+        }
+        .office-card:hover { border-color: var(--accent-gold); }
+        
+        .city-name { font-size: 1.5rem; font-family: var(--font-serif); margin-bottom: 8px; }
+        .office-type { font-size: 0.8rem; text-transform: uppercase; color: var(--accent-tech); letter-spacing: 0.1em; margin-bottom: 24px; display: block; }
+        .address { color: var(--secondary); font-size: 0.95rem; margin-bottom: 24px; }
+        
+        .map-coords {
+            position: absolute; bottom: 20px; right: 20px;
+            font-family: var(--font-mono); font-size: 0.7rem; color: var(--border-color);
+        }
+
+        /* --- CTA --- */
+        .legacy-cta { padding: 100px 0; text-align: center; }
+        .btn-join {
+            display: inline-block; padding: 16px 32px; border: 1px solid var(--primary);
+            color: var(--primary); text-transform: uppercase; letter-spacing: 0.1em;
+            text-decoration: none; transition: 0.3s; margin-top: 32px;
+        }
+        .btn-join:hover { background: var(--primary); color: var(--bg-body); }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .timeline-container { padding-left: 24px; }
+            .timeline-dot { left: -28px; }
+            .big-quote { font-size: 1.8rem; padding: 0 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-inner">
+            <a href="justicefirms_journal.html" class="brand">
+                <i data-lucide="scale" size="24" color="var(--accent-gold)"></i>
+                JusticeFirms
+            </a>
+            <div class="nav-links">
+                <a href="justicefirms_journal.html" class="nav-link">Journal</a>
+                <a href="the_bench.html" class="nav-link">The Bench</a>
+                <a href="consultation.html" class="nav-link" style="color:var(--accent-gold);">Consult</a>
+                <button id="themeToggle" style="background:none; border:none; cursor:pointer; color:var(--secondary);">
+                    <i data-lucide="moon" size="20"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="legacy-hero">
+        <div class="container">
+            <span class="hero-label">Est. 1985 • Prayagraj</span>
+            <h1 class="hero-title">From the Sangam<br>to the Cloud</h1>
+            <p class="hero-desc">
+                For four decades, we have stood at the confluence of tradition and truth. Today, we stand at the new frontier: the intersection of constitutional values and digital reality.
+            </p>
+        </div>
+    </header>
+
+    <!-- History Timeline -->
+    <section class="container timeline-section">
+        <div class="timeline-container">
+            
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <span class="year-label">1985</span>
+                <h3 class="t-title">The Foundation</h3>
+                <p class="t-desc">
+                    Adv. Ganga Shankar establishes the chambers at Civil Lines, Allahabad. Initially focused on Constitutional Writs and Criminal Defense during a turbulent era in Uttar Pradesh's legal history.
+                </p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <span class="year-label">2002</span>
+                <h3 class="t-title">Expansion to the Apex</h3>
+                <p class="t-desc">
+                    Following a series of high-profile acquittals, the firm opens its Delhi chapter to handle Special Leave Petitions (SLPs) at the Supreme Court of India.
+                </p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <span class="year-label">2018</span>
+                <h3 class="t-title">The Digital Pivot</h3>
+                <p class="t-desc">
+                    Recognizing the Puttaswamy Judgment (Right to Privacy) as a watershed moment, JusticeFirms establishes its dedicated "Cyber & Tech" wing led by the new generation of partners.
+                </p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <span class="year-label">2026</span>
+                <h3 class="t-title">JusticeFirms 2.0</h3>
+                <p class="t-desc">
+                    Full integration of AI-assisted discovery and the launch of the "Policy Innovation Lab" to navigate the BNS/BNSS transition.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section class="philosophy-section">
+        <div class="container">
+            <i data-lucide="quote" class="quote-icon" size="48"></i>
+            <h2 class="big-quote">
+                "The law is not a static monolith; it is a living algorithm. To serve justice in the 21st century, one must speak the language of both the Constitution and the Code."
+            </h2>
+            <span class="quote-author">— Founding Principle</span>
+        </div>
+    </section>
+
+    <!-- Offices -->
+    <section class="container offices-section">
+        <h2 style="font-size: 2.5rem; text-align: center;">Our Presence</h2>
+        
+        <div class="offices-grid">
+            <!-- HQ -->
+            <div class="office-card">
+                <h3 class="city-name">Prayagraj</h3>
+                <span class="office-type">Headquarters & Litigation</span>
+                <p class="address">
+                    34/B, Civil Lines,<br>
+                    Near High Court,<br>
+                    Uttar Pradesh - 211001
+                </p>
+                <div class="map-coords">25.4358° N, 81.8463° E</div>
+            </div>
+
+            <!-- Corp Office -->
+            <div class="office-card">
+                <h3 class="city-name">New Delhi</h3>
+                <span class="office-type">Corporate & Supreme Court</span>
+                <p class="address">
+                    L-Block, Jungpura Extension,<br>
+                    South Delhi,<br>
+                    New Delhi - 110014
+                </p>
+                <div class="map-coords">28.5847° N, 77.2483° E</div>
+            </div>
+
+            <!-- Virtual -->
+            <div class="office-card" style="border-color: var(--accent-tech); background: rgba(56, 189, 248, 0.05);">
+                <h3 class="city-name" style="color: var(--accent-tech);">The Cloud</h3>
+                <span class="office-type">Secure Client Enclave</span>
+                <p class="address">
+                    End-to-End Encrypted<br>
+                    Data Residency: India (DPDP Compliant)<br>
+                    24/7 Access
+                </p>
+                <div class="map-coords">::1</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="legacy-cta">
+        <h2 style="font-size: 2rem; margin-bottom: 16px; font-family: var(--font-serif);">Be Part of History</h2>
+        <p style="color: var(--secondary); margin-bottom: 0;">We are always looking for minds that challenge the status quo.</p>
+        <a href="careers.html" class="btn-join">View Opportunities</a>
+    </div>
+
+    <footer style="text-align: center; padding: 40px; border-top: 1px solid var(--border-color); color: var(--secondary); font-size: 0.8rem;">
+        <p>© 2026 JusticeFirms.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Theme Logic
+        const themeBtn = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        if (localStorage.getItem('theme') === 'light') {
+            html.classList.add('light-mode');
+            themeBtn.innerHTML = `<i data-lucide="sun" size="20"></i>`;
+        }
+        themeBtn.addEventListener('click', () => {
+            html.classList.toggle('light-mode');
+            const isLight = html.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            themeBtn.innerHTML = `<i data-lucide="${isLight ? 'sun' : 'moon'}" size="20"></i>`;
+            lucide.createIcons();
+        });
+
+        // Scroll Observer for Timeline
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
+    </script>
+</body>
+</html>
