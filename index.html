@@ -11,1632 +11,246 @@
   <meta property="og:description" content="High-search legal awareness articles in English and Hindi by experienced advocates at JusticeFirms." />
   <meta property="og:type" content="website" />
   <meta name="robots" content="index, follow">
-  <meta name="googlebot" content="index, follow">
   <meta name="author" content="JusticeFirms Journal">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --gold: #D4AF37;
-      --gold-dark: #B89A2E;
-      --charcoal: #0B0C0E;
-      --cream: #FDFDFB;
-      --muted: #5F6368;
-      --border: #e5e5e5;
+      --gold: #D4AF37; --gold-dark: #B89A2E; --charcoal: #0B0C0E;
+      --cream: #FDFDFB; --muted: #5F6368; --border: #e5e5e5;
     }
-
     .dark {
-      --background: #0B0C0E;
-      --foreground: #FDFDFB;
-      --card-bg: rgba(255,255,255,0.03);
-      --border: rgba(255,255,255,0.08);
+      --background: #0B0C0E; --foreground: #FDFDFB;
+      --card-bg: rgba(255,255,255,0.03); --border: rgba(255,255,255,0.08);
       --muted: #9CA3AF;
     }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: var(--cream);
-      color: var(--charcoal);
-      line-height: 1.6;
-      transition: background 0.4s, color 0.4s;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    body.dark {
-      background: var(--charcoal);
-      color: var(--cream);
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 600;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); line-height: 1.6; transition: 0.4s; -webkit-font-smoothing: antialiased; }
+    body.dark { background: var(--charcoal); color: var(--cream); }
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 600; }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
 
     /* Header */
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      background: rgba(11,12,14,0.95);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 80px;
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .logo-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 30px rgba(212,175,55,0.2);
-    }
-
-    .logo-icon svg {
-      width: 24px;
-      height: 24px;
-      stroke: var(--charcoal);
-    }
-
-    .logo-text {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .logo-text span:first-child {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      color: white;
-    }
-
-    .logo-text span:last-child {
-      font-size: 10px;
-      color: rgba(255,255,255,0.5);
-      text-transform: uppercase;
-      letter-spacing: 3px;
-    }
-
-    .header-nav {
-      display: none;
-      gap: 32px;
-    }
-
-    @media (min-width: 768px) {
-      .header-nav {
-        display: flex;
-      }
-    }
-
-    .header-nav a {
-      color: rgba(255,255,255,0.7);
-      font-size: 14px;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-
-    .header-nav a:hover {
-      color: white;
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .btn-theme {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.05);
-      border: none;
-      color: white;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.3s;
-    }
-
-    .btn-theme:hover {
-      background: rgba(255,255,255,0.1);
-    }
-
-    .btn-theme svg {
-      width: 20px;
-      height: 20px;
-    }
-
-    .btn-primary {
-      display: none;
-      padding: 10px 24px;
-      border-radius: 50px;
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      color: var(--charcoal);
-      font-weight: 600;
-      font-size: 14px;
-      border: none;
-      cursor: pointer;
-      transition: box-shadow 0.3s, transform 0.3s;
-    }
-
-    @media (min-width: 640px) {
-      .btn-primary {
-        display: inline-flex;
-      }
-    }
-
-    .btn-primary:hover {
-      box-shadow: 0 10px 30px rgba(212,175,55,0.3);
-      transform: translateY(-2px);
-    }
+    .header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(11,12,14,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 80px; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .logo { display: flex; align-items: center; gap: 16px; }
+    .logo-icon { width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); display: flex; align-items: center; justify-content: center; }
+    .logo-text span:first-child { font-size: 20px; color: white; }
+    .logo-text span:last-child { font-size: 10px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 3px; }
+    .header-nav { display: none; gap: 32px; }
+    @media (min-width: 768px) { .header-nav { display: flex; } }
+    .header-nav a { color: rgba(255,255,255,0.7); font-size: 14px; transition: 0.3s; }
+    .header-nav a:hover { color: white; }
+    .btn-primary { padding: 10px 24px; border-radius: 50px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--charcoal); font-weight: 600; border: none; cursor: pointer; }
 
     /* Hero */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding-top: 80px;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(rgba(11,12,14,0.75), rgba(11,12,14,0.85)), 
-                  url('https://images.unsplash.com/photo-1589829545856-d10d557cf95a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
-      background-size: cover;
-      background-position: center;
-    }
+    .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 80px; position: relative; overflow: hidden; background: linear-gradient(rgba(11,12,14,0.75), rgba(11,12,14,0.85)), url('https://images.unsplash.com/photo-1589829545856-d10d557cf95a?auto=format&fit=crop&w=2000&q=80'); background-size: cover; background-position: center; color: white; text-align: center; }
+    .hero-title { font-size: clamp(40px, 8vw, 80px); line-height: 1.1; margin-bottom: 32px; }
+    .hero-title em { color: var(--gold); font-style: italic; }
+    .btn-hero-primary { padding: 16px 40px; border-radius: 50px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--charcoal); font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, transparent, var(--charcoal));
-      pointer-events: none;
-    }
+    /* Topics */
+    .topics { padding: 100px 0; }
+    .topics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; margin-top: 64px; }
+    .topic-card { padding: 40px; border-radius: 24px; background: white; border: 1px solid rgba(0,0,0,0.05); transition: 0.4s; }
+    body.dark .topic-card { background: rgba(255,255,255,0.03); }
+    .topic-icon { width: 64px; height: 64px; border-radius: 16px; background: var(--gold); display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
 
-    .hero-content {
-      position: relative;
-      z-index: 10;
-      text-align: center;
-      padding: 60px 24px;
-      max-width: 1000px;
-    }
-
-    .hero-label {
-      color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: 5px;
-      font-size: 14px;
-      font-weight: 500;
-      margin-bottom: 32px;
-    }
-
-    .hero-title {
-      font-size: clamp(40px, 8vw, 80px);
-      color: white;
-      line-height: 1.1;
-      margin-bottom: 32px;
-    }
-
-    .hero-title em {
-      font-style: italic;
-      background: linear-gradient(135deg, #E8C547, var(--gold-dark));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-desc {
-      font-size: clamp(16px, 2vw, 20px);
-      color: rgba(255,255,255,0.8);
-      max-width: 800px;
-      margin: 0 auto 48px;
-      line-height: 1.7;
-      font-weight: 300;
-    }
-
-    .hero-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      justify-content: center;
-      align-items: center;
-    }
-
-    @media (min-width: 640px) {
-      .hero-buttons {
-        flex-direction: row;
-      }
-    }
-
-    .btn-hero-primary {
-      padding: 16px 40px;
-      border-radius: 50px;
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      color: var(--charcoal);
-      font-weight: 600;
-      font-size: 18px;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.3s;
-    }
-
-    .btn-hero-primary:hover {
-      box-shadow: 0 15px 40px rgba(212,175,55,0.35);
-      transform: translateY(-3px);
-    }
-
-    .btn-hero-secondary {
-      padding: 16px 40px;
-      border-radius: 50px;
-      background: transparent;
-      color: white;
-      font-weight: 600;
-      font-size: 18px;
-      border: 2px solid rgba(255,255,255,0.2);
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .btn-hero-secondary:hover {
-      background: rgba(255,255,255,0.1);
-    }
-
-    .scroll-indicator {
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: float 3s ease-in-out infinite;
-    }
-
-    .scroll-indicator div {
-      width: 24px;
-      height: 40px;
-      border: 2px solid rgba(255,255,255,0.3);
-      border-radius: 12px;
-      display: flex;
-      justify-content: center;
-      padding-top: 8px;
-    }
-
-    .scroll-indicator div::before {
-      content: '';
-      width: 4px;
-      height: 12px;
-      background: rgba(255,255,255,0.5);
-      border-radius: 2px;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(-10px); }
-    }
-
-    /* Topics Section */
-    .topics {
-      padding: 100px 0;
-      background: var(--cream);
-      transition: background 0.4s;
-    }
-
-    body.dark .topics {
-      background: var(--charcoal);
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 64px;
-    }
-
-    .section-label {
-      color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      font-size: 14px;
-      font-weight: 500;
-      margin-bottom: 16px;
-    }
-
-    .section-title {
-      font-size: clamp(32px, 5vw, 48px);
-      margin-bottom: 16px;
-      transition: color 0.4s;
-    }
-
-    body.dark .section-title {
-      color: var(--cream);
-    }
-
-    .section-desc {
-      color: var(--muted);
-      font-size: 18px;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .topics-grid {
-      display: grid;
-      grid-template-columns: repeat(1, 1fr);
-      gap: 32px;
-    }
-
-    @media (min-width: 768px) {
-      .topics-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    .topic-card {
-      padding: 40px;
-      border-radius: 24px;
-      background: white;
-      border: 1px solid rgba(0,0,0,0.05);
-      box-shadow: 0 4px 6px rgba(0,0,0,0.02), 0 10px 15px rgba(0,0,0,0.03);
-      transition: all 0.4s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    body.dark .topic-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .topic-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-    }
-
-    body.dark .topic-card:hover {
-      border-color: rgba(212,175,55,0.3);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    }
-
-    .topic-icon {
-      width: 64px;
-      height: 64px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 24px;
-      box-shadow: 0 0 30px rgba(212,175,55,0.15);
-    }
-
-    .topic-icon svg {
-      width: 32px;
-      height: 32px;
-      stroke: var(--charcoal);
-    }
-
-    .topic-card h3 {
-      font-size: 24px;
-      margin-bottom: 16px;
-    }
-
-    body.dark .topic-card h3 {
-      color: white;
-    }
-
-    .topic-card p {
-      color: var(--muted);
-      margin-bottom: 24px;
-      line-height: 1.7;
-    }
-
-    .topic-link {
-      color: var(--gold);
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: gap 0.3s;
-    }
-
-    .topic-link:hover {
-      gap: 12px;
-    }
+    /* Dynamic Articles Section */
+    .articles { padding: 100px 0; background: var(--cream); }
+    body.dark .articles { background: var(--charcoal); }
+    .articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; }
+    .article-card { position: relative; border-radius: 16px; background: white; border: 1px solid rgba(212, 175, 55, 0.1); overflow: hidden; transition: 0.35s; cursor: pointer; display: flex; flex-direction: column; }
+    body.dark .article-card { background: rgba(11, 12, 14, 0.6); border-color: rgba(212, 175, 55, 0.12); }
+    .article-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(212, 175, 55, 0.15); }
+    .article-image { width: 100%; height: 200px; overflow: hidden; }
+    .article-image img { width: 100%; height: 100%; object-fit: cover; transition: 0.45s; }
+    .article-category { color: var(--gold); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .article-excerpt { color: var(--muted); font-size: 14px; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .article-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.06); margin-top: auto; }
 
     /* Search Section */
-    .search-section {
-      padding: 80px 0;
-      background: #F8F8F6;
-      border-top: 1px solid rgba(0,0,0,0.05);
-      border-bottom: 1px solid rgba(0,0,0,0.05);
-      transition: all 0.4s;
-    }
-
-    body.dark .search-section {
-      background: rgba(11,12,14,0.8);
-      border-color: rgba(255,255,255,0.05);
-    }
-
-    .search-header {
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-    }
-
-    @media (min-width: 1024px) {
-      .search-header {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-      }
-    }
-
-    .search-header-text .section-label {
-      margin-bottom: 8px;
-    }
-
-    .search-header-text p {
-      color: var(--muted);
-      font-size: 18px;
-    }
-
-    .search-form {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      flex: 1;
-      max-width: 700px;
-    }
-
-    @media (min-width: 640px) {
-      .search-form {
-        flex-direction: row;
-      }
-    }
-
-    .search-input-wrap {
-      position: relative;
-      flex: 1;
-    }
-
-    .search-input-wrap svg {
-      position: absolute;
-      left: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 20px;
-      height: 20px;
-      stroke: var(--muted);
-    }
-
-    .search-input {
-      width: 100%;
-      padding: 16px 24px 16px 56px;
-      border-radius: 50px;
-      border: 1px solid rgba(0,0,0,0.1);
-      background: white;
-      font-size: 16px;
-      font-family: inherit;
-      transition: all 0.3s;
-    }
-
-    body.dark .search-input {
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,255,255,0.1);
-      color: white;
-    }
-
-    .search-input:focus {
-      outline: none;
-      border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(212,175,55,0.2);
-    }
-
-    .search-input::placeholder {
-      color: var(--muted);
-    }
-
-    .btn-search {
-      padding: 16px 32px;
-      border-radius: 50px;
-      background: var(--charcoal);
-      color: white;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.3s;
-    }
-
-    body.dark .btn-search {
-      background: var(--gold);
-      color: var(--charcoal);
-    }
-
-    .btn-search:hover {
-      opacity: 0.9;
-      transform: translateY(-2px);
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 40px;
-    }
-
-    .tag {
-      padding: 10px 20px;
-      border-radius: 50px;
-      background: white;
-      border: 1px solid rgba(0,0,0,0.08);
-      font-size: 14px;
-      color: var(--muted);
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    body.dark .tag {
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,255,255,0.1);
-    }
-
-    .tag:hover {
-      color: var(--gold);
-      border-color: rgba(212,175,55,0.5);
-    }
-/* ==============================================
-   Articles Section - Updated 2026 Style
-   Matches gold/charcoal/cream theme + dark mode
-============================================== */
-
-.articles {
-  padding: 100px 0;
-  background: var(--cream);
-  transition: background 0.4s ease;
-}
-
-body.dark .articles {
-  background: var(--charcoal);
-}
-
-/* Grid Layout */
-.articles-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 28px;
-}
-
-@media (min-width: 768px) {
-  .articles-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .articles-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* Article Card - Main Style */
-.article-card {
-  position: relative;
-  overflow: hidden;
-  border-radius: 16px;
-  background: white;
-  border: 1px solid rgba(212, 175, 55, 0.08);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-  transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
-  cursor: pointer;
-}
-
-body.dark .article-card {
-  background: rgba(11, 12, 14, 0.6);
-  border-color: rgba(212, 175, 55, 0.12);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-}
-
-.article-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 50px rgba(212, 175, 55, 0.18);
-}
-
-body.dark .article-card:hover {
-  box-shadow: 0 20px 50px rgba(212, 175, 55, 0.12);
-}
-
-/* Featured Badge */
-.article-featured {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  padding: 5px 12px;
-  border-radius: 50px;
-  background: rgba(212, 175, 55, 0.18);
-  color: var(--gold);
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  backdrop-filter: blur(4px);
-}
-
-/* Category Label */
-.article-category {
-  display: inline-block;
-  color: var(--gold);
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 12px;
-}
-
-/* Title */
-.article-card h3 {
-  font-family: var(--font-serif);
-  font-size: 21px;
-  line-height: 1.35;
-  margin-bottom: 12px;
-  transition: color 0.3s ease;
-}
-
-body.dark .article-card h3 {
-  color: #f5f5f5;
-}
-
-.article-card:hover h3 {
-  color: var(--gold);
-}
-
-/* Excerpt */
-.article-excerpt {
-  color: var(--muted);
-  font-size: 15px;
-  line-height: 1.65;
-  margin-bottom: 20px;
-  flex: 1;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-body.dark .article-excerpt {
-  color: #a0a0a0;
-}
-
-/* Meta Row */
-.article-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: auto;
-  padding-top: 20px;
-  border-top: 1px solid rgba(0,0,0,0.06);
-  font-size: 13.5px;
-  color: var(--muted);
-}
-
-body.dark .article-meta {
-  border-top-color: rgba(255,255,255,0.07);
-}
-
-/* Load More Button */
-.load-more-wrap {
-  text-align: center;
-  margin-top: 70px;
-}
-
-.btn-load-more {
-  padding: 16px 48px;
-  border-radius: 50px;
-  background: var(--gold);
-  color: var(--charcoal);
-  font-weight: 600;
-  font-size: 17px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.35s ease;
-  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
-}
-
-.btn-load-more:hover {
-  background: var(--deepgold);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(212, 175, 55, 0.35);
-}
-
-/* Optional: Image container inside card */
-.article-image {
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
-}
-
-.article-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.45s ease;
-}
-
-.article-card:hover .article-image img {
-  transform: scale(1.06);
-}
-   
-    /* Experts Section */
-    .experts {
-      padding: 100px 0;
-      background: var(--charcoal);
-    }
-
-    .experts .section-title {
-      color: var(--gold);
-    }
-
-    .experts .section-desc {
-      color: rgba(255,255,255,0.7);
-    }
-
-    .experts-grid {
-      display: grid;
-      grid-template-columns: repeat(1, 1fr);
-      gap: 32px;
-    }
-
-    @media (min-width: 640px) {
-      .experts-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .experts-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-
-    .expert-card {
-      padding: 20px;
-      border-radius: 24px;
-      background: rgba(255,255,255,0.03);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.08);
-      transition: all 0.4s;
-      cursor: pointer;
-    }
-
-    .expert-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(212,175,55,0.3);
-    }
-
-    .expert-image {
-      width: 100%;
-      aspect-ratio: 4/5;
-      object-fit: cover;
-      object-position: top;
-      border-radius: 16px;
-      margin-bottom: 20px;
-      transition: transform 0.5s;
-    }
-
-    .expert-card:hover .expert-image {
-      transform: scale(1.02);
-    }
-
-    .expert-card h3 {
-      font-size: 20px;
-      color: white;
-      margin-bottom: 4px;
-    }
-
-    .expert-spec {
-      color: var(--gold);
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 12px;
-    }
-
-    .expert-bio {
-      color: rgba(255,255,255,0.6);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    /* CTA Section */
-    .cta {
-      padding: 100px 0;
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-      opacity: 0.03;
-      pointer-events: none;
-    }
-
-    .cta-content {
-      position: relative;
-      z-index: 10;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .cta h2 {
-      font-size: clamp(32px, 5vw, 48px);
-      color: var(--charcoal);
-      margin-bottom: 24px;
-    }
-
-    .cta p {
-      color: rgba(11,12,14,0.8);
-      font-size: 18px;
-      margin-bottom: 40px;
-      line-height: 1.7;
-    }
-
-    .btn-cta {
-      padding: 16px 40px;
-      border-radius: 50px;
-      background: var(--charcoal);
-      color: white;
-      font-weight: 600;
-      font-size: 18px;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      transition: all 0.3s;
-    }
-
-    .btn-cta:hover {
-      opacity: 0.9;
-      transform: translateY(-2px);
-    }
-
-    /* Footer */
-    .footer {
-      padding: 80px 0 40px;
-      background: var(--charcoal);
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(1, 1fr);
-      gap: 48px;
-      margin-bottom: 48px;
-    }
-
-    @media (min-width: 768px) {
-      .footer-grid {
-        grid-template-columns: 2fr 1fr 1fr;
-      }
-    }
-
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-
-    .footer-brand-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .footer-brand-icon svg {
-      width: 24px;
-      height: 24px;
-      stroke: var(--charcoal);
-    }
-
-    .footer-brand span {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      color: white;
-    }
-
-    .footer-about {
-      color: rgba(255,255,255,0.6);
-      max-width: 400px;
-      line-height: 1.7;
-    }
-
-    .footer h4 {
-      color: white;
-      font-size: 16px;
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-
-    .footer-links {
-      list-style: none;
-    }
-
-    .footer-links li {
-      margin-bottom: 12px;
-    }
-
-    .footer-links a {
-      color: rgba(255,255,255,0.6);
-      transition: color 0.3s;
-    }
-
-    .footer-links a:hover {
-      color: var(--gold);
-    }
-
-    .footer-bottom {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      padding-top: 32px;
-      border-top: 1px solid rgba(255,255,255,0.05);
-      font-size: 14px;
-      color: rgba(255,255,255,0.4);
-    }
-
-    @media (min-width: 768px) {
-      .footer-bottom {
-        flex-direction: row;
-        justify-content: space-between;
-      }
-    }
-
-    /* Utility Classes */
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0,0,0,0);
-      border: 0;
-    }
-
-    /* Icons */
-    .icon {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      stroke-width: 2;
-      stroke: currentColor;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
+    .search-section { padding: 80px 0; background: #F8F8F6; border-top: 1px solid var(--border); }
+    body.dark .search-section { background: rgba(11,12,14,0.8); border-color: rgba(255,255,255,0.05); }
+    .search-input { width: 100%; padding: 16px 24px 16px 56px; border-radius: 50px; border: 1px solid rgba(0,0,0,0.1); outline: none; transition: 0.3s; }
+    body.dark .search-input { background: rgba(255,255,255,0.05); color: white; border-color: rgba(255,255,255,0.1); }
+
+    /* Experts */
+    .experts { padding: 100px 0; background: var(--charcoal); color: white; }
+    .experts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 32px; margin-top: 64px; }
+    .expert-card { padding: 20px; border-radius: 24px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); text-align: center; }
+    .expert-image { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 16px; margin-bottom: 20px; }
+
+    /* CTA */
+    .cta { padding: 100px 0; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); text-align: center; color: var(--charcoal); }
+    .footer { padding: 80px 0 40px; background: var(--charcoal); color: rgba(255,255,255,0.6); border-top: 1px solid rgba(255,255,255,0.05); }
   </style>
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LegalService",
-  "name": "JusticeFirms Journal",
-  "url": "https://justicefirms.com",
-  "logo": "https://justicefirms.com/icon-512.png",
-  "description": "JusticeFirms Journal provides practical legal insights on Indian criminal law, family law, NDPS, POCSO, cyber law and civil matters.",
-  "areaServed": {
-    "@type": "Country",
-    "name": "India"
-  },
-  "knowsAbout": [
-    "Anticipatory Bail",
-    "Section 498A IPC",
-    "Divorce Law",
-    "Maintenance",
-    "NDPS Act",
-    "POCSO Act",
-    "Cyber Crime",
-    "Section 482 CrPC"
-  ],
-  "provider": {
-    "@type": "Organization",
-    "name": "JusticeFirms",
-    "url": "https://justicefirms.com"
-  }
-}
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "JusticeFirms Journal",
-  "url": "https://justicefirms.com",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://justicefirms.com/?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
-}
-</script>
 </head>
-<body>
-  <a class="sr-only" href="#main">Skip to content</a>
+<body class="light">
 
-  <!-- Header -->
   <header class="header">
     <div class="header-inner">
       <a href="/" class="logo">
-        <div class="logo-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 3v18M3 7l9-4 9 4M3 7l9 4 9-4M3 7v4l9 4 9-4V7"/>
-          </svg>
-        </div>
-        <div class="logo-text">
-          <span>JusticeFirms</span>
-          <span>Journal</span>
-        </div>
+        <div class="logo-icon">⚖️</div>
+        <div class="logo-text"><span>JusticeFirms</span><span>Journal</span></div>
       </a>
-
       <nav class="header-nav">
-        <a href="#articles">Articles</a>
-        <a href="#topics">Topics</a>
-        <a href="#experts">Our Experts</a>
+        <a href="#articles">Articles</a><a href="#topics">Topics</a><a href="#experts">Experts</a>
       </nav>
-
       <div class="header-actions">
-        <button class="btn-theme" id="themeToggle" aria-label="Toggle theme">
-          <svg id="sunIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
-            <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-          </svg>
-          <svg id="moonIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
-          </svg>
-        </button>
-        <a href="https://justicefirms.com/contact" class="btn-primary">Book Consultation</a>
+        <button class="btn-theme" id="themeToggle" style="background:transparent; border:none; cursor:pointer; color:white; font-size:20px; margin-right:15px;">🌓</button>
+        <a href="https://justicefirms.com/contact" class="btn-primary">Consult Now</a>
       </div>
     </div>
   </header>
 
-  <!-- Hero -->
   <main id="main">
     <section class="hero">
       <div class="hero-content">
-        <p class="hero-label">JusticeFirms Journal</p>
+        <p style="color:var(--gold); letter-spacing:5px; margin-bottom:20px;">JUSTICEFIRMS JOURNAL</p>
         <h1 class="hero-title">Understand Your Rights.<br><em>Get Expert Guidance.</em></h1>
-        <p class="hero-desc">40+ practical articles in English & Hindi on high-search topics like anticipatory bail, 498A, divorce, maintenance, cyber fraud, NDPS, POCSO and more.</p>
-        <div class="hero-buttons">
-          <a href="#articles" class="btn-hero-primary" aria-label="Explore legal articles">
-            Explore Articles
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-          <a href="https://justicefirms.com/contact"
-   class="btn-hero-secondary"
-   aria-label="Book legal consultation">
-   Book Consultation
-</a>
-        </div>
-      </div>
-      <div class="scroll-indicator"><div></div></div>
-    </section>
-
-    <!-- Topics -->
-    <section id="topics" class="topics">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-label">Areas of Practice</p>
-          <h2 class="section-title">Explore Common Legal Topics</h2>
-          <p class="section-desc">Expert guidance across criminal, family, and civil law matters from experienced practitioners</p>
-        </div>
-
-        <div class="topics-grid">
-          <div class="topic-card">
-            <div class="topic-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2"/><path d="M12 7v10M5 21c1-4 3-6 7-7 4 1 6 3 7 7"/></svg>
-            </div>
-            <h3>Criminal Matters</h3>
-            <p>Bail • Anticipatory Bail • FIR Quashing • NDPS • POCSO • Cyber Crimes</p>
-            <a href="https://justicefirms.com/contact" class="topic-link">
-              Need Help? Contact Us
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-          </div>
-
-          <div class="topic-card">
-            <div class="topic-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-            </div>
-            <h3>Family Disputes</h3>
-            <p>Domestic Violence • Maintenance • Divorce • Child Custody</p>
-            <a href="https://justicefirms.com/contact" class="topic-link">
-              Need Help? Contact Us
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-          </div>
-
-          <div class="topic-card">
-            <div class="topic-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
-            </div>
-            <h3>Civil & Other</h3>
-            <p>Property • Writs • Service Matters • Section 482 CrPC</p>
-            <a href="https://justicefirms.com/contact" class="topic-link">
-              Need Help? Contact Us
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-          </div>
-        </div>
+        <p style="max-width:800px; margin:0 auto 40px; color:rgba(255,255,255,0.8);">Practical legal articles in English & Hindi on BNS, BNSS, 498A, Bail, and more.</p>
+        <a href="#articles" class="btn-hero-primary">Explore Articles</a>
       </div>
     </section>
 
-    <!-- Search -->
     <section class="search-section">
       <div class="container">
-        <div class="search-header">
-          <div class="search-header-text">
-            <p class="section-label">Find Answers Fast</p>
-            <p>Search articles by case, section, or issue</p>
-          </div>
-          <div class="search-form">
-            <div class="search-input-wrap">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-              <input
-  type="search"
-  class="search-input"
-  placeholder="e.g., anticipatory bail, 498A, Section 482..."
-  id="searchInput"
-  aria-label="Search legal articles">
-            </div>
-            <a
-  href="https://justicefirms.com/contact"
-  class="btn-search"
-  aria-label="Speak to an advocate for legal advice">
-  Speak to Advocate
-</a>
-          </div>
-        </div>
-
-        <div class="tags" id="tagCloud">
-          <button class="tag">Anticipatory Bail</button>
-          <button class="tag">Section 498A</button>
-          <button class="tag">Divorce Procedure</button>
-          <button class="tag">Maintenance</button>
-          <button class="tag">Cyber Fraud</button>
-          <button class="tag">NDPS Act</button>
-          <button class="tag">POCSO</button>
-          <button class="tag">FIR Quashing</button>
-          <button class="tag">Section 482</button>
-          <button class="tag">Child Custody</button>
-          <button class="tag">Property Dispute</button>
-          <button class="tag">Domestic Violence</button>
+        <div style="position:relative; max-width:700px; margin:0 auto;">
+          <input type="search" id="searchInput" class="search-input" placeholder="Search by topic, section, or keyword...">
         </div>
       </div>
     </section>
-       <section id="articles" class="articles">
-  <div class="container">
-    <div class="section-header">
-      <p class="section-label">Legal Insights</p>
-      <h2 class="section-title">Latest Practical Articles</h2>
-      <p class="section-desc">
-        Explore our library of 40+ practitioner-authored legal guides.
-      </p>
-    </div>
 
-    <div class="articles-grid" id="articlesGrid">
-      <p style="text-align: center; grid-column: 1/-1;">Loading articles...</p>
-    </div>
+    <section id="articles" class="articles">
+      <div class="container">
+        <div style="text-align:center; margin-bottom:60px;">
+          <h2 style="font-size:36px;">Latest Practical Articles</h2>
+        </div>
+        <div class="articles-grid" id="articlesGrid">
+          <p style="grid-column: 1/-1; text-align:center; padding:50px;">Loading articles...</p>
+        </div>
+        <div id="loadMoreWrap" style="text-align:center; margin-top:50px; display:none;">
+          <button id="loadMoreBtn" class="btn-primary" style="padding:15px 40px;">View More Articles</button>
+        </div>
+      </div>
+    </section>
 
-    <div class="load-more-wrap">
-      <button class="btn-load-more" onclick="window.location.reload()">
-        Refresh Journal
-      </button>
-    </div>
-  </div>
-</section>
-    <!-- Experts -->
     <section id="experts" class="experts">
       <div class="container">
-        <div class="section-header">
-          <p class="section-label">Our Team</p>
-          <h2 class="section-title">Legal Experts Behind JusticeFirms</h2>
-          <p class="section-desc">Articles and guidance authored by practicing advocates with real courtroom experience</p>
-        </div>
-
+        <h2 style="text-align:center; color:var(--gold); font-size:36px;">Our Legal Experts</h2>
         <div class="experts-grid">
           <div class="expert-card">
-            <img 
-  src="ganga.jpg"
-  alt="Adv. Ganga Shankar Shastri"
-  class="expert-image"
-  loading="lazy"
-  decoding="async">
+            <img src="ganga.jpg" class="expert-image" alt="Adv. Ganga Shankar Shastri">
             <h3>Adv. Ganga Shankar Shastri</h3>
-            <p class="expert-spec">Criminal Law</p>
-            <p class="expert-bio">Practicing advocate with extensive experience in criminal trials, bail matters and High Court litigation.</p>
+            <p style="color:var(--gold);">Criminal Law Specialist</p>
           </div>
-
           <div class="expert-card">
-            <img 
-  src="minakshi.jpg"
-  alt="Adv. Minakshi Shastri"
-  class="expert-image"
-  loading="lazy"
-  decoding="async">
+            <img src="minakshi.jpg" class="expert-image" alt="Adv. Minakshi Shastri">
             <h3>Adv. Minakshi Shastri</h3>
-            <p class="expert-spec">Family Law</p>
-            <p class="expert-bio">Expert in matrimonial disputes, divorce proceedings, and child custody matters with 15+ years experience.</p>
+            <p style="color:var(--gold);">Family Law Expert</p>
           </div>
-
           <div class="expert-card">
-            <img 
-  src="shivani.jpg"
-  alt="Adv. Shivani Shastri"
-  class="expert-image"
-  loading="lazy"
-  decoding="async">
+            <img src="shivani.jpg" class="expert-image" alt="Adv. Shivani Shastri">
             <h3>Adv. Shivani Shastri</h3>
-            <p class="expert-spec">Cyber & IT Law</p>
-            <p class="expert-bio">Specialist in cyber crimes, data protection, and IT Act cases with expertise in digital forensics.</p>
-          </div>
-
-          <div class="expert-card">
-            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=500&fit=crop&crop=face" alt="Adv. Priya Singh" class="expert-image">
-            <h3>Adv. Priya Singh</h3>
-            <p class="expert-spec">Civil Law</p>
-            <p class="expert-bio">Handles property disputes, writs, and civil litigation with a track record of successful outcomes.</p>
+            <p style="color:var(--gold);">Cyber & IT Law</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CTA -->
     <section class="cta">
       <div class="container">
-        <div class="cta-content">
-          <h2>Need Legal Assistance?</h2>
-          <p>Get personalized guidance from experienced advocates. We're here to help you navigate the complexities of Indian law with clarity and confidence.</p>
-          <a
-  href="https://justicefirms.com/contact"
-  class="btn-cta"
-  aria-label="Schedule legal consultation">
-            Schedule Your Consultation
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
-          </a>
-        </div>
+        <h2>Need Legal Assistance?</h2>
+        <p style="margin:20px 0 40px;">Get personalized guidance from experienced advocates today.</p>
+        <a href="https://justicefirms.com/contact" style="background:var(--charcoal); color:white; padding:15px 40px; border-radius:50px; font-weight:600;">Schedule Consultation</a>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
   <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <div class="footer-brand">
-            <div class="footer-brand-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 7l9-4 9 4M3 7l9 4 9-4M3 7v4l9 4 9-4V7"/></svg>
-            </div>
-            <span>JusticeFirms Journal</span>
-          </div>
-          <p class="footer-about">Providing practical legal insights in English and Hindi. Our mission is to make Indian law accessible and understandable for everyone.</p>
-        </div>
-
-        <div>
-          <h4>Quick Links</h4>
-          <ul class="footer-links">
-            <li><a href="#articles">Articles</a></li>
-            <li><a href="#topics">Legal Topics</a></li>
-            <li><a href="#experts">Our Experts</a></li>
-            <li><a href="https://justicefirms.com/contact">Contact</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4>Legal</h4>
-          <ul class="footer-links">
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Service</a></li>
-            <li><a href="#">Disclaimer</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <p>© 2026 JusticeFirms Journal. All rights reserved.</p>
-        <p>Made with care for the Indian legal community</p>
-      </div>
+    <div class="container" style="text-align:center;">
+      <p>© 2026 JusticeFirms Journal. All rights reserved.</p>
     </div>
   </footer>
 
   <script>
-    // Theme Toggle
-    const themeToggle = document.getElementById('themeToggle');
-    const sunIcon = document.getElementById('sunIcon');
-    const moonIcon = document.getElementById('moonIcon');
-    
-    // Check for saved theme preference or default to system preference
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const savedTheme = localStorage.getItem('theme');
-    
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-      document.body.classList.add('dark');
-      sunIcon.style.display = 'block';
-      moonIcon.style.display = 'none';
-    }
+    let allArticles = [];
+    let visibleCount = 0;
+    const PER_PAGE = 6;
 
+    // Theme Toggle Logic
+    const themeToggle = document.getElementById('themeToggle');
     themeToggle.addEventListener('click', () => {
       document.body.classList.toggle('dark');
-      const isDark = document.body.classList.contains('dark');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    // Load Articles from JSON
+    async function loadArticles() {
+      const grid = document.getElementById('articlesGrid');
+      try {
+        const res = await fetch('articles.json');
+        const data = await res.json();
+        allArticles = data.articles || [];
+        grid.innerHTML = '';
+        renderArticles();
+      } catch (err) {
+        grid.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:red;">articles.json missing or invalid.</p>';
+      }
+    }
+
+    function renderArticles(filterData = null) {
+      const grid = document.getElementById('articlesGrid');
+      const source = filterData || allArticles.slice(visibleCount, visibleCount + PER_PAGE);
       
-      if (isDark) {
-        sunIcon.style.display = 'block';
-        moonIcon.style.display = 'none';
+      source.forEach(article => {
+        const card = document.createElement('article');
+        card.className = 'article-card';
+        card.innerHTML = `
+          <div class="article-image"><img src="${article.cover}" alt="${article.title}"></div>
+          <div style="padding:24px; display:flex; flex-direction:column; flex-grow:1;">
+            <span class="article-category">${article.category.primary}</span>
+            <h3 style="margin-bottom:12px; font-size:20px;">${article.title}</h3>
+            <p class="article-excerpt">${article.excerpt}</p>
+            <div class="article-meta">
+              <span>${article.author.name}</span>
+              <span>${article.reading_time}</span>
+            </div>
+          </div>
+        `;
+        card.onclick = () => window.location.href = `./${article.slug}.html`;
+        grid.appendChild(card);
+      });
+
+      if (!filterData) {
+        visibleCount += PER_PAGE;
+        document.getElementById('loadMoreWrap').style.display = (visibleCount < allArticles.length) ? 'block' : 'none';
+      }
+    }
+
+    // Search Feature
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      const grid = document.getElementById('articlesGrid');
+      grid.innerHTML = '';
+      if (q === '') {
+        visibleCount = 0;
+        renderArticles();
       } else {
-        sunIcon.style.display = 'none';
-        moonIcon.style.display = 'block';
+        const filtered = allArticles.filter(a => a.title.toLowerCase().includes(q) || a.excerpt.toLowerCase().includes(q));
+        renderArticles(filtered);
+        document.getElementById('loadMoreWrap').style.display = 'none';
       }
     });
-// ✅ UPDATED SEARCH (Dynamic Articles Compatible)
-function enableSearch() {
-  const searchInput = document.getElementById('searchInput');
-  if (!searchInput) return;
 
-  searchInput.addEventListener('input', () => {
-    const query = searchInput.value.toLowerCase().trim();
-
-    document.querySelectorAll('.article-card').forEach(card => {
-      const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
-      const excerpt = card.querySelector('.article-excerpt')?.textContent.toLowerCase() || '';
-      const category = card.querySelector('.article-category')?.textContent.toLowerCase() || '';
-
-      const match =
-        title.includes(query) ||
-        excerpt.includes(query) ||
-        category.includes(query);
-
-      card.style.display = match || query === '' ? 'flex' : 'none';
-    });
-  });
-
-  // ✅ Tag click handling (FIXED)
-  document.querySelectorAll('.tag').forEach(tag => {
-    tag.addEventListener('click', () => {
-      searchInput.value = tag.textContent.trim();
-      searchInput.dispatchEvent(new Event('input'));
-      document.getElementById('articles')
-        ?.scrollIntoView({ behavior: 'smooth' });
-    });
-  });
-}
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    });
-
-    // Intersection Observer for fade-in animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, observerOptions);
-
-    // Animate cards on scroll
-    document.querySelectorAll('.topic-card, .article-card, .expert-card').forEach((card, index) => {
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(30px)';
-      card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
-      observer.observe(card);
-    });
+    document.getElementById('loadMoreBtn').addEventListener('click', () => renderArticles());
+    document.addEventListener('DOMContentLoaded', loadArticles);
   </script>
-  <!-- Service Worker Registration -->
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker
-        .register('/sw.js')
-        .then(reg => {
-          console.log('Service Worker registered:', reg.scope);
-        })
-        .catch(err => {
-          console.error('Service Worker registration failed:', err);
-        });
-    });
-  }
-</script>
-  <script>
-let allArticles = [];
-let visibleCount = 0;
-const PER_PAGE = 6;
-
-/* ===============================
-   ANIMATION OBSERVER
-================================ */
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.1 });
-
-/* ===============================
-   LOAD ARTICLES FROM JSON
-================================ */
-async function loadArticles() {
-  const grid = document.getElementById('articlesGrid');
-  if (!grid) return;
-
-  grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--gold)">Journal Articles loading...</p>';
-
-  try {
-    const res = await fetch('articles.json');
-    const data = await res.json();
-
-    // Aapke JSON ke hisaab se: data.articles
-    allArticles = data.articles || [];
-    
-    grid.innerHTML = '';
-    visibleCount = 0;
-
-    renderArticles();
-    enableSearch();
-
-  } catch (err) {
-    console.error("Fetch Error:", err);
-    grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:red">Error: articles.json file missing or invalid.</p>';
-  }
-}
-
-/* ===============================
-   RENDER ARTICLES
-================================ */
-function renderArticles() {
-  const grid = document.getElementById('articlesGrid');
-  const slice = allArticles.slice(visibleCount, visibleCount + PER_PAGE);
-
-  slice.forEach(article => {
-    const card = document.createElement('article');
-    card.className = 'article-card';
-    
-    // Design matching your JSON (Cover + Category + Title)
-    card.innerHTML = `
-      <div class="article-image">
-        <img src="${article.cover}" alt="${article.title}" loading="lazy">
-      </div>
-      <div style="padding: 24px; display: flex; flex-direction: column; flex-grow: 1;">
-        <span class="article-category">${article.category.primary} • ${article.category.secondary}</span>
-        <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; margin: 10px 0;">${article.title}</h3>
-        <p class="article-excerpt" style="font-size: 14px; color: var(--muted); margin-bottom: 20px;">${article.excerpt}</p>
-        <div class="article-meta" style="margin-top: auto; font-size: 12px; display: flex; justify-content: space-between;">
-          <span>${article.author.name}</span>
-          <span>${article.reading_time}</span>
-        </div>
-      </div>
-    `;
-
-    // Click behavior (Slugs se URL banana)
-    card.onclick = () => {
-      window.location.href = `./${article.slug}.html`;
-    };
-
-    // Animation Settings
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(30px)';
-    card.style.transition = 'all 0.5s ease-out';
-    card.style.display = 'flex';
-    card.style.flexDirection = 'column';
-
-    grid.appendChild(card);
-    observer.observe(card);
-  });
-
-  visibleCount += slice.length;
-
-  // Load More Button Logic
-  const btnWrap = document.getElementById('loadMoreWrap');
-  if (btnWrap) {
-    btnWrap.style.display = (visibleCount < allArticles.length) ? 'block' : 'none';
-  }
-}
-
-/* ===============================
-   SEARCH & TAGS
-================================ */
-function enableSearch() {
-  const input = document.getElementById('searchInput');
-  if (!input) return;
-
-  input.addEventListener('input', () => {
-    const q = input.value.toLowerCase().trim();
-    const cards = document.querySelectorAll('.article-card');
-    
-    cards.forEach(card => {
-      const text = card.innerText.toLowerCase();
-      card.style.display = text.includes(q) ? 'flex' : 'none';
-    });
-  });
-
-  // Tag support
-  document.querySelectorAll('.tag').forEach(tag => {
-    tag.addEventListener('click', () => {
-      input.value = tag.textContent.trim();
-      input.dispatchEvent(new Event('input'));
-      document.getElementById('articles')?.scrollIntoView({ behavior: 'smooth' });
-    });
-  });
-}
-
-document.getElementById('loadMoreBtn')?.addEventListener('click', renderArticles);
-document.addEventListener('DOMContentLoaded', loadArticles);
-</script>
 </body>
 </html>
