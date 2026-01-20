@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard — JusticeFirms Enclave</title>
+    <meta name="description" content="Secure client overview for active litigation, billing, and encrypted communication." />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            /* Palette: Midnight Luxury */
+            --bg-body: #020617;
+            --bg-glass: rgba(15, 23, 42, 0.95);
+            --bg-card: rgba(30, 41, 59, 0.4);
+            --bg-sidebar: #0f172a;
+            
+            --primary: #ffffff;
+            --secondary: #94a3b8;
+            
+            --accent-gold: #d4af37;
+            --accent-tech: #38bdf8;
+            --accent-success: #10b981;
+            --accent-danger: #ef4444;
+            --accent-warning: #f59e0b;
+            
+            --border-color: rgba(255, 255, 255, 0.08);
+            
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        /* Light Mode */
+        html.light-mode {
+            --bg-body: #f8fafc;
+            --bg-glass: rgba(255, 255, 255, 0.95);
+            --bg-card: #ffffff;
+            --bg-sidebar: #1e293b;
+            --primary: #0f172a;
+            --secondary: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-body);
+            color: var(--primary);
+            font-family: var(--font-sans);
+            height: 100vh;
+            display: flex;
+            overflow: hidden; /* App-like feel */
+            transition: background 0.3s ease;
+        }
+
+        h1, h2, h3, h4 { font-family: var(--font-serif); }
+        .mono { font-family: var(--font-mono); }
+        
+        /* --- Sidebar --- */
+        .app-sidebar {
+            width: 260px;
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border-color);
+            display: flex; flex-direction: column;
+            z-index: 10;
+        }
+        
+        .sidebar-header {
+            height: 80px; display: flex; align-items: center; padding: 0 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .brand { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; color: var(--primary); display: flex; gap: 8px; text-decoration: none; }
+        .brand span { color: var(--accent-gold); }
+
+        .nav-menu { padding: 24px 16px; flex-grow: 1; }
+        .nav-item {
+            display: flex; align-items: center; gap: 12px;
+            padding: 12px 16px; color: var(--secondary);
+            text-decoration: none; border-radius: 6px;
+            margin-bottom: 4px; transition: 0.2s; font-size: 0.9rem;
+        }
+        .nav-item:hover, .nav-item.active { background: rgba(255,255,255,0.05); color: var(--primary); }
+        .nav-item.active { border-left: 3px solid var(--accent-gold); border-radius: 0 6px 6px 0; background: linear-gradient(90deg, rgba(212, 175, 55, 0.1), transparent); }
+
+        .sidebar-footer { padding: 24px; border-top: 1px solid var(--border-color); }
+        .user-profile { display: flex; align-items: center; gap: 12px; }
+        .avatar { width: 36px; height: 36px; background: var(--accent-gold); border-radius: 50%; display: grid; place-items: center; font-weight: bold; color: #000; }
+        .user-info h4 { font-size: 0.85rem; font-family: var(--font-sans); margin: 0; }
+        .user-info p { font-size: 0.7rem; color: var(--secondary); margin: 0; }
+
+        /* --- Main Content --- */
+        .app-main {
+            flex-grow: 1; display: flex; flex-direction: column;
+            overflow-y: auto; position: relative;
+        }
+
+        .top-bar {
+            height: 80px; border-bottom: 1px solid var(--border-color);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 32px; background: var(--bg-glass); backdrop-filter: blur(10px);
+            position: sticky; top: 0; z-index: 5;
+        }
+        .breadcrumb { font-size: 0.85rem; color: var(--secondary); display: flex; gap: 8px; align-items: center; }
+        .secure-badge {
+            display: flex; align-items: center; gap: 8px; font-size: 0.75rem; 
+            color: var(--accent-success); background: rgba(16, 185, 129, 0.1); 
+            padding: 6px 12px; border-radius: 100px; border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .dashboard-content { padding: 32px; max-width: 1400px; margin: 0 auto; width: 100%; }
+
+        /* --- Grid Layout --- */
+        .dashboard-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 24px; margin-bottom: 32px;
+        }
+        
+        /* Stats Cards */
+        .stat-card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            padding: 24px; border-radius: 8px;
+        }
+        .stat-header { display: flex; justify-content: space-between; margin-bottom: 16px; color: var(--secondary); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .stat-value { font-size: 2rem; font-family: var(--font-mono); color: var(--primary); }
+        .stat-meta { font-size: 0.8rem; margin-top: 8px; display: flex; gap: 8px; align-items: center; }
+
+        /* Active Matters (Wide) */
+        .matters-card {
+            grid-column: span 2; background: var(--bg-card);
+            border: 1px solid var(--border-color); border-radius: 8px;
+            overflow: hidden;
+        }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
+        .card-title { font-size: 1.1rem; font-family: var(--font-serif); }
+        
+        .matters-list { display: flex; flex-direction: column; }
+        .matter-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 24px; border-bottom: 1px solid var(--border-color);
+            transition: 0.2s;
+        }
+        .matter-item:hover { background: rgba(255,255,255,0.02); }
+        .matter-info h4 { font-size: 1rem; margin-bottom: 4px; font-family: var(--font-sans); }
+        .matter-ref { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-tech); }
+        
+        .status-pill {
+            padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .status-active { background: rgba(56, 189, 248, 0.1); color: var(--accent-tech); border: 1px solid rgba(56, 189, 248, 0.2); }
+        .status-urgent { background: rgba(239, 68, 68, 0.1); color: var(--accent-danger); border: 1px solid rgba(239, 68, 68, 0.2); }
+
+        /* Document Vault */
+        .vault-card {
+            grid-column: span 1; background: var(--bg-card);
+            border: 1px solid var(--border-color); border-radius: 8px;
+        }
+        .doc-list { padding: 16px; }
+        .doc-item {
+            display: flex; align-items: center; gap: 12px;
+            padding: 12px; border-radius: 4px; cursor: pointer;
+            transition: 0.2s; color: var(--secondary);
+        }
+        .doc-item:hover { background: rgba(255,255,255,0.05); color: var(--primary); }
+        .doc-icon { color: var(--accent-gold); }
+        .doc-name { font-size: 0.9rem; flex-grow: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        /* Calendar Widget */
+        .calendar-widget {
+            grid-column: span 1; background: var(--bg-card);
+            border: 1px solid var(--border-color); border-radius: 8px; padding: 24px;
+        }
+        .event-row { display: flex; gap: 16px; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border-color); }
+        .event-row:last-child { border-bottom: none; }
+        .event-date-box { 
+            background: rgba(255,255,255,0.03); padding: 8px 12px; border-radius: 4px; 
+            text-align: center; border: 1px solid var(--border-color);
+        }
+        .ed-day { display: block; font-size: 1.2rem; font-weight: bold; color: var(--primary); }
+        .ed-mon { display: block; font-size: 0.7rem; text-transform: uppercase; color: var(--accent-tech); }
+
+        @media (max-width: 1024px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+            .matters-card { grid-column: span 1; }
+            .app-sidebar { display: none; } /* Simplified: In real app, add hamburger menu */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="app-sidebar">
+        <div class="sidebar-header">
+            <a href="#" class="brand">
+                <i data-lucide="scale" size="20" color="var(--accent-gold)"></i>
+                JusticeFirms<span>.Enc</span>
+            </a>
+        </div>
+        
+        <nav class="nav-menu">
+            <a href="#" class="nav-item active"><i data-lucide="layout-dashboard" size="18"></i> Dashboard</a>
+            <a href="#" class="nav-item"><i data-lucide="folder-lock" size="18"></i> Case Files</a>
+            <a href="#" class="nav-item"><i data-lucide="message-square-dashed" size="18"></i> Secure Chat</a>
+            <a href="#" class="nav-item"><i data-lucide="receipt" size="18"></i> Retainer & Billing</a>
+            <div style="height: 24px;"></div>
+            <a href="#" class="nav-item"><i data-lucide="settings" size="18"></i> Settings</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <div class="avatar">R</div>
+                <div class="user-info">
+                    <h4>R. Malhotra</h4>
+                    <p>Client ID: JF-8821</p>
+                </div>
+                <a href="justicefirms_journal.html" style="margin-left: auto; color: var(--secondary);"><i data-lucide="log-out" size="16"></i></a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="app-main">
+        
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="breadcrumb">
+                <span style="color:var(--accent-gold);">JusticeFirms</span>
+                <i data-lucide="chevron-right" size="14"></i>
+                <span>Client Overview</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 24px;">
+                <div class="secure-badge">
+                    <i data-lucide="shield-check" size="12"></i> Session Encrypted
+                </div>
+                <button id="themeToggle" style="background:none; border:none; cursor:pointer; color:var(--secondary);">
+                    <i data-lucide="moon" size="20"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            
+            <h2 style="font-size: 2rem; margin-bottom: 32px;">Executive Summary</h2>
+
+            <!-- Stats Row -->
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-header">Active Matters</div>
+                    <div class="stat-value">03</div>
+                    <div class="stat-meta" style="color: var(--accent-success);">
+                        <i data-lucide="activity" size="14"></i> No critical alerts
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">Next Hearing</div>
+                    <div class="stat-value" style="font-size: 1.5rem;">Oct 14</div>
+                    <div class="stat-meta">
+                        Supreme Court • Court No. 4
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">Retainer Balance</div>
+                    <div class="stat-value" style="font-size: 1.5rem;">₹ 4.2L</div>
+                    <div class="stat-meta" style="color: var(--accent-warning);">
+                        <i data-lucide="alert-circle" size="14"></i> Renewal due in 45 days
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Grid -->
+            <div class="dashboard-grid">
+                
+                <!-- Matters List -->
+                <div class="matters-card">
+                    <div class="card-header">
+                        <span class="card-title">Litigation Docket</span>
+                        <button style="background:none; border:none; color:var(--accent-tech); font-size:0.8rem; cursor:pointer;">View All</button>
+                    </div>
+                    <div class="matters-list">
+                        <div class="matter-item">
+                            <div class="matter-info">
+                                <h4>Malhotra Industries vs. Union of India</h4>
+                                <span class="matter-ref">WP(C) 1204/2025 • GST Tribunal</span>
+                            </div>
+                            <span class="status-pill status-active">Pleadings Complete</span>
+                        </div>
+                        <div class="matter-item">
+                            <div class="matter-info">
+                                <h4>State vs. Director (Quashing Petition)</h4>
+                                <span class="matter-ref">CRL.M.C. 442/2026 • High Court</span>
+                            </div>
+                            <span class="status-pill status-urgent">Hearing: Oct 18</span>
+                        </div>
+                         <div class="matter-item">
+                            <div class="matter-info">
+                                <h4>Data Fiduciary Compliance Audit</h4>
+                                <span class="matter-ref">Internal Advisory • DPDP Act</span>
+                            </div>
+                            <span class="status-pill status-active">Reviewing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Document Vault -->
+                <div class="vault-card">
+                    <div class="card-header">
+                        <span class="card-title">Recent Uploads</span>
+                        <i data-lucide="lock" size="16" style="color:var(--accent-gold);"></i>
+                    </div>
+                    <div class="doc-list">
+                        <div class="doc-item">
+                            <i data-lucide="file-text" class="doc-icon" size="18"></i>
+                            <span class="doc-name">Rejoinder_Affidavit_v2.pdf</span>
+                            <span style="font-size:0.7rem;">2h ago</span>
+                        </div>
+                        <div class="doc-item">
+                            <i data-lucide="file-bar-chart" class="doc-icon" size="18"></i>
+                            <span class="doc-name">Forensic_Audit_Final.xlsx</span>
+                            <span style="font-size:0.7rem;">1d ago</span>
+                        </div>
+                        <div class="doc-item">
+                            <i data-lucide="file-text" class="doc-icon" size="18"></i>
+                            <span class="doc-name">Opinion_BNS_Section111.pdf</span>
+                            <span style="font-size:0.7rem;">3d ago</span>
+                        </div>
+                        <button style="width:100%; margin-top:12px; padding:10px; background:rgba(255,255,255,0.05); border:1px dashed var(--border-color); color:var(--secondary); border-radius:4px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;">
+                            <i data-lucide="upload-cloud" size="14"></i> Secure Upload
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        // Theme Logic (Shared with other files)
+        const themeBtn = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        // Check local storage
+        if (localStorage.getItem('theme') === 'light') {
+            html.classList.add('light-mode');
+            themeBtn.innerHTML = `<i data-lucide="sun" size="20"></i>`;
+        }
+
+        themeBtn.addEventListener('click', () => {
+            html.classList.toggle('light-mode');
+            const isLight = html.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            themeBtn.innerHTML = `<i data-lucide="${isLight ? 'sun' : 'moon'}" size="20"></i>`;
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
