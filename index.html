@@ -4,179 +4,143 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JusticeFirms Journal — Practical Insights on Indian Law</title>
-  <meta name="description" content="40+ clear, practitioner-authored articles in English & Hindi on anticipatory bail, 498A, divorce, maintenance, cyber fraud, NDPS, POCSO and more." />
-  
-  <meta property="og:site_name" content="JusticeFirms Journal" />
-  <meta property="og:title" content="JusticeFirms Journal — Practical Insights on Indian Law" />
-  <meta property="og:description" content="High-search legal awareness articles in English and Hindi by experienced advocates at JusticeFirms." />
-  <meta property="og:type" content="website" />
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="JusticeFirms Journal">
+  <meta name="description" content="Practitioner-authored legal articles on BNS, BNSS, BSA, and more." />
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --gold: #D4AF37; --gold-dark: #B89A2E; --charcoal: #0B0C0E;
-      --cream: #FDFDFB; --muted: #5F6368; --border: #e5e5e5;
+      --primary: #1a1a1a;       /* Deep Sober Charcoal */
+      --accent: #af955a;        /* Elegant Muted Gold */
+      --bg-light: #fdfdfb;      /* Paper-like Cream */
+      --text-main: #2d2d2d;
+      --text-muted: #666666;
+      --border: #e0e0e0;
+      --white: #ffffff;
     }
+
     .dark {
-      --background: #0B0C0E; --foreground: #FDFDFB;
-      --card-bg: rgba(255,255,255,0.03); --border: rgba(255,255,255,0.08);
-      --muted: #9CA3AF;
+      --primary: #fdfdfb;
+      --accent: #d4af37;
+      --bg-light: #0f0f0f;
+      --text-main: #e0e0e0;
+      --text-muted: #a0a0a0;
+      --border: #262626;
+      --white: #1a1a1a;
     }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); line-height: 1.6; transition: 0.4s; -webkit-font-smoothing: antialiased; }
-    body.dark { background: var(--charcoal); color: var(--cream); }
-    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 600; }
-    a { text-decoration: none; color: inherit; }
-    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var(--text-main); transition: 0.3s; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 400; letter-spacing: -0.02em; }
+    a { text-decoration: none; color: inherit; transition: 0.2s; }
 
-    /* Header */
-    .header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(11,12,14,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 80px; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
-    .logo { display: flex; align-items: center; gap: 16px; }
-    .logo-icon { width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); display: flex; align-items: center; justify-content: center; }
-    .logo-text span:first-child { font-size: 20px; color: white; }
-    .logo-text span:last-child { font-size: 10px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 3px; }
-    .header-nav { display: none; gap: 32px; }
-    @media (min-width: 768px) { .header-nav { display: flex; } }
-    .header-nav a { color: rgba(255,255,255,0.7); font-size: 14px; transition: 0.3s; }
-    .header-nav a:hover { color: white; }
-    .btn-primary { padding: 10px 24px; border-radius: 50px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--charcoal); font-weight: 600; border: none; cursor: pointer; }
+    /* Elegant Navigation */
+    .nav { position: fixed; top: 0; width: 100%; z-index: 1000; background: rgba(253, 253, 251, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; height: 70px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; }
+    .brand { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--primary); }
+    .nav-links a { font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; margin-left: 30px; color: var(--text-muted); }
+    .nav-links a:hover { color: var(--accent); }
 
-    /* Hero */
-    .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 80px; position: relative; overflow: hidden; background: linear-gradient(rgba(11,12,14,0.75), rgba(11,12,14,0.85)), url('https://images.unsplash.com/photo-1589829545856-d10d557cf95a?auto=format&fit=crop&w=2000&q=80'); background-size: cover; background-position: center; color: white; text-align: center; }
-    .hero-title { font-size: clamp(40px, 8vw, 80px); line-height: 1.1; margin-bottom: 32px; }
-    .hero-title em { color: var(--gold); font-style: italic; }
-    .btn-hero-primary { padding: 16px 40px; border-radius: 50px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--charcoal); font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
+    /* Sober Hero Section */
+    .hero { padding: 180px 24px 100px; text-align: center; border-bottom: 1px solid var(--border); }
+    .hero-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.4em; color: var(--accent); margin-bottom: 20px; font-weight: 600; }
+    .hero-title { font-size: clamp(40px, 5vw, 64px); line-height: 1.2; margin-bottom: 30px; color: var(--primary); }
+    .hero-title i { font-family: 'Playfair Display', serif; font-style: italic; }
 
-    /* Topics */
-    .topics { padding: 100px 0; }
-    .topics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; margin-top: 64px; }
-    .topic-card { padding: 40px; border-radius: 24px; background: white; border: 1px solid rgba(0,0,0,0.05); transition: 0.4s; }
-    body.dark .topic-card { background: rgba(255,255,255,0.03); }
-    .topic-icon { width: 64px; height: 64px; border-radius: 16px; background: var(--gold); display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
+    /* Minimalist Search */
+    .search-container { max-width: 600px; margin: -30px auto 80px; padding: 0 24px; }
+    .search-input { width: 100%; padding: 18px 30px; border-radius: 4px; border: 1px solid var(--border); background: var(--white); box-shadow: 0 10px 30px rgba(0,0,0,0.03); outline: none; font-size: 16px; }
+    .search-input:focus { border-color: var(--accent); }
 
-    /* Dynamic Articles Section */
-    .articles { padding: 100px 0; background: var(--cream); }
-    body.dark .articles { background: var(--charcoal); }
-    .articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; }
-    .article-card { position: relative; border-radius: 16px; background: white; border: 1px solid rgba(212, 175, 55, 0.1); overflow: hidden; transition: 0.35s; cursor: pointer; display: flex; flex-direction: column; }
-    body.dark .article-card { background: rgba(11, 12, 14, 0.6); border-color: rgba(212, 175, 55, 0.12); }
-    .article-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(212, 175, 55, 0.15); }
-    .article-image { width: 100%; height: 200px; overflow: hidden; }
-    .article-image img { width: 100%; height: 100%; object-fit: cover; transition: 0.45s; }
-    .article-category { color: var(--gold); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-    .article-excerpt { color: var(--muted); font-size: 14px; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-    .article-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.06); margin-top: auto; }
+    /* Refined Article Grid */
+    .grid-container { max-width: 1200px; margin: 0 auto; padding: 0 24px 100px; }
+    .articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 50px; }
+    
+    .article-card { border-bottom: 1px solid var(--border); padding-bottom: 30px; transition: 0.3s; display: flex; flex-direction: column; }
+    .article-card:hover { border-bottom-color: var(--accent); }
+    
+    .article-img-wrap { width: 100%; height: 240px; overflow: hidden; margin-bottom: 24px; border-radius: 2px; }
+    .article-img-wrap img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%); transition: 0.5s; }
+    .article-card:hover img { transform: scale(1.03); filter: grayscale(0%); }
 
-    /* Search Section */
-    .search-section { padding: 80px 0; background: #F8F8F6; border-top: 1px solid var(--border); }
-    body.dark .search-section { background: rgba(11,12,14,0.8); border-color: rgba(255,255,255,0.05); }
-    .search-input { width: 100%; padding: 16px 24px 16px 56px; border-radius: 50px; border: 1px solid rgba(0,0,0,0.1); outline: none; transition: 0.3s; }
-    body.dark .search-input { background: rgba(255,255,255,0.05); color: white; border-color: rgba(255,255,255,0.1); }
+    .cat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); font-weight: 600; margin-bottom: 12px; display: block; }
+    .article-title { font-size: 24px; margin-bottom: 15px; line-height: 1.3; color: var(--primary); }
+    .article-snippet { font-size: 15px; color: var(--text-muted); margin-bottom: 20px; font-weight: 300; }
+    .article-meta { font-size: 12px; color: var(--text-muted); display: flex; justify-content: space-between; text-transform: uppercase; letter-spacing: 0.05em; }
 
-    /* Experts */
-    .experts { padding: 100px 0; background: var(--charcoal); color: white; }
-    .experts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 32px; margin-top: 64px; }
-    .expert-card { padding: 20px; border-radius: 24px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); text-align: center; }
-    .expert-image { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 16px; margin-bottom: 20px; }
+    /* Experts Section - Minimalist */
+    .experts-section { background: #111; color: #fff; padding: 100px 24px; }
+    .experts-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+    .expert-box img { width: 100%; aspect-ratio: 1; object-fit: cover; margin-bottom: 20px; filter: sepia(20%); }
+    .expert-box h4 { font-size: 18px; margin-bottom: 5px; }
+    .expert-box p { font-size: 13px; color: var(--accent); text-transform: uppercase; }
 
-    /* CTA */
-    .cta { padding: 100px 0; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); text-align: center; color: var(--charcoal); }
-    .footer { padding: 80px 0 40px; background: var(--charcoal); color: rgba(255,255,255,0.6); border-top: 1px solid rgba(255,255,255,0.05); }
+    /* Footer */
+    footer { padding: 60px 24px; text-align: center; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-muted); }
+    
+    .btn-load { display: inline-block; padding: 14px 35px; border: 1px solid var(--primary); color: var(--primary); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 60px; cursor: pointer; }
+    .btn-load:hover { background: var(--primary); color: var(--white); }
+
+    @media (max-width: 768px) { .nav-links { display: none; } }
   </style>
 </head>
-<body class="light">
+<body>
 
-  <header class="header">
-    <div class="header-inner">
-      <a href="/" class="logo">
-        <div class="logo-icon">⚖️</div>
-        <div class="logo-text"><span>JusticeFirms</span><span>Journal</span></div>
-      </a>
-      <nav class="header-nav">
-        <a href="#articles">Articles</a><a href="#topics">Topics</a><a href="#experts">Experts</a>
-      </nav>
-      <div class="header-actions">
-        <button class="btn-theme" id="themeToggle" style="background:transparent; border:none; cursor:pointer; color:white; font-size:20px; margin-right:15px;">🌓</button>
-        <a href="https://justicefirms.com/contact" class="btn-primary">Consult Now</a>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="brand">JUSTICEFIRMS</a>
+      <div class="nav-links">
+        <a href="#articles">Journal</a>
+        <a href="#experts">Advocates</a>
+        <a href="https://justicefirms.com/contact" style="color: var(--accent);">Consultation</a>
       </div>
+      <button onclick="document.body.classList.toggle('dark')" style="background:none; border:none; cursor:pointer; font-size:18px;">🌓</button>
     </div>
-  </header>
+  </nav>
 
-  <main id="main">
-    <section class="hero">
-      <div class="hero-content">
-        <p style="color:var(--gold); letter-spacing:5px; margin-bottom:20px;">JUSTICEFIRMS JOURNAL</p>
-        <h1 class="hero-title">Understand Your Rights.<br><em>Get Expert Guidance.</em></h1>
-        <p style="max-width:800px; margin:0 auto 40px; color:rgba(255,255,255,0.8);">Practical legal articles in English & Hindi on BNS, BNSS, 498A, Bail, and more.</p>
-        <a href="#articles" class="btn-hero-primary">Explore Articles</a>
-      </div>
-    </section>
+  <section class="hero">
+    <p class="hero-label">The Legal Journal</p>
+    <h1 class="hero-title">Practical <i>Perspectives</i> on <br>Contemporary Indian Law.</h1>
+  </section>
 
-    <section class="search-section">
-      <div class="container">
-        <div style="position:relative; max-width:700px; margin:0 auto;">
-          <input type="search" id="searchInput" class="search-input" placeholder="Search by topic, section, or keyword...">
-        </div>
-      </div>
-    </section>
+  <div class="search-container">
+    <input type="text" id="searchInput" class="search-input" placeholder="Search by case type, section or keyword...">
+  </div>
 
-    <section id="articles" class="articles">
-      <div class="container">
-        <div style="text-align:center; margin-bottom:60px;">
-          <h2 style="font-size:36px;">Latest Practical Articles</h2>
-        </div>
-        <div class="articles-grid" id="articlesGrid">
-          <p style="grid-column: 1/-1; text-align:center; padding:50px;">Loading articles...</p>
-        </div>
-        <div id="loadMoreWrap" style="text-align:center; margin-top:50px; display:none;">
-          <button id="loadMoreBtn" class="btn-primary" style="padding:15px 40px;">View More Articles</button>
-        </div>
-      </div>
-    </section>
-
-    <section id="experts" class="experts">
-      <div class="container">
-        <h2 style="text-align:center; color:var(--gold); font-size:36px;">Our Legal Experts</h2>
-        <div class="experts-grid">
-          <div class="expert-card">
-            <img src="ganga.jpg" class="expert-image" alt="Adv. Ganga Shankar Shastri">
-            <h3>Adv. Ganga Shankar Shastri</h3>
-            <p style="color:var(--gold);">Criminal Law Specialist</p>
-          </div>
-          <div class="expert-card">
-            <img src="minakshi.jpg" class="expert-image" alt="Adv. Minakshi Shastri">
-            <h3>Adv. Minakshi Shastri</h3>
-            <p style="color:var(--gold);">Family Law Expert</p>
-          </div>
-          <div class="expert-card">
-            <img src="shivani.jpg" class="expert-image" alt="Adv. Shivani Shastri">
-            <h3>Adv. Shivani Shastri</h3>
-            <p style="color:var(--gold);">Cyber & IT Law</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta">
-      <div class="container">
-        <h2>Need Legal Assistance?</h2>
-        <p style="margin:20px 0 40px;">Get personalized guidance from experienced advocates today.</p>
-        <a href="https://justicefirms.com/contact" style="background:var(--charcoal); color:white; padding:15px 40px; border-radius:50px; font-weight:600;">Schedule Consultation</a>
-      </div>
-    </section>
+  <main class="grid-container">
+    <div class="articles-grid" id="articlesGrid">
+      <p style="text-align: center; grid-column: 1/-1;">Archiving legal insights...</p>
+    </div>
+    <div style="text-align: center;">
+      <div id="loadMoreBtn" class="btn-load">Load More Articles</div>
+    </div>
   </main>
 
-  <footer class="footer">
-    <div class="container" style="text-align:center;">
-      <p>© 2026 JusticeFirms Journal. All rights reserved.</p>
+  <section id="experts" class="experts-section">
+    <div class="experts-inner">
+      <div class="expert-box">
+        <img src="ganga.jpg" alt="Adv. Ganga Shankar">
+        <h4>Ganga Shankar Shastri</h4>
+        <p>Criminal Litigation</p>
+      </div>
+      <div class="expert-box">
+        <img src="minakshi.jpg" alt="Adv. Minakshi">
+        <h4>Minakshi Shastri</h4>
+        <p>Matrimonial Law</p>
+      </div>
+      <div class="expert-box">
+        <img src="shivani.jpg" alt="Adv. Shivani">
+        <h4>Shivani Shastri</h4>
+        <p>Cyber Jurisprudence</p>
+      </div>
     </div>
+  </section>
+
+  <footer>
+    <p>© 2026 JUSTICEFIRMS JOURNAL. ALL RIGHTS RESERVED. <br> AUTHORED BY PRACTICING ADVOCATES AT PRAYAGRAJ.</p>
   </footer>
 
   <script>
@@ -184,14 +148,6 @@
     let visibleCount = 0;
     const PER_PAGE = 6;
 
-    // Theme Toggle Logic
-    const themeToggle = document.getElementById('themeToggle');
-    themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-      localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
-    });
-
-    // Load Articles from JSON
     async function loadArticles() {
       const grid = document.getElementById('articlesGrid');
       try {
@@ -201,7 +157,7 @@
         grid.innerHTML = '';
         renderArticles();
       } catch (err) {
-        grid.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:red;">articles.json missing or invalid.</p>';
+        grid.innerHTML = '<p>The journal database is currently unavailable.</p>';
       }
     }
 
@@ -210,18 +166,16 @@
       const source = filterData || allArticles.slice(visibleCount, visibleCount + PER_PAGE);
       
       source.forEach(article => {
-        const card = document.createElement('article');
+        const card = document.createElement('div');
         card.className = 'article-card';
         card.innerHTML = `
-          <div class="article-image"><img src="${article.cover}" alt="${article.title}"></div>
-          <div style="padding:24px; display:flex; flex-direction:column; flex-grow:1;">
-            <span class="article-category">${article.category.primary}</span>
-            <h3 style="margin-bottom:12px; font-size:20px;">${article.title}</h3>
-            <p class="article-excerpt">${article.excerpt}</p>
-            <div class="article-meta">
-              <span>${article.author.name}</span>
-              <span>${article.reading_time}</span>
-            </div>
+          <div class="article-img-wrap"><img src="${article.cover}" alt="${article.title}"></div>
+          <span class="cat-label">${article.category.primary}</span>
+          <h3 class="article-title">${article.title}</h3>
+          <p class="article-snippet">${article.excerpt}</p>
+          <div class="article-meta">
+            <span>By ${article.author.name}</span>
+            <span>${article.reading_time}</span>
           </div>
         `;
         card.onclick = () => window.location.href = `./${article.slug}.html`;
@@ -230,11 +184,10 @@
 
       if (!filterData) {
         visibleCount += PER_PAGE;
-        document.getElementById('loadMoreWrap').style.display = (visibleCount < allArticles.length) ? 'block' : 'none';
+        document.getElementById('loadMoreBtn').style.display = (visibleCount < allArticles.length) ? 'inline-block' : 'none';
       }
     }
 
-    // Search Feature
     document.getElementById('searchInput').addEventListener('input', (e) => {
       const q = e.target.value.toLowerCase().trim();
       const grid = document.getElementById('articlesGrid');
@@ -245,7 +198,7 @@
       } else {
         const filtered = allArticles.filter(a => a.title.toLowerCase().includes(q) || a.excerpt.toLowerCase().includes(q));
         renderArticles(filtered);
-        document.getElementById('loadMoreWrap').style.display = 'none';
+        document.getElementById('loadMoreBtn').style.display = 'none';
       }
     });
 
