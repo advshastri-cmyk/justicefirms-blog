@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Manifest — JusticeFirms</title>
+    <meta name="description" content="Site Map and Directory for the JusticeFirms Digital Ecosystem." />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --bg-body: #020617;
+            --bg-card: #0f172a;
+            --primary: #ffffff;
+            --secondary: #94a3b8;
+            --accent-gold: #d4af37;
+            --accent-tech: #38bdf8;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-body);
+            color: var(--primary);
+            font-family: var(--font-sans);
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; }
+
+        header { margin-bottom: 60px; border-bottom: 1px solid var(--border-color); padding-bottom: 40px; }
+        .brand { font-size: 1.5rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+        .brand span { color: var(--accent-gold); }
+        .subtitle { color: var(--secondary); max-width: 600px; }
+
+        .grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px; margin-bottom: 60px;
+        }
+
+        .category-title {
+            font-family: var(--font-mono); font-size: 0.8rem; text-transform: uppercase;
+            letter-spacing: 0.1em; color: var(--accent-tech); margin-bottom: 24px;
+            display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px; grid-column: 1 / -1; margin-top: 24px;
+        }
+
+        .page-card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 8px; padding: 20px; transition: 0.2s;
+            text-decoration: none; color: inherit; display: flex; flex-direction: column;
+        }
+        .page-card:hover { border-color: var(--accent-gold); transform: translateY(-2px); }
+
+        .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+        .file-name { font-family: var(--font-mono); font-size: 0.75rem; color: var(--secondary); background: rgba(0,0,0,0.3); padding: 4px 8px; border-radius: 4px; }
+        
+        .page-title { font-weight: 600; font-size: 1.1rem; margin-bottom: 6px; color: var(--primary); }
+        .page-desc { font-size: 0.85rem; color: var(--secondary); }
+
+        .status-dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; display: inline-block; }
+
+        footer { text-align: center; color: var(--secondary); font-size: 0.8rem; margin-top: 80px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header>
+            <div class="brand">
+                <i data-lucide="layers" color="var(--accent-gold)"></i> JusticeFirms <span>Ecosystem</span>
+            </div>
+            <p class="subtitle">
+                Directory of all generated modules. This architecture represents a complete, "Ultra-Premium" digital presence for a Tier-1 Law Firm.
+            </p>
+        </header>
+
+        <main>
+            
+            <!-- Public Core -->
+            <div class="grid">
+                <div class="category-title"><i data-lucide="globe"></i> Public Interface (Core)</div>
+
+                <!-- Updated to index.html as per your request -->
+                <a href="index.html" class="page-card">
+                    <div class="card-top"><span class="file-name">index.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">The Journal (Home)</div>
+                    <div class="page-desc">Main landing page featuring article feed, infinite scroll logic, and glassmorphic UI.</div>
+                </a>
+
+                <a href="firm_legacy.html" class="page-card">
+                    <div class="card-top"><span class="file-name">firm_legacy.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">Legacy & Vision</div>
+                    <div class="page-desc">History timeline, global footprint map, and firm philosophy.</div>
+                </a>
+
+                <a href="the_bench.html" class="page-card">
+                    <div class="card-top"><span class="file-name">the_bench.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">The Bench (Team)</div>
+                    <div class="page-desc">Senior partner profiles with detailed biographies and credentials.</div>
+                </a>
+
+                <a href="practice_areas.html" class="page-card">
+                    <div class="card-top"><span class="file-name">practice_areas.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">Practice Areas</div>
+                    <div class="page-desc">Sticky sidebar navigation detailing legal specializations (BNS, Crypto, etc.).</div>
+                </a>
+            </div>
+
+            <!-- Client Enclave -->
+            <div class="grid">
+                <div class="category-title"><i data-lucide="lock"></i> Client Enclave (Secure)</div>
+
+                <a href="client_portal.html" class="page-card">
+                    <div class="card-top"><span class="file-name">client_portal.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">Secure Login</div>
+                    <div class="page-desc">Authentication interface with simulated biometric 2FA and scanning animations.</div>
+                </a>
+
+                <a href="client_dashboard.html" class="page-card">
+                    <div class="card-top"><span class="file-name">client_dashboard.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">Client Dashboard</div>
+                    <div class="page-desc">Real-time case status, alerts, and document vault overview.</div>
+                </a>
+
+                <a href="secure_chat.html" class="page-card">
+                    <div class="card-top"><span class="file-name">secure_chat.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">Secure Comms</div>
+                    <div class="page-desc">End-to-End encrypted messaging interface with attachment support.</div>
+                </a>
+
+                <a href="billing_finance.html" class="page-card">
+                    <div class="card-top"><span class="file-name">billing_finance.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">Billing & Finance</div>
+                    <div class="page-desc">Retainer management, invoice history, and crypto payment options.</div>
+                </a>
+
+                <a href="help_center.html" class="page-card">
+                    <div class="card-top"><span class="file-name">help_center.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">Help Center</div>
+                    <div class="page-desc">Documentation and FAQs for using the client portal.</div>
+                </a>
+            </div>
+
+            <!-- Knowledge & Research -->
+            <div class="grid">
+                <div class="category-title"><i data-lucide="book-open"></i> Knowledge & Research</div>
+
+                <a href="policy_innovation.html" class="page-card">
+                    <div class="card-top"><span class="file-name">policy_innovation.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">Policy Lab</div>
+                    <div class="page-desc">Interactive Statute Comparator (IPC vs BNS) and white papers.</div>
+                </a>
+
+                <a href="glossary.html" class="page-card">
+                    <div class="card-top"><span class="file-name">glossary.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">Legal Lexicon</div>
+                    <div class="page-desc">Searchable dictionary for new legal terms under BNS/BNSS.</div>
+                </a>
+
+                <a href="case_studies.html" class="page-card">
+                    <div class="card-top"><span class="file-name">case_studies.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">Case Studies</div>
+                    <div class="page-desc">Archive of landmark judgments with strategy visualization.</div>
+                </a>
+
+                <a href="article_detail.html" class="page-card">
+                    <div class="card-top"><span class="file-name">article_detail.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">Article Detail</div>
+                    <div class="page-desc">Long-form reading template with progress bar and citation tools.</div>
+                </a>
+            </div>
+
+            <!-- Engagement & Growth -->
+            <div class="grid">
+                <div class="category-title"><i data-lucide="users"></i> Engagement & Growth</div>
+
+                <a href="consultation.html" class="page-card">
+                    <div class="card-top"><span class="file-name">consultation.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">Consultation</div>
+                    <div class="page-desc">Intake form with "Secure Enclave" branding and logic.</div>
+                </a>
+
+                <a href="careers.html" class="page-card">
+                    <div class="card-top"><span class="file-name">careers.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">Careers</div>
+                    <div class="page-desc">Job listings with expandable details and culture grid.</div>
+                </a>
+
+                <a href="alumni.html" class="page-card">
+                    <div class="card-top"><span class="file-name">alumni.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">Alumni Network</div>
+                    <div class="page-desc">Hall of Fame and networking events for past associates.</div>
+                </a>
+
+                <a href="events.html" class="page-card">
+                    <div class="card-top"><span class="file-name">events.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">Academy Events</div>
+                    <div class="page-desc">Webinars, masterclasses, and live countdown timers.</div>
+                </a>
+
+                <a href="subscribe.html" class="page-card">
+                    <div class="card-top"><span class="file-name">subscribe.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">Subscription</div>
+                    <div class="page-desc">Newsletter and Client Intelligence tier pricing.</div>
+                </a>
+            </div>
+
+            <!-- Brand & Utility -->
+            <div class="grid">
+                <div class="category-title"><i data-lucide="settings"></i> Brand & Utility</div>
+
+                <a href="connect.html" class="page-card">
+                    <div class="card-top"><span class="file-name">connect.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">Digital Connect</div>
+                    <div class="page-desc">Mobile-first "Link-in-Bio" page for social sharing.</div>
+                </a>
+
+                <a href="media_room.html" class="page-card">
+                    <div class="card-top"><span class="file-name">media_room.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">Media Room</div>
+                    <div class="page-desc">Press coverage, awards, and downloadable media kits.</div>
+                </a>
+
+                <a href="pro_bono.html" class="page-card">
+                    <div class="card-top"><span class="file-name">pro_bono.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">Pro Bono</div>
+                    <div class="page-desc">Social impact initiatives and PIL tracking.</div>
+                </a>
+
+                <a href="secure_drop.html" class="page-card">
+                    <div class="card-top"><span class="file-name">secure_drop.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">Secure Drop</div>
+                    <div class="page-desc">Anonymous whistleblower submission portal (Tor/PGP).</div>
+                </a>
+
+                <a href="search_results.html" class="page-card">
+                    <div class="card-top"><span class="file-name">search_results.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">Search Results</div>
+                    <div class="page-desc">Global search UI with faceted filters.</div>
+                </a>
+
+                <a href="legal_notices.html" class="page-card">
+                    <div class="card-top"><span class="file-name">legal_notices.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">Legal Notices</div>
+                    <div class="page-desc">BCI disclaimer, privacy policy, and terms of use.</div>
+                </a>
+
+                <a href="404.html" class="page-card">
+                    <div class="card-top"><span class="file-name">404.html</span> <span class="status-dot"></span></div>
+                    <div class="page-title">404 Error</div>
+                    <div class="page-desc">Custom error page with "Redacted" aesthetic.</div>
+                </a>
+            </div>
+
+        </main>
+
+        <footer>
+            <p>© 2026 JusticeFirms Development Build. All systems nominal.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
