@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JurisAI — Legal Intelligence</title>
+    <meta name="description" content="AI-powered legal assistant specialized in BNS, BNSS, and Indian Corporate Law." />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            /* Palette: Cyber Legal */
+            --bg-body: #050505;
+            --bg-sidebar: #0a0a0a;
+            --bg-chat: #000000;
+            
+            --primary: #e5e5e5;
+            --secondary: #737373;
+            
+            --accent-gold: #d4af37;
+            --accent-ai: #8b5cf6; /* Violet for AI */
+            --accent-user: #3b82f6; /* Blue for User */
+            
+            --border-color: #262626;
+            
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-body);
+            color: var(--primary);
+            font-family: var(--font-sans);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* --- Sidebar --- */
+        .ai-sidebar {
+            width: 280px; background: var(--bg-sidebar); border-right: 1px solid var(--border-color);
+            display: flex; flex-direction: column; z-index: 10;
+        }
+        
+        .ai-header {
+            height: 70px; padding: 0 24px; display: flex; align-items: center; gap: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .brand-ai { 
+            font-family: var(--font-mono); font-size: 1rem; font-weight: 600; letter-spacing: -0.02em;
+            display: flex; align-items: center; gap: 8px; color: var(--primary);
+        }
+        .beta-tag {
+            font-size: 0.6rem; background: var(--accent-ai); color: #fff; 
+            padding: 2px 6px; border-radius: 4px; text-transform: uppercase;
+        }
+
+        .history-list { flex-grow: 1; padding: 20px; overflow-y: auto; }
+        .history-label { font-size: 0.7rem; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+        
+        .chat-item {
+            display: block; padding: 10px 12px; border-radius: 6px; 
+            color: var(--secondary); text-decoration: none; font-size: 0.85rem;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            margin-bottom: 4px; transition: 0.2s;
+        }
+        .chat-item:hover, .chat-item.active { background: rgba(139, 92, 246, 0.1); color: var(--primary); }
+        .chat-item.active { border-left: 2px solid var(--accent-ai); }
+
+        .model-config { padding: 24px; border-top: 1px solid var(--border-color); }
+        .config-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 0.8rem; color: var(--secondary); }
+        .model-select {
+            width: 100%; background: #000; border: 1px solid var(--border-color); color: var(--primary);
+            padding: 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.8rem; outline: none;
+        }
+
+        /* --- Main Chat Interface --- */
+        .main-chat { flex-grow: 1; display: flex; flex-direction: column; background: var(--bg-chat); position: relative; }
+        
+        .chat-top {
+            height: 70px; border-bottom: 1px solid var(--border-color);
+            display: flex; align-items: center; justify-content: space-between; padding: 0 32px;
+        }
+        .context-indicator { font-size: 0.85rem; color: var(--secondary); display: flex; align-items: center; gap: 8px; }
+        .dot-live { width: 8px; height: 8px; background: var(--accent-ai); border-radius: 50%; box-shadow: 0 0 10px var(--accent-ai); }
+        
+        .exit-link { color: var(--secondary); text-decoration: none; font-size: 0.85rem; transition: 0.2s; display: flex; gap: 6px; align-items: center; }
+        .exit-link:hover { color: var(--primary); }
+
+        /* Messages */
+        .chat-feed { flex-grow: 1; overflow-y: auto; padding: 40px; display: flex; flex-direction: column; gap: 40px; max-width: 900px; margin: 0 auto; width: 100%; }
+        
+        .msg-container { display: grid; grid-template-columns: 40px 1fr; gap: 20px; animation: fadeIn 0.3s ease-out; }
+        
+        .avatar {
+            width: 36px; height: 36px; border-radius: 4px; display: grid; place-items: center; font-size: 0.9rem;
+        }
+        .av-ai { background: linear-gradient(135deg, var(--accent-ai), #4c1d95); color: #fff; }
+        .av-user { background: var(--border-color); color: var(--secondary); }
+
+        .msg-content { font-size: 1rem; line-height: 1.6; color: var(--primary); }
+        .msg-content p { margin-bottom: 16px; }
+        .msg-content p:last-child { margin-bottom: 0; }
+        
+        /* Code/Citation Block */
+        .citation-block {
+            background: #111; border: 1px solid var(--border-color); border-left: 2px solid var(--accent-gold);
+            padding: 16px; margin: 16px 0; border-radius: 0 4px 4px 0; font-family: var(--font-mono); font-size: 0.85rem; color: var(--secondary);
+        }
+        .cite-header { display: flex; justify-content: space-between; margin-bottom: 8px; color: var(--accent-gold); font-size: 0.75rem; text-transform: uppercase; }
+
+        /* Confidence Meter */
+        .meta-row { display: flex; gap: 16px; margin-top: 12px; font-size: 0.75rem; color: var(--secondary); align-items: center; }
+        .conf-score { color: var(--accent-ai); font-family: var(--font-mono); }
+
+        /* Input Area */
+        .input-region {
+            padding: 24px 40px 40px; background: linear-gradient(to top, var(--bg-chat) 80%, transparent);
+            max-width: 900px; margin: 0 auto; width: 100%;
+        }
+        .input-box {
+            background: #111; border: 1px solid var(--border-color); border-radius: 12px;
+            padding: 16px; display: flex; flex-direction: column; gap: 12px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.5); transition: 0.2s;
+        }
+        .input-box:focus-within { border-color: var(--accent-ai); box-shadow: 0 0 20px rgba(139, 92, 246, 0.1); }
+        
+        .prompt-input {
+            background: transparent; border: none; color: var(--primary); outline: none;
+            font-family: var(--font-sans); font-size: 1rem; resize: none; min-height: 24px; max-height: 200px;
+        }
+        
+        .input-footer { display: flex; justify-content: space-between; align-items: center; }
+        .attach-btn { color: var(--secondary); cursor: pointer; transition: 0.2s; }
+        .attach-btn:hover { color: var(--primary); }
+        
+        .send-btn {
+            background: var(--accent-ai); color: #fff; border: none; padding: 8px 16px;
+            border-radius: 6px; font-weight: 600; font-size: 0.85rem; cursor: pointer;
+            transition: 0.2s; display: flex; align-items: center; gap: 6px;
+        }
+        .send-btn:hover { background: #7c3aed; }
+
+        /* Disclaimer */
+        .legal-disclaimer {
+            text-align: center; font-size: 0.7rem; color: var(--secondary); margin-top: 12px;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 900px) {
+            .ai-sidebar { display: none; }
+            .chat-feed { padding: 20px; }
+            .input-region { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="ai-sidebar">
+        <div class="ai-header">
+            <i data-lucide="brain-circuit" color="var(--accent-ai)"></i>
+            <div class="brand-ai">JurisAI <span class="beta-tag">Beta v2.1</span></div>
+        </div>
+        
+        <div class="history-list">
+            <div class="history-label">Today</div>
+            <a href="#" class="chat-item active">BNS Section 111 Definition</a>
+            <a href="#" class="chat-item">Drafting NDA Clause</a>
+            
+            <div class="history-label" style="margin-top:24px;">Yesterday</div>
+            <a href="#" class="chat-item">Search & Seizure Protocol</a>
+            <a href="#" class="chat-item">Limitation Act Query</a>
+        </div>
+
+        <div class="model-config">
+            <div class="config-row">
+                <span>Model</span>
+                <span>JusticeLLM-70B</span>
+            </div>
+            <div class="config-row">
+                <span>Database</span>
+                <span>BNS/BNSS 2026</span>
+            </div>
+            <select class="model-select">
+                <option>Standard Mode (Fast)</option>
+                <option selected>Citation Mode (Accurate)</option>
+                <option>Drafting Mode (Creative)</option>
+            </select>
+        </div>
+    </aside>
+
+    <!-- Chat Area -->
+    <main class="main-chat">
+        
+        <div class="chat-top">
+            <div class="context-indicator">
+                <div class="dot-live"></div>
+                Context: Indian Criminal Code (BNS 2023)
+            </div>
+            <a href="client_dashboard.html" class="exit-link">
+                <i data-lucide="log-out" size="16"></i> Exit to Dashboard
+            </a>
+        </div>
+
+        <div class="chat-feed" id="chatFeed">
+            
+            <!-- Welcome Message -->
+            <div class="msg-container">
+                <div class="avatar av-ai"><i data-lucide="bot" size="20"></i></div>
+                <div class="msg-content">
+                    <p>Hello. I am JurisAI, trained on the complete text of the Bharatiya Nyaya Sanhita (BNS) and Bharatiya Nagarik Suraksha Sanhita (BNSS).</p>
+                    <p>I can assist with statutory definitions, procedural checklists, and draft clause generation. <strong>I cannot provide legal advice or strategy.</strong></p>
+                    <p style="color:var(--secondary); font-size:0.9rem;">Try asking: <em>"What constitutes 'Organized Crime' under the new code?"</em></p>
+                </div>
+            </div>
+
+            <!-- User Query Simulation -->
+            <div class="msg-container">
+                <div class="avatar av-user"><i data-lucide="user" size="20"></i></div>
+                <div class="msg-content">
+                    <p>Summarize the changes to sedition laws under the BNS.</p>
+                </div>
+            </div>
+
+            <!-- AI Response Simulation -->
+            <div class="msg-container">
+                <div class="avatar av-ai"><i data-lucide="bot" size="20"></i></div>
+                <div class="msg-content">
+                    <p>Under the Bharatiya Nyaya Sanhita (BNS) 2023, the specific offense of "Sedition" (previously Section 124A of the IPC) has been removed. It is replaced by <strong>Section 152</strong>, which deals with "Acts endangering sovereignty, unity and integrity of India".</p>
+                    
+                    <div class="citation-block">
+                        <div class="cite-header">
+                            <span>Statutory Reference</span>
+                            <span>BNS Sec. 152</span>
+                        </div>
+                        "Whoever, purposely or knowingly, by words... excites secession or armed rebellion or subversive activities, or encourages feelings of separatist activities... shall be punished with imprisonment for life or with imprisonment which may extend to seven years..."
+                    </div>
+
+                    <p><strong>Key Differences:</strong></p>
+                    <ul style="list-style:disc; padding-left:20px; margin-bottom:16px;">
+                        <li><strong>Terminology:</strong> The term "Rajdroh" (treason against government) is replaced by "Deshdroh" (treason against nation).</li>
+                        <li><strong>Scope:</strong> The focus shifts from "disaffection towards the Government" to acts threatening the "sovereignty, unity, and integrity of India."</li>
+                        <li><strong>Punishment:</strong> The gap in sentencing under IPC (3 years or Life) has been bridged. BNS prescribes up to 7 years or Life Imprisonment.</li>
+                    </ul>
+
+                    <div class="meta-row">
+                        <span class="conf-score">Confidence: 98.4%</span>
+                        <span>•</span>
+                        <span>Tokens: 142</span>
+                        <span>•</span>
+                        <div style="display:flex; gap:8px;">
+                            <i data-lucide="thumbs-up" size="14" style="cursor:pointer;"></i>
+                            <i data-lucide="thumbs-down" size="14" style="cursor:pointer;"></i>
+                            <i data-lucide="copy" size="14" style="cursor:pointer;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Input -->
+        <div class="input-region">
+            <div class="input-box">
+                <textarea class="prompt-input" id="userInput" placeholder="Ask a legal question or request a draft..." rows="1" oninput="autoResize(this)"></textarea>
+                <div class="input-footer">
+                    <div style="display:flex; gap:16px;">
+                        <i data-lucide="paperclip" class="attach-btn" size="18"></i>
+                        <i data-lucide="mic" class="attach-btn" size="18"></i>
+                    </div>
+                    <button class="send-btn" onclick="sendMessage()">
+                        Generate <i data-lucide="sparkles" size="14"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="legal-disclaimer">
+                AI can hallucinate. Information generated here does not create an attorney-client relationship and must be verified by a qualified Partner.
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        // Auto-resize textarea
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+        }
+
+        // Send Logic
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const text = input.value.trim();
+            if(!text) return;
+
+            const feed = document.getElementById('chatFeed');
+
+            // User Message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'msg-container';
+            userMsg.innerHTML = `
+                <div class="avatar av-user"><i data-lucide="user" size="20"></i></div>
+                <div class="msg-content"><p>${text}</p></div>
+            `;
+            feed.appendChild(userMsg);
+            input.value = '';
+            input.style.height = 'auto';
+            feed.scrollTop = feed.scrollHeight;
+            lucide.createIcons();
+
+            // Typing Indicator
+            const typing = document.createElement('div');
+            typing.className = 'msg-container';
+            typing.id = 'typingIndicator';
+            typing.innerHTML = `
+                <div class="avatar av-ai"><i data-lucide="bot" size="20"></i></div>
+                <div class="msg-content"><p style="color:var(--secondary); font-style:italic;">Analyzing statutes...</p></div>
+            `;
+            feed.appendChild(typing);
+            feed.scrollTop = feed.scrollHeight;
+            lucide.createIcons();
+
+            // Simulate Response
+            setTimeout(() => {
+                typing.remove();
+                const aiMsg = document.createElement('div');
+                aiMsg.className = 'msg-container';
+                aiMsg.innerHTML = `
+                    <div class="avatar av-ai"><i data-lucide="bot" size="20"></i></div>
+                    <div class="msg-content">
+                        <p>I have received your query regarding "${text}".</p>
+                        <div class="citation-block">
+                            <div class="cite-header">System Note</div>
+                            Processing complex legal query. Please consult a Senior Partner for specific advice on this matter.
+                        </div>
+                        <div class="meta-row">
+                            <span class="conf-score">Confidence: --%</span>
+                        </div>
+                    </div>
+                `;
+                feed.appendChild(aiMsg);
+                feed.scrollTop = feed.scrollHeight;
+                lucide.createIcons();
+            }, 1500);
+        }
+
+        // Enter key to send
+        document.getElementById('userInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
