@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Policy & Innovation — JusticeFirms Lab</title>
+    <meta name="description" content="Analyzing the intersection of Indian Statute reform (BNS/BNSS) and Legal Technology. White papers, statute comparators, and compliance roadmaps." />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --bg-body: #020617;
+            --bg-glass: rgba(15, 23, 42, 0.85);
+            --bg-card: rgba(30, 41, 59, 0.4);
+            --bg-code: #0f172a;
+            
+            --primary: #ffffff;
+            --secondary: #94a3b8;
+            
+            --accent-gold: #d4af37;
+            --accent-tech: #38bdf8;
+            --accent-danger: #ef4444;
+            --accent-success: #10b981;
+            
+            --border-color: rgba(255, 255, 255, 0.08);
+            
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            
+            --container-width: 1280px;
+        }
+
+        html.light-mode {
+            --bg-body: #f8fafc;
+            --bg-glass: rgba(255, 255, 255, 0.9);
+            --bg-card: #ffffff;
+            --bg-code: #e2e8f0;
+            --primary: #0f172a;
+            --secondary: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-body);
+            color: var(--primary);
+            font-family: var(--font-sans);
+            line-height: 1.7;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        h1, h2, h3, h4 { font-family: var(--font-serif); }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 24px; }
+        .mono { font-family: var(--font-mono); }
+
+        /* --- Nav --- */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: var(--bg-glass); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .nav-inner { height: 90px; display: flex; align-items: center; justify-content: space-between; }
+        .brand { font-family: var(--font-serif); font-size: 1.75rem; font-weight: 700; display: flex; gap: 8px; text-decoration: none; color: inherit; }
+        .brand span { color: var(--accent-gold); }
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-link { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--secondary); text-decoration: none; transition: 0.3s; }
+        .nav-link:hover { color: var(--primary); }
+
+        /* --- Hero --- */
+        .lab-hero {
+            padding: 180px 0 100px;
+            background: linear-gradient(180deg, rgba(2,6,23,0) 0%, rgba(56, 189, 248, 0.05) 100%);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .hero-label { 
+            font-family: var(--font-mono); color: var(--accent-tech); font-size: 0.8rem; 
+            margin-bottom: 24px; display: inline-block; padding: 6px 12px; 
+            border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 4px;
+        }
+        .hero-title { font-size: 4rem; line-height: 1.1; margin-bottom: 24px; }
+        .hero-desc { max-width: 600px; color: var(--secondary); font-size: 1.1rem; }
+
+        /* --- Statute Comparator Widget --- */
+        .comparator-section { padding: 100px 0; }
+        
+        .widget-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px -20px rgba(0,0,0,0.5);
+        }
+
+        .widget-header {
+            padding: 20px 32px;
+            background: rgba(0,0,0,0.2);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .topic-selector {
+            background: var(--bg-body);
+            color: var(--primary);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-family: var(--font-sans);
+            outline: none;
+            cursor: pointer;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            divide-x: 1px solid var(--border-color); /* Tailwind style divide */
+        }
+        
+        /* Explicit fallback for browsers that don't support divide-x */
+        .comparison-col { padding: 40px; }
+        .comparison-col:first-child { border-right: 1px solid var(--border-color); }
+
+        .col-header {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--secondary);
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .statute-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .statute-text {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            color: var(--secondary);
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .highlight {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--accent-danger);
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+        .highlight-new {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent-success);
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+
+        /* --- Tech Stack --- */
+        .tech-section { padding: 100px 0; border-top: 1px solid var(--border-color); }
+        .tech-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px; margin-top: 60px;
+        }
+        
+        .tech-card {
+            background: var(--bg-card);
+            padding: 32px;
+            border: 1px solid var(--border-color);
+            transition: 0.3s;
+        }
+        .tech-card:hover { border-color: var(--accent-tech); transform: translateY(-5px); }
+        .tech-icon { color: var(--accent-tech); margin-bottom: 20px; }
+        .tech-title { font-size: 1.1rem; margin-bottom: 12px; }
+        .tech-desc { font-size: 0.9rem; color: var(--secondary); }
+
+        /* --- White Papers --- */
+        .papers-section { padding: 100px 0; border-top: 1px solid var(--border-color); }
+        .paper-row {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 32px 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: 0.3s;
+        }
+        .paper-row:hover { background: rgba(255,255,255,0.02); padding-left: 16px; padding-right: 16px; }
+        
+        .paper-info h4 { font-size: 1.25rem; margin-bottom: 8px; }
+        .paper-meta { font-family: var(--font-mono); font-size: 0.8rem; color: var(--secondary); }
+        .btn-download {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 20px;
+            border: 1px solid var(--border-color);
+            color: var(--primary);
+            font-size: 0.85rem;
+            border-radius: 4px;
+            transition: 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-download:hover { background: var(--primary); color: var(--bg-body); }
+
+        @media (max-width: 768px) {
+            .comparison-grid { grid-template-columns: 1fr; }
+            .comparison-col:first-child { border-right: none; border-bottom: 1px solid var(--border-color); }
+            .hero-title { font-size: 2.5rem; }
+            .paper-row { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .btn-download { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-inner">
+            <a href="justicefirms_journal.html" class="brand">
+                <i data-lucide="scale" size="24" color="var(--accent-gold)"></i>
+                JusticeFirms
+            </a>
+            <div class="nav-links">
+                <a href="justicefirms_journal.html" class="nav-link">Journal</a>
+                <a href="the_bench.html" class="nav-link">The Bench</a>
+                <a href="consultation.html" class="nav-link" style="color:var(--accent-gold);">Consult</a>
+                <button id="themeToggle" style="background:none; border:none; cursor:pointer; color:var(--secondary);">
+                    <i data-lucide="moon" size="20"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="lab-hero">
+        <div class="container">
+            <span class="hero-label">Research Wing • Est. 2024</span>
+            <h1 class="hero-title">Policy &<br>Innovation Lab</h1>
+            <p class="hero-desc">
+                Analyzing the seismic shift in Indian Criminal Jurisprudence and pioneering the adoption of forensic-grade technology in legal practice.
+            </p>
+        </div>
+    </header>
+
+    <!-- Interactive Comparator -->
+    <section class="comparator-section container">
+        <div style="margin-bottom: 40px;">
+            <h2 style="font-size: 2rem;">The Great Transition</h2>
+            <p style="color: var(--secondary);">Interactive comparison between the Colonial IPC (1860) and the Bharatiya Nyaya Sanhita (2023).</p>
+        </div>
+
+        <div class="widget-container">
+            <div class="widget-header">
+                <span class="mono" style="color:var(--accent-gold);">// STATUTE_COMPARATOR_V2.0</span>
+                <select class="topic-selector" id="topicSelect">
+                    <option value="sedition">Sedition vs Treason</option>
+                    <option value="mob">Mob Lynching</option>
+                    <option value="organized">Organized Crime</option>
+                    <option value="digital">Digital Evidence</option>
+                </select>
+            </div>
+            
+            <div class="comparison-grid">
+                <!-- Old Law -->
+                <div class="comparison-col">
+                    <div class="col-header">
+                        <span>OLD REGIME</span>
+                        <span>IPC 1860</span>
+                    </div>
+                    <div id="leftPanel">
+                        <!-- Content populated by JS -->
+                    </div>
+                </div>
+
+                <!-- New Law -->
+                <div class="comparison-col">
+                    <div class="col-header">
+                        <span style="color:var(--accent-success);">CURRENT REGIME</span>
+                        <span>BNS 2023</span>
+                    </div>
+                    <div id="rightPanel">
+                        <!-- Content populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="tech-section">
+        <div class="container">
+            <h2 style="font-size: 2rem; margin-bottom: 16px;">Legal-Tech Infrastructure</h2>
+            <p style="color: var(--secondary); max-width: 600px;">
+                We utilize a proprietary stack of tools to ensure data integrity, rapid discovery, and secure communication.
+            </p>
+
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <i data-lucide="shield-check" class="tech-icon" size="32"></i>
+                    <h3 class="tech-title">Chain of Custody</h3>
+                    <p class="tech-desc">Blockchain-anchored evidence logging ensuring zero tampering during the discovery phase.</p>
+                </div>
+                <div class="tech-card">
+                    <i data-lucide="cpu" class="tech-icon" size="32"></i>
+                    <h3 class="tech-title">AI Discovery</h3>
+                    <p class="tech-desc">LLM-powered document review capable of analyzing 50,000 pages of case law in under 3 hours.</p>
+                </div>
+                <div class="tech-card">
+                    <i data-lucide="lock" class="tech-icon" size="32"></i>
+                    <h3 class="tech-title">Secure Enclave</h3>
+                    <p class="tech-desc">Client communications hosted on air-gapped servers with military-grade end-to-end encryption.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- White Papers -->
+    <section class="papers-section container">
+        <h2 style="font-size: 2rem; margin-bottom: 60px;">Research Publications</h2>
+
+        <div class="paper-row">
+            <div class="paper-info">
+                <h4>The Architecture of BNSS Bail Provisions</h4>
+                <div class="paper-meta">Dec 2025 • PDF • 24 Pages</div>
+            </div>
+            <a href="#" class="btn-download" onclick="alert('Downloading simulated PDF...'); return false;">
+                <i data-lucide="download" size="16"></i> Download Brief
+            </a>
+        </div>
+
+        <div class="paper-row">
+            <div class="paper-info">
+                <h4>Digital Personal Data Protection: A Compliance Checklist</h4>
+                <div class="paper-meta">Oct 2025 • PDF • 18 Pages</div>
+            </div>
+            <a href="#" class="btn-download" onclick="alert('Downloading simulated PDF...'); return false;">
+                <i data-lucide="download" size="16"></i> Download Checklist
+            </a>
+        </div>
+
+        <div class="paper-row">
+            <div class="paper-info">
+                <h4>Cryptocurrency Assets in Matrimonial Disputes</h4>
+                <div class="paper-meta">Aug 2025 • PDF • 32 Pages</div>
+            </div>
+            <a href="#" class="btn-download" onclick="alert('Downloading simulated PDF...'); return false;">
+                <i data-lucide="download" size="16"></i> Download Research
+            </a>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 40px; color: var(--secondary); font-size: 0.8rem;">
+        <p>© 2026 JusticeFirms Policy Lab. All rights reserved.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Theme Logic
+        const themeBtn = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        if (localStorage.getItem('theme') === 'light') {
+            html.classList.add('light-mode');
+            themeBtn.innerHTML = `<i data-lucide="sun" size="20"></i>`;
+        }
+        themeBtn.addEventListener('click', () => {
+            html.classList.toggle('light-mode');
+            const isLight = html.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            themeBtn.innerHTML = `<i data-lucide="${isLight ? 'sun' : 'moon'}" size="20"></i>`;
+            lucide.createIcons();
+        });
+
+        // --- Statute Data ---
+        const statutes = {
+            sedition: {
+                titleOld: "Section 124A (Sedition)",
+                textOld: "Whoever brings into <span class='highlight'>hatred or contempt</span>, or excites disaffection towards the Government established by law shall be punished...",
+                titleNew: "Section 152 (Acts Endangering Sovereignty)",
+                textNew: "Whoever excites secession or <span class='highlight-new'>armed rebellion</span> or subversive activities, or endangers sovereignty or unity and integrity of India..."
+            },
+            mob: {
+                titleOld: "Section 302 (Murder)",
+                textOld: "Punishment for murder. <span class='highlight'>No specific provision</span> distinguishing mob lynching from general homicide committed by a group.",
+                titleNew: "Section 103(2) (Mob Lynching)",
+                textNew: "When a group of five or more persons acting in concert commits murder on the ground of <span class='highlight-new'>race, caste, or community</span>... punished with death or life imprisonment."
+            },
+            organized: {
+                titleOld: "Various Special Acts (MCOCA etc.)",
+                textOld: "Organized crime was largely dealt with under state-specific laws like MCOCA (Maharashtra) or UAPA, with <span class='highlight'>no central definition</span> in the IPC.",
+                titleNew: "Section 111 (Organized Crime)",
+                textNew: "First central definition: Any continuing unlawful activity including <span class='highlight-new'>economic offences, cyber crimes</span>, and land grabbing by a crime syndicate."
+            },
+            digital: {
+                titleOld: "Indian Evidence Act (1872)",
+                textOld: "Electronic records treated as <span class='highlight'>secondary evidence</span> requiring Section 65B certification. Often led to inadmissibility due to technical errors.",
+                titleNew: "Bharatiya Sakshya Adhiniyam (2023)",
+                textNew: "Electronic records are now <span class='highlight-new'>primary evidence</span>. Includes semiconductor memory, smartphones, and server logs explicitly."
+            }
+        };
+
+        // --- Comparator Logic ---
+        const selector = document.getElementById('topicSelect');
+        const leftPanel = document.getElementById('leftPanel');
+        const rightPanel = document.getElementById('rightPanel');
+
+        function renderComparison(key) {
+            const data = statutes[key];
+            
+            // Animate Out
+            leftPanel.style.opacity = 0;
+            rightPanel.style.opacity = 0;
+
+            setTimeout(() => {
+                // Update Content
+                leftPanel.innerHTML = `
+                    <h3 class="statute-title">${data.titleOld}</h3>
+                    <p class="statute-text">${data.textOld}</p>
+                `;
+                rightPanel.innerHTML = `
+                    <h3 class="statute-title">${data.titleNew}</h3>
+                    <p class="statute-text">${data.textNew}</p>
+                `;
+                
+                // Animate In
+                leftPanel.style.opacity = 1;
+                rightPanel.style.opacity = 1;
+            }, 200);
+        }
+
+        // Add transitions
+        leftPanel.style.transition = 'opacity 0.2s';
+        rightPanel.style.transition = 'opacity 0.2s';
+
+        selector.addEventListener('change', (e) => renderComparison(e.target.value));
+        
+        // Init
+        renderComparison('sedition');
+
+    </script>
+</body>
+</html>
