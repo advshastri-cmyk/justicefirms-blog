@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 — Motion Denied</title>
+    <meta name="description" content="The page you are looking for has been redacted or does not exist." />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            /* Palette: Midnight Luxury */
+            --bg-body: #020617;
+            --bg-glass: rgba(15, 23, 42, 0.85);
+            --bg-card: rgba(30, 41, 59, 0.4);
+            
+            --primary: #ffffff;
+            --secondary: #94a3b8;
+            
+            --accent-gold: #d4af37;
+            --accent-tech: #38bdf8;
+            --accent-danger: #ef4444;
+            
+            --border-color: rgba(255, 255, 255, 0.08);
+            
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        html.light-mode {
+            --bg-body: #f8fafc;
+            --bg-glass: rgba(255, 255, 255, 0.9);
+            --bg-card: #ffffff;
+            --primary: #0f172a;
+            --secondary: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-body);
+            color: var(--primary);
+            font-family: var(--font-sans);
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        /* --- Nav --- */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: var(--bg-glass); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .nav-inner { height: 90px; display: flex; align-items: center; justify-content: space-between; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+        .brand { font-family: var(--font-serif); font-size: 1.75rem; font-weight: 700; display: flex; gap: 8px; text-decoration: none; color: inherit; }
+        .brand span { color: var(--accent-gold); }
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-link { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--secondary); text-decoration: none; transition: 0.3s; }
+        .nav-link:hover { color: var(--primary); }
+
+        /* --- 404 Content --- */
+        .error-container {
+            flex-grow: 1;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center;
+            padding: 120px 24px 60px;
+            background: radial-gradient(circle at 50% 50%, rgba(239, 68, 68, 0.05) 0%, transparent 50%);
+        }
+
+        .error-code {
+            font-family: var(--font-mono); font-size: 8rem; line-height: 1;
+            color: var(--primary); margin-bottom: 16px;
+            position: relative;
+        }
+        
+        /* Glitch Effect */
+        .error-code::before, .error-code::after {
+            content: '404'; position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.8;
+        }
+        .error-code::before { color: var(--accent-tech); z-index: -1; animation: glitch 3s infinite; }
+        .error-code::after { color: var(--accent-danger); z-index: -2; animation: glitch 2s infinite reverse; }
+        
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        .error-title { font-size: 2.5rem; font-family: var(--font-serif); margin-bottom: 24px; }
+        .error-desc { max-width: 500px; color: var(--secondary); font-size: 1.1rem; margin-bottom: 40px; }
+        
+        .redacted {
+            background: var(--primary); color: transparent; padding: 0 4px; border-radius: 2px;
+            user-select: none; opacity: 0.2;
+        }
+
+        /* Search & Actions */
+        .action-area { width: 100%; max-width: 400px; }
+        
+        .search-box {
+            position: relative; margin-bottom: 32px;
+        }
+        .search-input {
+            width: 100%; padding: 14px 20px; padding-right: 48px;
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 100px; color: var(--primary); outline: none;
+            font-family: var(--font-sans); transition: 0.3s;
+        }
+        .search-input:focus { border-color: var(--accent-tech); box-shadow: 0 0 20px rgba(56, 189, 248, 0.1); }
+        .search-btn {
+            position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+            background: none; border: none; color: var(--secondary); cursor: pointer;
+        }
+
+        .btn-home {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 24px; border: 1px solid var(--primary);
+            color: var(--primary); text-transform: uppercase; letter-spacing: 0.1em;
+            text-decoration: none; font-size: 0.85rem; transition: 0.3s;
+        }
+        .btn-home:hover { background: var(--primary); color: var(--bg-body); }
+
+        .quick-links {
+            margin-top: 40px; display: flex; gap: 24px; justify-content: center;
+            font-size: 0.9rem;
+        }
+        .q-link { color: var(--secondary); text-decoration: none; border-bottom: 1px solid transparent; transition: 0.3s; }
+        .q-link:hover { color: var(--accent-gold); border-bottom-color: var(--accent-gold); }
+
+        footer { text-align: center; padding: 40px; border-top: 1px solid var(--border-color); color: var(--secondary); font-size: 0.8rem; margin-top: auto; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="justicefirms_journal.html" class="brand">
+                <i data-lucide="scale" size="24" color="var(--accent-gold)"></i>
+                JusticeFirms
+            </a>
+            <div class="nav-links">
+                <a href="justicefirms_journal.html" class="nav-link">Journal</a>
+                <a href="consultation.html" class="nav-link">Consult</a>
+                <button id="themeToggle" style="background:none; border:none; cursor:pointer; color:var(--secondary);">
+                    <i data-lucide="moon" size="20"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="error-container">
+        
+        <div class="error-code">404</div>
+        <h1 class="error-title">Objection Overruled</h1>
+        <p class="error-desc">
+            The record you are attempting to access has been <span class="redacted">deleted</span>, moved, or sealed by administrative order.
+        </p>
+
+        <div class="action-area">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search the archives...">
+                <button class="search-btn"><i data-lucide="search" size="20"></i></button>
+            </div>
+
+            <a href="justicefirms_journal.html" class="btn-home">
+                <i data-lucide="arrow-left" size="16"></i> Return to Journal
+            </a>
+        </div>
+
+        <div class="quick-links">
+            <a href="practice_areas.html" class="q-link">Practice Areas</a>
+            <a href="the_bench.html" class="q-link">Our Attorneys</a>
+            <a href="client_portal.html" class="q-link">Client Login</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>© 2026 JusticeFirms. Error ID: JF-404-X</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Theme Logic
+        const themeBtn = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        if (localStorage.getItem('theme') === 'light') {
+            html.classList.add('light-mode');
+            themeBtn.innerHTML = `<i data-lucide="sun" size="20"></i>`;
+        }
+        themeBtn.addEventListener('click', () => {
+            html.classList.toggle('light-mode');
+            const isLight = html.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            themeBtn.innerHTML = `<i data-lucide="${isLight ? 'sun' : 'moon'}" size="20"></i>`;
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
