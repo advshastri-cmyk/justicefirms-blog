@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Bench — JusticeFirms Advocates</title>
+    <meta name="description" content="Meet the Senior Counsels and Legal Technologists behind JusticeFirms. Profiles of Adv. Ganga Shankar, Minakshi Shastri, and Shivani Shastri." />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --bg-body: #020617;
+            --bg-glass: rgba(15, 23, 42, 0.85);
+            --bg-card: rgba(30, 41, 59, 0.4);
+            --primary: #ffffff;
+            --secondary: #94a3b8;
+            --accent-gold: #d4af37;
+            --accent-tech: #38bdf8;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --container-width: 1280px;
+        }
+
+        html.light-mode {
+            --bg-body: #f8fafc;
+            --bg-glass: rgba(255, 255, 255, 0.9);
+            --bg-card: #ffffff;
+            --primary: #0f172a;
+            --secondary: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-body);
+            color: var(--primary);
+            font-family: var(--font-sans);
+            line-height: 1.7;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        h1, h2, h3, h4 { font-family: var(--font-serif); }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 24px; }
+
+        /* --- Nav --- */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: var(--bg-glass); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .nav-inner { height: 90px; display: flex; align-items: center; justify-content: space-between; }
+        .brand { font-family: var(--font-serif); font-size: 1.75rem; font-weight: 700; display: flex; gap: 8px; text-decoration: none; color: inherit; }
+        .brand span { color: var(--accent-gold); }
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-link { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--secondary); text-decoration: none; transition: 0.3s; }
+        .nav-link:hover { color: var(--primary); }
+
+        /* --- Header --- */
+        .bench-header {
+            padding: 200px 0 100px;
+            text-align: center;
+            background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+        }
+        .header-title { font-size: clamp(3rem, 5vw, 4.5rem); margin-bottom: 24px; line-height: 1.1; }
+        .header-desc { max-width: 600px; margin: 0 auto; color: var(--secondary); font-size: 1.1rem; }
+
+        /* --- Profiles --- */
+        .profiles-section { padding-bottom: 120px; }
+        
+        .profile-card {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 60px;
+            margin-bottom: 100px;
+            opacity: 0; transform: translateY(40px);
+            transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .profile-card.visible { opacity: 1; transform: translateY(0); }
+
+        .profile-image-col { position: relative; }
+        .profile-img-wrap {
+            width: 100%; height: 450px;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+        .profile-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.1); transition: 0.5s; }
+        .profile-img-wrap:hover .profile-img { filter: grayscale(0%); }
+        
+        /* Decorative frame border */
+        .profile-img-wrap::after {
+            content: ''; position: absolute; top: 20px; left: 20px; right: -20px; bottom: -20px;
+            border: 1px solid var(--accent-gold); z-index: -1; transition: 0.3s;
+        }
+        .profile-card:hover .profile-img-wrap::after { top: 10px; left: 10px; right: -10px; bottom: -10px; }
+
+        .profile-content { display: flex; flex-direction: column; justify-content: center; }
+        .designation { 
+            color: var(--accent-gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.2em; 
+            margin-bottom: 16px; font-weight: 600; display: block;
+        }
+        .name { font-size: 3rem; margin-bottom: 24px; line-height: 1; }
+        
+        .bio { color: var(--secondary); margin-bottom: 32px; font-size: 1.05rem; }
+        
+        .credentials-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+            margin-bottom: 40px; border-top: 1px solid var(--border-color); padding-top: 24px;
+        }
+        .cred-item h5 { font-size: 0.9rem; color: var(--primary); margin-bottom: 4px; font-family: var(--font-sans); }
+        .cred-item p { font-size: 0.85rem; color: var(--secondary); }
+
+        .actions { display: flex; gap: 20px; }
+        .btn-outline {
+            padding: 12px 24px; border: 1px solid var(--border-color);
+            color: var(--primary); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.15em;
+            text-decoration: none; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-outline:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
+
+        /* Reverse Layout for alternate cards */
+        .profile-card.reverse { grid-template-columns: 1fr 350px; }
+        .profile-card.reverse .profile-image-col { order: 2; }
+        .profile-card.reverse .profile-content { order: 1; text-align: right; }
+        .profile-card.reverse .credentials-grid { direction: rtl; } /* Visual trick, or use flex-end */
+        .profile-card.reverse .actions { justify-content: flex-end; }
+        .profile-card.reverse .profile-img-wrap::after { left: auto; right: 20px; left: -20px; }
+
+        /* Mobile */
+        @media (max-width: 900px) {
+            .profile-card, .profile-card.reverse { grid-template-columns: 1fr; gap: 40px; text-align: left; }
+            .profile-card.reverse .profile-image-col { order: -1; } /* Image first always on mobile */
+            .profile-card.reverse .profile-content { order: 2; text-align: left; }
+            .profile-card.reverse .actions { justify-content: flex-start; }
+            .profile-img-wrap { height: 350px; }
+            .header-title { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-inner">
+            <a href="justicefirms_journal.html" class="brand">
+                <i data-lucide="scale" size="24" color="var(--accent-gold)"></i>
+                JusticeFirms
+            </a>
+            <div class="nav-links">
+                <a href="justicefirms_journal.html" class="nav-link">Journal</a>
+                <a href="consultation.html" class="nav-link" style="color:var(--accent-gold);">Consult</a>
+                <button id="themeToggle" style="background:none; border:none; cursor:pointer; color:var(--secondary);">
+                    <i data-lucide="moon" size="20"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bench-header">
+        <div class="container">
+            <div style="opacity:0; animation: fadeUp 1s forwards;">
+                <h1 class="header-title">The Council</h1>
+                <p class="header-desc">
+                    A synergy of veteran courtroom advocacy and next-generation legal engineering. 
+                    Meet the minds shaping the future of Indian jurisprudence.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container profiles-section">
+
+        <!-- Profile 1: Ganga Shankar -->
+        <article class="profile-card">
+            <div class="profile-image-col">
+                <div class="profile-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&q=80&w=800" alt="Adv. Ganga Shankar" class="profile-img">
+                </div>
+            </div>
+            <div class="profile-content">
+                <span class="designation">Senior Counsel • Criminal & Constitutional</span>
+                <h2 class="name">Ganga Shankar<br>Shastri</h2>
+                <p class="bio">
+                    With over 35 years of practice at the Allahabad High Court and Supreme Court of India, Adv. Shastri is a doyen of criminal defense. Known for his microscopic dissection of the Evidence Act and commanding courtroom presence, he now leads the firm's transition into the BNS/BNSS era.
+                </p>
+                <div class="credentials-grid">
+                    <div class="cred-item">
+                        <h5>Experience</h5>
+                        <p>35+ Years, Bar Council of UP</p>
+                    </div>
+                    <div class="cred-item">
+                        <h5>Specialization</h5>
+                        <p>White Collar Crime, Writ Petitions</p>
+                    </div>
+                    <div class="cred-item">
+                        <h5>Education</h5>
+                        <p>LL.M, University of Allahabad</p>
+                    </div>
+                    <div class="cred-item">
+                        <h5>Notable</h5>
+                        <p>Amicus Curiae in 12 Landmark Cases</p>
+                    </div>
+                </div>
+                <div class="actions">
+                    <a href="#" class="btn-outline">Download V-Card</a>
+                    <a href="consultation.html" class="btn-outline">Request Appointment</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Profile 2: Minakshi Shastri -->
+        <article class="profile-card reverse">
+            <div class="profile-image-col">
+                <div class="profile-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800" alt="Adv. Minakshi Shastri" class="profile-img">
+                </div>
+            </div>
+            <div class="profile-content">
+                <span class="designation">Partner • Civil & Matrimonial</span>
+                <h2 class="name">Minakshi<br>Shastri</h2>
+                <p class="bio">
+                    Advocate Minakshi Shastri brings empathy and iron-clad procedural knowledge to high-stakes family litigation. She specializes in complex divorce settlements involving cross-border assets and custody battles. She is also a standing counsel for multiple educational trusts.
+                </p>
+                <div class="credentials-grid">
+                    <div class="cred-item">
+                        <h5>Experience</h5>
+                        <p>28 Years, Family Courts & HC</p>
+                    </div>
+                    <div class="cred-item">
+                        <h5>Specialization</h5>
+                        <p>Divorce, Succession, Educational Law</p>
+                    </div>
+                    <div class="cred-item">
+                        <h5>Education</h5>
+                        <p>LL.B, Gold Medalist</p>
+                    </div>
+                    <div class="cred-item">
+                        <h5>Role</h5>
+                        <p>Head of Civil Litigation Wing</p>
+                    </div>
+                </div>
+                <div class="actions">
+                    <a href="consultation.html" class="btn-outline">Request Appointment</a>
+                    <a href="#" class="btn-outline">Download V-Card</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Profile 3: Shivani Shastri -->
+        <article class="profile-card">
+            <div class="profile-image-col">
+                <div class="profile-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?auto=format&fit=crop&q=80&w=800" alt="Adv. Shivani Shastri" class="profile-img">
+                </div>
+            </div>
+            <div class="profile-content">
+                <span class="designation" style="color: var(--accent-tech);">Partner • Cyber Law & IP</span>
+                <h2 class="name">Shivani<br>Shastri</h2>
+                <p class="bio">
+                    Representing the new guard, Shivani bridges the gap between code and constitution. A certified Cyber Crime Investigator and IP attorney, she handles data privacy audits, crypto-asset disputes, and AI-copyright litigation. She is the architect of the firm's "Legal-Tech" initiative.
+                </p>
+                <div class="credentials-grid">
+                    <div class="cred-item">
+                        <h5>Experience</h5>
+                        <p>8 Years, NCLT & Cyber Appellate</p>
+                    </div>
+                    <div class="cred-item">
+                        <h5>Specialization</h5>
+                        <p>FinTech, Data Privacy (DPDP), IP</p>
+                    </div>
+                    <div class="cred-item">
+                        <h5>Education</h5>
+                        <p>LL.M (Cyber Law), NLSIU</p>
+                    </div>
+                    <div class="cred-item">
+                        <h5>Tech Stack</h5>
+                        <p>Certified Blockchain Expert</p>
+                    </div>
+                </div>
+                <div class="actions">
+                    <a href="#" class="btn-outline">LinkedIn</a>
+                    <a href="consultation.html" class="btn-outline">Consult on Tech</a>
+                </div>
+            </div>
+        </article>
+
+    </main>
+
+    <footer style="text-align: center; padding: 40px; border-top: 1px solid var(--border-color); color: var(--secondary); font-size: 0.8rem;">
+        <p>© 2026 JusticeFirms. Excellence in Advocacy.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Theme Logic
+        const themeBtn = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        if (localStorage.getItem('theme') === 'light') {
+            html.classList.add('light-mode');
+            themeBtn.innerHTML = `<i data-lucide="sun" size="20"></i>`;
+        }
+        themeBtn.addEventListener('click', () => {
+            html.classList.toggle('light-mode');
+            const isLight = html.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            themeBtn.innerHTML = `<i data-lucide="${isLight ? 'sun' : 'moon'}" size="20"></i>`;
+            lucide.createIcons();
+        });
+
+        // Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.profile-card').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
