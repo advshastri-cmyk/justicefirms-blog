@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Legal Lexicon & BNS Dictionary — JusticeFirms</title>
+    <meta name="description" content="A comprehensive glossary defining key legal terms under the new Bharatiya Nyaya Sanhita (BNS) and Bharatiya Nagarik Suraksha Sanhita (BNSS)." />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            /* Palette: Midnight Luxury */
+            --bg-body: #020617;
+            --bg-glass: rgba(15, 23, 42, 0.85);
+            --bg-card: rgba(30, 41, 59, 0.4);
+            
+            --primary: #ffffff;
+            --secondary: #94a3b8;
+            
+            --accent-gold: #d4af37;
+            --accent-tech: #38bdf8;
+            --accent-change: #10b981; /* Green for new laws */
+            
+            --border-color: rgba(255, 255, 255, 0.08);
+            
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-body: 'Merriweather', serif;
+            
+            --container-width: 1000px;
+        }
+
+        html.light-mode {
+            --bg-body: #f8fafc;
+            --bg-glass: rgba(255, 255, 255, 0.95);
+            --bg-card: #ffffff;
+            --primary: #0f172a;
+            --secondary: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-body);
+            color: var(--primary);
+            font-family: var(--font-sans);
+            line-height: 1.7;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        h1, h2, h3 { font-family: var(--font-serif); }
+        .mono { font-family: var(--font-mono); font-size: 0.85rem; }
+
+        /* --- Nav --- */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: var(--bg-glass); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .nav-inner { 
+            height: 90px; display: flex; align-items: center; justify-content: space-between; 
+            max-width: 1280px; margin: 0 auto; padding: 0 24px;
+        }
+        .brand { font-family: var(--font-serif); font-size: 1.75rem; font-weight: 700; display: flex; gap: 8px; text-decoration: none; color: inherit; }
+        .brand span { color: var(--accent-gold); }
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-link { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--secondary); text-decoration: none; transition: 0.3s; }
+        .nav-link:hover { color: var(--primary); }
+
+        /* --- Hero --- */
+        .lexicon-hero {
+            padding: 160px 0 100px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            background: linear-gradient(180deg, rgba(2,6,23,0) 0%, rgba(56, 189, 248, 0.05) 100%);
+        }
+        .hero-title { font-size: 3.5rem; margin-bottom: 24px; }
+        .hero-desc { max-width: 600px; margin: 0 auto 40px; color: var(--secondary); font-size: 1.1rem; }
+        
+        /* Search Box */
+        .search-container { max-width: 600px; margin: 0 auto; position: relative; }
+        .search-input {
+            width: 100%; padding: 16px 24px; padding-left: 50px;
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            color: var(--primary); font-size: 1.1rem; border-radius: 50px;
+            outline: none; transition: 0.3s;
+        }
+        .search-input:focus { border-color: var(--accent-tech); box-shadow: 0 0 30px rgba(56, 189, 248, 0.1); }
+        .search-icon { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--secondary); }
+
+        /* --- Alpha Nav --- */
+        .alpha-nav {
+            padding: 40px 0; border-bottom: 1px solid var(--border-color);
+            position: sticky; top: 90px; background: var(--bg-body); z-index: 900;
+        }
+        .alpha-list {
+            display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
+            max-width: var(--container-width); margin: 0 auto;
+        }
+        .alpha-link {
+            font-family: var(--font-mono); color: var(--secondary); cursor: pointer;
+            width: 30px; height: 30px; display: grid; place-items: center; border-radius: 4px;
+            transition: 0.2s;
+        }
+        .alpha-link:hover, .alpha-link.active { background: var(--accent-gold); color: #000; }
+
+        /* --- Term Grid --- */
+        .terms-container { max-width: var(--container-width); margin: 0 auto; padding: 80px 24px; }
+        
+        .term-group { margin-bottom: 60px; scroll-margin-top: 200px; }
+        .group-letter { 
+            font-size: 4rem; font-family: var(--font-serif); color: var(--border-color); 
+            border-bottom: 1px solid var(--border-color); margin-bottom: 40px;
+        }
+
+        .term-card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            padding: 32px; border-radius: 8px; margin-bottom: 24px;
+            transition: 0.3s;
+        }
+        .term-card:hover { border-color: var(--accent-tech); }
+
+        .term-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; }
+        .term-word { font-size: 1.5rem; font-family: var(--font-serif); color: var(--primary); }
+        .term-type { 
+            font-family: var(--font-mono); font-size: 0.75rem; 
+            padding: 4px 8px; border-radius: 4px; background: rgba(255,255,255,0.05); 
+            color: var(--secondary); text-transform: uppercase; 
+        }
+
+        .definition-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+        .def-col h4 { 
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; 
+            margin-bottom: 12px; color: var(--secondary); border-bottom: 1px solid var(--border-color); padding-bottom: 8px;
+        }
+        .def-text { font-family: var(--font-body); font-size: 1rem; color: var(--primary); line-height: 1.6; }
+        
+        .bns-highlight { color: var(--accent-change); }
+        .section-ref { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-gold); display: block; margin-top: 8px; }
+
+        @media (max-width: 768px) {
+            .definition-grid { grid-template-columns: 1fr; gap: 24px; }
+            .alpha-link { width: 24px; height: 24px; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="justicefirms_journal.html" class="brand">
+                <i data-lucide="scale" size="24" color="var(--accent-gold)"></i>
+                JusticeFirms
+            </a>
+            <div class="nav-links">
+                <a href="justicefirms_journal.html" class="nav-link">Journal</a>
+                <a href="policy_innovation.html" class="nav-link">Policy Lab</a>
+                <a href="consultation.html" class="nav-link" style="color:var(--accent-gold);">Consult</a>
+                <button id="themeToggle" style="background:none; border:none; cursor:pointer; color:var(--secondary);">
+                    <i data-lucide="moon" size="20"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="lexicon-hero">
+        <div class="container">
+            <h1 class="hero-title">The Legal Lexicon</h1>
+            <p class="hero-desc">
+                Decoding the language of the new Indian Criminal Laws. A comparative reference for the transition from IPC to BNS.
+            </p>
+            <div class="search-container">
+                <i data-lucide="search" class="search-icon"></i>
+                <input type="text" id="termSearch" class="search-input" placeholder="Search for terms (e.g., Sedition, Remand)...">
+            </div>
+        </div>
+    </header>
+
+    <div class="alpha-nav">
+        <div class="alpha-list" id="alphaList">
+            <!-- Populated by JS -->
+        </div>
+    </div>
+
+    <main class="terms-container" id="termsContainer">
+        
+        <!-- C Terms -->
+        <div class="term-group" id="group-C">
+            <div class="group-letter">C</div>
+            
+            <div class="term-card" data-term="community service">
+                <div class="term-header">
+                    <span class="term-word">Community Service</span>
+                    <span class="term-type">Punishment</span>
+                </div>
+                <div class="definition-grid">
+                    <div class="def-col">
+                        <h4>IPC 1860 (Old)</h4>
+                        <p class="def-text" style="opacity: 0.7;">
+                            Not recognized as a formal punishment. Sentences were limited to imprisonment, fine, or forfeiture of property.
+                        </p>
+                    </div>
+                    <div class="def-col">
+                        <h4 class="bns-highlight">BNS 2023 (New)</h4>
+                        <p class="def-text">
+                            Introduced as a specific punishment for petty offenses (e.g., defamation, small theft). Aims to reduce prison overcrowding and promote rehabilitation.
+                        </p>
+                        <span class="section-ref">Ref: BNS Section 4(f)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="term-card" data-term="cyber crime">
+                <div class="term-header">
+                    <span class="term-word">Cyber Crime (Organized)</span>
+                    <span class="term-type">Offense</span>
+                </div>
+                <div class="definition-grid">
+                    <div class="def-col">
+                        <h4>IPC 1860 (Old)</h4>
+                        <p class="def-text" style="opacity: 0.7;">
+                            Dealt with disjointedly under the IT Act, 2000. No specific "organized" classification within the penal code.
+                        </p>
+                    </div>
+                    <div class="def-col">
+                        <h4 class="bns-highlight">BNS 2023 (New)</h4>
+                        <p class="def-text">
+                            Explicitly included under the definition of "Organized Crime". Use of cyber means by a syndicate now attracts stricter bail conditions and penalties.
+                        </p>
+                        <span class="section-ref">Ref: BNS Section 111</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- E Terms -->
+        <div class="term-group" id="group-E">
+            <div class="group-letter">E</div>
+            
+            <div class="term-card" data-term="electronic evidence">
+                <div class="term-header">
+                    <span class="term-word">Electronic Evidence</span>
+                    <span class="term-type">Procedure</span>
+                </div>
+                <div class="definition-grid">
+                    <div class="def-col">
+                        <h4>Evidence Act 1872 (Old)</h4>
+                        <p class="def-text" style="opacity: 0.7;">
+                            Secondary evidence. Required mandatory Section 65B certificate for admissibility.
+                        </p>
+                    </div>
+                    <div class="def-col">
+                        <h4 class="bns-highlight">BSA 2023 (New)</h4>
+                        <p class="def-text">
+                            Classified as "Primary Evidence" (Document). Includes semiconductor memory, smartphone logs, and server records.
+                        </p>
+                        <span class="section-ref">Ref: BSA Section 57</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- M Terms -->
+        <div class="term-group" id="group-M">
+            <div class="group-letter">M</div>
+            
+            <div class="term-card" data-term="mob lynching">
+                <div class="term-header">
+                    <span class="term-word">Mob Lynching</span>
+                    <span class="term-type">Offense</span>
+                </div>
+                <div class="definition-grid">
+                    <div class="def-col">
+                        <h4>IPC 1860 (Old)</h4>
+                        <p class="def-text" style="opacity: 0.7;">
+                            No specific provision. Treated as murder (S. 302) or unlawful assembly.
+                        </p>
+                    </div>
+                    <div class="def-col">
+                        <h4 class="bns-highlight">BNS 2023 (New)</h4>
+                        <p class="def-text">
+                            Specific offense: Murder by a group of 5 or more on grounds of race, caste, community, sex, place of birth, language, personal belief. Punishable with death.
+                        </p>
+                        <span class="section-ref">Ref: BNS Section 103(2)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- S Terms -->
+        <div class="term-group" id="group-S">
+            <div class="group-letter">S</div>
+            
+            <div class="term-card" data-term="sedition">
+                <div class="term-header">
+                    <span class="term-word">Sedition (Rajdroh)</span>
+                    <span class="term-type">Constitutional</span>
+                </div>
+                <div class="definition-grid">
+                    <div class="def-col">
+                        <h4>IPC 1860 (Old)</h4>
+                        <p class="def-text" style="opacity: 0.7;">
+                            Section 124A. Criminalized bringing hatred or contempt towards the "Government established by law".
+                        </p>
+                    </div>
+                    <div class="def-col">
+                        <h4 class="bns-highlight">BNS 2023 (New)</h4>
+                        <p class="def-text">
+                            Repealed as "Sedition". Replaced by "Acts endangering sovereignty, unity and integrity of India" (Deshdroh). Focus shifts from government to the nation.
+                        </p>
+                        <span class="section-ref">Ref: BNS Section 152</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer style="text-align: center; padding: 60px 0; border-top: 1px solid var(--border-color); color: var(--secondary); font-size: 0.8rem;">
+        <p>Definitions are simplified for educational purposes.</p>
+        <p>© 2026 JusticeFirms Lexicon.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Theme Logic
+        const themeBtn = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        if (localStorage.getItem('theme') === 'light') {
+            html.classList.add('light-mode');
+            themeBtn.innerHTML = `<i data-lucide="sun" size="20"></i>`;
+        }
+        themeBtn.addEventListener('click', () => {
+            html.classList.toggle('light-mode');
+            const isLight = html.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            themeBtn.innerHTML = `<i data-lucide="${isLight ? 'sun' : 'moon'}" size="20"></i>`;
+            lucide.createIcons();
+        });
+
+        // Alpha Nav Generation
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+        const alphaList = document.getElementById('alphaList');
+        
+        letters.forEach(letter => {
+            const span = document.createElement('span');
+            span.className = 'alpha-link';
+            span.innerText = letter;
+            
+            // Check if section exists
+            const target = document.getElementById(`group-${letter}`);
+            if (target) {
+                span.onclick = () => {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    document.querySelectorAll('.alpha-link').forEach(l => l.classList.remove('active'));
+                    span.classList.add('active');
+                };
+            } else {
+                span.style.opacity = '0.3';
+                span.style.cursor = 'default';
+            }
+            alphaList.appendChild(span);
+        });
+
+        // Search Filter
+        document.getElementById('termSearch').addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.term-card');
+            const groups = document.querySelectorAll('.term-group');
+
+            cards.forEach(card => {
+                const term = card.dataset.term;
+                if (term.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Hide empty groups
+            groups.forEach(group => {
+                const visibleCards = group.querySelectorAll('.term-card[style="display: block;"], .term-card:not([style*="display: none"])');
+                if (visibleCards.length === 0) {
+                    group.style.display = 'none';
+                } else {
+                    group.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
