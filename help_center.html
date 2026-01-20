@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Client Support — JusticeFirms</title>
+    <meta name="description" content="Documentation and FAQs for JusticeFirms' secure client portal, billing, and legal processes." />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            /* Palette: Midnight Luxury */
+            --bg-body: #020617;
+            --bg-glass: rgba(15, 23, 42, 0.85);
+            --bg-card: rgba(30, 41, 59, 0.4);
+            
+            --primary: #ffffff;
+            --secondary: #94a3b8;
+            
+            --accent-gold: #d4af37;
+            --accent-tech: #38bdf8;
+            
+            --border-color: rgba(255, 255, 255, 0.08);
+            
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            
+            --container-width: 1000px;
+        }
+
+        html.light-mode {
+            --bg-body: #f8fafc;
+            --bg-glass: rgba(255, 255, 255, 0.9);
+            --bg-card: #ffffff;
+            --primary: #0f172a;
+            --secondary: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-body);
+            color: var(--primary);
+            font-family: var(--font-sans);
+            line-height: 1.7;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        /* --- Nav --- */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: var(--bg-glass); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .nav-inner { height: 90px; display: flex; align-items: center; justify-content: space-between; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+        .brand { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; display: flex; gap: 8px; text-decoration: none; color: inherit; }
+        .brand span { color: var(--accent-gold); }
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-link { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--secondary); text-decoration: none; transition: 0.3s; }
+        .nav-link:hover { color: var(--primary); }
+
+        /* --- Search Hero --- */
+        .help-hero {
+            padding: 160px 0 100px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            background: linear-gradient(180deg, rgba(2,6,23,0) 0%, rgba(56, 189, 248, 0.05) 100%);
+        }
+        .hero-title { font-size: 2.5rem; margin-bottom: 32px; font-weight: 600; }
+        
+        .search-wrap {
+            max-width: 600px; margin: 0 auto; position: relative;
+        }
+        .search-input {
+            width: 100%; padding: 16px 24px; padding-left: 50px;
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 8px; color: var(--primary); outline: none;
+            font-size: 1rem; transition: 0.3s;
+        }
+        .search-input:focus { border-color: var(--accent-tech); box-shadow: 0 0 20px rgba(56, 189, 248, 0.1); }
+        .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--secondary); }
+
+        /* --- Categories --- */
+        .cat-section { padding: 80px 0; }
+        .cat-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+            max-width: var(--container-width); margin: 0 auto;
+        }
+        .cat-card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            padding: 32px; border-radius: 8px; text-decoration: none; color: inherit;
+            transition: 0.3s; display: block;
+        }
+        .cat-card:hover { transform: translateY(-5px); border-color: var(--accent-gold); }
+        .cat-icon { color: var(--accent-tech); margin-bottom: 20px; }
+        .cat-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; }
+        .cat-desc { font-size: 0.9rem; color: var(--secondary); }
+
+        /* --- FAQ Accordion --- */
+        .faq-section { 
+            max-width: 800px; margin: 0 auto; padding-bottom: 120px;
+        }
+        .faq-header { font-size: 1.5rem; margin-bottom: 40px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px; }
+        
+        .accordion-item { border-bottom: 1px solid var(--border-color); }
+        .accordion-btn {
+            width: 100%; padding: 24px 0; background: none; border: none;
+            text-align: left; color: var(--primary); font-size: 1rem; font-weight: 500;
+            cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .accordion-btn:hover { color: var(--accent-gold); }
+        .accordion-content {
+            max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
+            color: var(--secondary); font-size: 0.95rem; line-height: 1.6;
+        }
+        .accordion-content p { padding-bottom: 24px; }
+        
+        .icon-plus { transition: transform 0.3s; }
+        .accordion-item.active .icon-plus { transform: rotate(45deg); }
+        .accordion-item.active .accordion-content { max-height: 200px; }
+
+        /* --- Contact Support --- */
+        .support-cta {
+            background: var(--bg-card); border-top: 1px solid var(--border-color);
+            padding: 60px 0; text-align: center;
+        }
+        .cta-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 24px; background: var(--accent-tech); color: #000;
+            font-weight: 600; text-decoration: none; border-radius: 4px;
+            margin-top: 24px; transition: 0.3s;
+        }
+        .cta-btn:hover { background: #7dd3fc; }
+
+        @media (max-width: 900px) {
+            .cat-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="justicefirms_journal.html" class="brand">
+                <i data-lucide="scale" size="24" color="var(--accent-gold)"></i>
+                JusticeFirms
+            </a>
+            <div class="nav-links">
+                <a href="client_portal.html" class="nav-link">Portal Login</a>
+                <a href="consultation.html" class="nav-link" style="color:var(--accent-gold);">Contact</a>
+                <button id="themeToggle" style="background:none; border:none; cursor:pointer; color:var(--secondary);">
+                    <i data-lucide="moon" size="20"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="help-hero">
+        <div class="container">
+            <h1 class="hero-title">How can we assist you?</h1>
+            <div class="search-wrap">
+                <i data-lucide="search" class="search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search guides, billing help, or security protocols...">
+            </div>
+        </div>
+    </header>
+
+    <section class="container cat-section">
+        <div class="cat-grid">
+            <a href="#" class="cat-card">
+                <i data-lucide="layout-dashboard" class="cat-icon" size="32"></i>
+                <h3 class="cat-title">Portal Guide</h3>
+                <p class="cat-desc">Navigating the dashboard, accessing case files, and tracking court dates.</p>
+            </a>
+            <a href="#" class="cat-card">
+                <i data-lucide="receipt" class="cat-icon" size="32"></i>
+                <h3 class="cat-title">Billing & Retainer</h3>
+                <p class="cat-desc">Understanding invoices, topping up retainers, and crypto payment methods.</p>
+            </a>
+            <a href="#" class="cat-card">
+                <i data-lucide="lock" class="cat-icon" size="32"></i>
+                <h3 class="cat-title">Security & 2FA</h3>
+                <p class="cat-desc">Setting up biometric login, encrypted chat protocols, and data privacy.</p>
+            </a>
+        </div>
+    </section>
+
+    <section class="container faq-section">
+        <h2 class="faq-header">Frequently Asked Questions</h2>
+
+        <div class="accordion-item">
+            <button class="accordion-btn">
+                How do I upload evidence securely?
+                <i data-lucide="plus" class="icon-plus"></i>
+            </button>
+            <div class="accordion-content">
+                <p>Use the "Document Vault" in your Client Dashboard. Files uploaded there are AES-256 encrypted and air-gapped from our public servers. Do not email sensitive evidence.</p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-btn">
+                Can I pay using USDT or Bitcoin?
+                <i data-lucide="plus" class="icon-plus"></i>
+            </button>
+            <div class="accordion-content">
+                <p>Yes. We accept USDC (Solana) and USDT (ERC-20) for international retainers. Invoices generated for crypto payments will include a standard FIU-IND compliance disclaimer.</p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-btn">
+                What does "Privileged" status mean in chat?
+                <i data-lucide="plus" class="icon-plus"></i>
+            </button>
+            <div class="accordion-content">
+                <p>Messages marked "Privileged" fall under Attorney-Client Privilege (Section 126, Evidence Act). These cannot be compelled as evidence in court. Our secure chat ensures this chain is never broken by third-party servers.</p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-btn">
+                I forgot my 2FA recovery code.
+                <i data-lucide="plus" class="icon-plus"></i>
+            </button>
+            <div class="accordion-content">
+                <p>For security reasons, we cannot reset 2FA remotely. You must schedule a video verification call with your Case Manager to verify identity before access is restored.</p>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="support-cta">
+        <div class="container">
+            <h2 style="font-size: 1.5rem; margin-bottom: 16px;">Still need help?</h2>
+            <p style="color:var(--secondary);">Our technical support team is available 24/7 for critical access issues.</p>
+            <a href="mailto:support@justicefirms.com" class="cta-btn">
+                <i data-lucide="mail" size="18"></i> Email Support
+            </a>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 40px; border-top: 1px solid var(--border-color); color: var(--secondary); font-size: 0.8rem;">
+        <p>© 2026 JusticeFirms Support.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Theme Logic
+        const themeBtn = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        if (localStorage.getItem('theme') === 'light') {
+            html.classList.add('light-mode');
+            themeBtn.innerHTML = `<i data-lucide="sun" size="20"></i>`;
+        }
+        themeBtn.addEventListener('click', () => {
+            html.classList.toggle('light-mode');
+            const isLight = html.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            themeBtn.innerHTML = `<i data-lucide="${isLight ? 'sun' : 'moon'}" size="20"></i>`;
+            lucide.createIcons();
+        });
+
+        // Accordion Logic
+        document.querySelectorAll('.accordion-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
