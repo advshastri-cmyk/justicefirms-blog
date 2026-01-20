@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Intelligence Briefing — JusticeFirms</title>
+    <meta name="description" content="Subscribe to JusticeFirms' elite legal insights, case analysis, and BNS updates." />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            /* Palette: Midnight Luxury */
+            --bg-body: #020617;
+            --bg-glass: rgba(15, 23, 42, 0.85);
+            --bg-card: rgba(30, 41, 59, 0.4);
+            
+            --primary: #ffffff;
+            --secondary: #94a3b8;
+            
+            --accent-gold: #d4af37;
+            --accent-tech: #38bdf8;
+            --accent-purple: #a855f7;
+            
+            --border-color: rgba(255, 255, 255, 0.08);
+            
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            
+            --container-width: 1100px;
+        }
+
+        html.light-mode {
+            --bg-body: #f8fafc;
+            --bg-glass: rgba(255, 255, 255, 0.9);
+            --bg-card: #ffffff;
+            --primary: #0f172a;
+            --secondary: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-body);
+            color: var(--primary);
+            font-family: var(--font-sans);
+            line-height: 1.7;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        h1, h2, h3 { font-family: var(--font-serif); }
+        .mono { font-family: var(--font-mono); font-size: 0.85rem; }
+
+        /* --- Nav --- */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: var(--bg-glass); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .nav-inner { height: 90px; display: flex; align-items: center; justify-content: space-between; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+        .brand { font-family: var(--font-serif); font-size: 1.75rem; font-weight: 700; display: flex; gap: 8px; text-decoration: none; color: inherit; }
+        .brand span { color: var(--accent-gold); }
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-link { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--secondary); text-decoration: none; transition: 0.3s; }
+        .nav-link:hover { color: var(--primary); }
+
+        /* --- Header --- */
+        .sub-hero {
+            padding: 180px 0 80px;
+            text-align: center;
+        }
+        .hero-title { font-size: 3.5rem; margin-bottom: 24px; }
+        .hero-desc { max-width: 600px; margin: 0 auto; color: var(--secondary); font-size: 1.1rem; }
+
+        /* --- Tiers --- */
+        .tiers-section { padding: 60px 0 120px; }
+        .tiers-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+            max-width: 900px; margin: 0 auto;
+        }
+
+        .tier-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            display: flex; flex-direction: column;
+            position: relative; overflow: hidden;
+            transition: 0.3s;
+        }
+        .tier-card:hover { transform: translateY(-5px); border-color: var(--accent-gold); }
+        
+        /* Gold Highlight for Client Tier */
+        .tier-card.premium { border-color: var(--accent-gold); background: radial-gradient(circle at 100% 0%, rgba(212, 175, 55, 0.05) 0%, transparent 50%); }
+        .tier-card.premium::before {
+            content: 'Recommended'; position: absolute; top: 20px; right: -30px;
+            background: var(--accent-gold); color: #000; padding: 4px 40px;
+            font-size: 0.7rem; text-transform: uppercase; transform: rotate(45deg); font-weight: bold;
+        }
+
+        .tier-name { font-size: 1.5rem; font-family: var(--font-serif); margin-bottom: 16px; }
+        .tier-price { font-size: 2.5rem; font-family: var(--font-mono); margin-bottom: 24px; color: var(--primary); }
+        .tier-price span { font-size: 1rem; color: var(--secondary); }
+
+        .feature-list { list-style: none; margin-bottom: 40px; flex-grow: 1; }
+        .feature-item { 
+            display: flex; gap: 12px; margin-bottom: 16px; color: var(--secondary); font-size: 0.95rem; 
+        }
+        .check-icon { color: var(--accent-tech); flex-shrink: 0; }
+        .premium .check-icon { color: var(--accent-gold); }
+
+        /* Forms */
+        .input-group { margin-bottom: 20px; }
+        .form-input {
+            width: 100%; padding: 14px; background: rgba(0,0,0,0.2); 
+            border: 1px solid var(--border-color); color: var(--primary);
+            border-radius: 4px; outline: none; transition: 0.3s;
+        }
+        .form-input:focus { border-color: var(--accent-tech); }
+
+        .btn-sub {
+            width: 100%; padding: 16px; border: none; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer;
+            transition: 0.3s; margin-top: auto;
+        }
+        .btn-free { background: var(--border-color); color: var(--primary); }
+        .btn-free:hover { background: var(--primary); color: var(--bg-body); }
+        
+        .btn-gold { background: var(--accent-gold); color: #000; }
+        .btn-gold:hover { background: #b8962e; }
+
+        @media (max-width: 800px) {
+            .tiers-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="justicefirms_journal.html" class="brand">
+                <i data-lucide="scale" size="24" color="var(--accent-gold)"></i>
+                JusticeFirms
+            </a>
+            <div class="nav-links">
+                <a href="justicefirms_journal.html" class="nav-link">Journal</a>
+                <a href="client_portal.html" class="nav-link">Portal</a>
+                <button id="themeToggle" style="background:none; border:none; cursor:pointer; color:var(--secondary);">
+                    <i data-lucide="moon" size="20"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="sub-hero">
+        <div class="container">
+            <h1 class="hero-title">Knowledge is the<br>Ultimate Defense</h1>
+            <p class="hero-desc">
+                Stay ahead of the curve with our expert analysis. Choose the level of intelligence that suits your legal needs.
+            </p>
+        </div>
+    </header>
+
+    <section class="container tiers-section">
+        <div class="tiers-grid">
+            
+            <!-- Free Tier -->
+            <div class="tier-card">
+                <h3 class="tier-name">The Public Docket</h3>
+                <div class="tier-price">₹0 <span>/ month</span></div>
+                <p style="color:var(--secondary); margin-bottom: 24px;">Essential updates for law students, journalists, and citizens.</p>
+                
+                <ul class="feature-list">
+                    <li class="feature-item"><i data-lucide="check" class="check-icon" size="18"></i> Weekly Newsletter</li>
+                    <li class="feature-item"><i data-lucide="check" class="check-icon" size="18"></i> Public Blog Access</li>
+                    <li class="feature-item"><i data-lucide="check" class="check-icon" size="18"></i> Event Notifications</li>
+                </ul>
+
+                <form onsubmit="event.preventDefault(); alert('Subscribed to The Docket!');">
+                    <div class="input-group">
+                        <input type="email" class="form-input" placeholder="Enter your email address" required>
+                    </div>
+                    <button type="submit" class="btn-sub btn-free">Subscribe Free</button>
+                </form>
+            </div>
+
+            <!-- Premium Tier -->
+            <div class="tier-card premium">
+                <h3 class="tier-name">Client Intelligence</h3>
+                <div class="tier-price">Retainer <span>Access</span></div>
+                <p style="color:var(--secondary); margin-bottom: 24px;">Exclusive strategic resources for our corporate and litigation clients.</p>
+                
+                <ul class="feature-list">
+                    <li class="feature-item"><i data-lucide="check-circle" class="check-icon" size="18"></i> All Public Features</li>
+                    <li class="feature-item"><i data-lucide="check-circle" class="check-icon" size="18"></i> White Paper Library (PDFs)</li>
+                    <li class="feature-item"><i data-lucide="check-circle" class="check-icon" size="18"></i> 24/7 Secure Portal Access</li>
+                    <li class="feature-item"><i data-lucide="check-circle" class="check-icon" size="18"></i> Priority Consultation Booking</li>
+                </ul>
+
+                <a href="consultation.html" class="btn-sub btn-gold" style="text-align: center; text-decoration: none; display: block;">Inquire About Retainer</a>
+            </div>
+
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 40px; border-top: 1px solid var(--border-color); color: var(--secondary); font-size: 0.8rem;">
+        <p>© 2026 JusticeFirms.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Theme Logic
+        const themeBtn = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        if (localStorage.getItem('theme') === 'light') {
+            html.classList.add('light-mode');
+            themeBtn.innerHTML = `<i data-lucide="sun" size="20"></i>`;
+        }
+        themeBtn.addEventListener('click', () => {
+            html.classList.toggle('light-mode');
+            const isLight = html.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            themeBtn.innerHTML = `<i data-lucide="${isLight ? 'sun' : 'moon'}" size="20"></i>`;
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
