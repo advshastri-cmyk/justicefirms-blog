@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Partner Desk — JusticeFirms Internal</title>
+    <meta name="description" content="Internal practice management system for JusticeFirms partners. Case tracking, secure drop alerts, and conflict checks." />
+    <meta name="robots" content="noindex, nofollow" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            /* Palette: Command Center (Darker, High Contrast) */
+            --bg-body: #050505;
+            --bg-sidebar: #0a0a0a;
+            --bg-card: #111111;
+            --bg-panel: #000000;
+            
+            --primary: #e5e5e5;
+            --secondary: #737373;
+            
+            --accent-gold: #d4af37;
+            --accent-tech: #38bdf8;
+            --accent-alert: #ef4444;
+            --accent-onion: #a855f7; /* Tor/Secure Drop */
+            
+            --border-color: #262626;
+            
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-body);
+            color: var(--primary);
+            font-family: var(--font-sans);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* --- Sidebar --- */
+        .sidebar {
+            width: 60px; background: var(--bg-sidebar); border-right: 1px solid var(--border-color);
+            display: flex; flex-direction: column; align-items: center; padding: 20px 0;
+            transition: width 0.3s; z-index: 20;
+        }
+        .sidebar:hover { width: 240px; }
+        
+        .brand-icon { margin-bottom: 40px; color: var(--accent-gold); }
+        
+        .nav-item {
+            width: 100%; height: 50px; display: flex; align-items: center; padding: 0 18px;
+            color: var(--secondary); text-decoration: none; transition: 0.2s;
+            white-space: nowrap; overflow: hidden; position: relative;
+        }
+        .nav-item:hover, .nav-item.active { background: rgba(255,255,255,0.05); color: var(--primary); }
+        .nav-item.active { border-left: 3px solid var(--accent-gold); }
+        .nav-item i { min-width: 24px; margin-right: 16px; }
+        .nav-badge { 
+            position: absolute; right: 20px; background: var(--accent-alert); color: #fff; 
+            font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; font-weight: 600;
+        }
+
+        /* --- Main Layout --- */
+        .main-view { flex-grow: 1; display: flex; flex-direction: column; background: var(--bg-panel); overflow: hidden; }
+
+        /* Top Bar */
+        .top-bar {
+            height: 60px; border-bottom: 1px solid var(--border-color);
+            display: flex; align-items: center; justify-content: space-between; padding: 0 24px;
+            background: var(--bg-body);
+        }
+        .breadcrumb { font-family: var(--font-mono); font-size: 0.8rem; color: var(--secondary); }
+        .breadcrumb span { color: var(--accent-tech); }
+        
+        .timer-widget {
+            display: flex; align-items: center; gap: 12px;
+            background: rgba(255,255,255,0.05); padding: 6px 12px; border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+        .timer-display { font-family: var(--font-mono); font-size: 0.9rem; color: var(--accent-gold); }
+        .timer-btn { background: none; border: none; color: var(--primary); cursor: pointer; }
+        .timer-btn:hover { color: var(--accent-tech); }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            padding: 24px; overflow-y: auto; height: 100%;
+            display: grid; grid-template-columns: 2fr 1fr; gap: 24px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 6px; overflow: hidden; display: flex; flex-direction: column;
+        }
+        .card-header {
+            padding: 16px 20px; border-bottom: 1px solid var(--border-color);
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255,255,255,0.02);
+        }
+        .card-title { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--secondary); }
+        .card-action { color: var(--accent-tech); cursor: pointer; font-size: 0.8rem; }
+
+        /* Active Matters List */
+        .matter-row {
+            display: flex; align-items: center; padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color); transition: 0.2s;
+        }
+        .matter-row:hover { background: rgba(255,255,255,0.03); }
+        .matter-status { width: 8px; height: 8px; border-radius: 50%; margin-right: 16px; }
+        .st-green { background: var(--accent-success); box-shadow: 0 0 8px rgba(16, 185, 129, 0.4); }
+        .st-yellow { background: var(--accent-gold); }
+        .st-red { background: var(--accent-alert); }
+        
+        .matter-info { flex-grow: 1; }
+        .matter-title { font-size: 0.95rem; font-weight: 500; display: block; }
+        .matter-client { font-size: 0.8rem; color: var(--secondary); font-family: var(--font-mono); }
+        
+        .matter-meta { text-align: right; font-size: 0.8rem; color: var(--secondary); }
+
+        /* Secure Drop Feed */
+        .drop-item {
+            padding: 16px; border-bottom: 1px solid var(--border-color);
+            background: rgba(168, 85, 247, 0.05); /* Onion tint */
+        }
+        .drop-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+        .drop-id { font-family: var(--font-mono); color: var(--accent-onion); font-size: 0.8rem; }
+        .drop-time { font-size: 0.75rem; color: var(--secondary); }
+        .drop-msg { font-size: 0.85rem; color: var(--primary); margin-bottom: 12px; }
+        .drop-tags { display: flex; gap: 8px; }
+        .tag { font-size: 0.7rem; padding: 2px 6px; border-radius: 2px; background: rgba(255,255,255,0.1); color: var(--secondary); }
+
+        /* Conflict Check Tool */
+        .conflict-box { padding: 20px; }
+        .search-row { display: flex; gap: 12px; margin-bottom: 16px; }
+        .conflict-input {
+            flex-grow: 1; background: var(--bg-body); border: 1px solid var(--border-color);
+            padding: 8px 12px; color: var(--primary); font-family: var(--font-mono); font-size: 0.9rem;
+            outline: none;
+        }
+        .conflict-input:focus { border-color: var(--accent-gold); }
+        .btn-check {
+            padding: 0 16px; background: var(--accent-gold); color: #000; border: none;
+            font-weight: 600; cursor: pointer; font-size: 0.8rem; text-transform: uppercase;
+        }
+        .conflict-result {
+            padding: 12px; background: rgba(16, 185, 129, 0.1); border: 1px solid var(--accent-success);
+            color: var(--accent-success); font-size: 0.85rem; display: flex; align-items: center; gap: 8px;
+            display: none; /* Hidden by default */
+        }
+
+        /* Financial Mini-Chart (CSS only bar) */
+        .fin-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.85rem; }
+        .fin-bar-bg { width: 100%; height: 6px; background: var(--border-color); border-radius: 3px; margin-bottom: 20px; overflow: hidden; }
+        .fin-bar-fill { height: 100%; background: var(--accent-tech); }
+
+        @media (max-width: 1200px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="brand-icon">
+            <i data-lucide="scale" size="24"></i>
+        </div>
+        
+        <a href="#" class="nav-item active">
+            <i data-lucide="layout-grid"></i> Desk
+        </a>
+        <a href="#" class="nav-item">
+            <i data-lucide="briefcase"></i> Matters
+            <span class="nav-badge">3</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i data-lucide="ghost"></i> Secure Drop
+            <span class="nav-badge" style="background:var(--accent-onion);">1</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i data-lucide="files"></i> Discovery
+        </a>
+        <a href="#" class="nav-item">
+            <i data-lucide="users"></i> Conflicts
+        </a>
+        <a href="#" class="nav-item">
+            <i data-lucide="pie-chart"></i> Financials
+        </a>
+        
+        <div style="margin-top: auto; border-top: 1px solid var(--border-color); width: 100%;"></div>
+        <a href="index.html" class="nav-item">
+            <i data-lucide="log-out"></i> Logout
+        </a>
+    </aside>
+
+    <!-- Main View -->
+    <main class="main-view">
+        
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="breadcrumb">JUSTICEFIRMS / PARTNERS / <span id="userName">G. SHANKAR</span></div>
+            
+            <div style="display:flex; align-items:center; gap:24px;">
+                <!-- Billable Timer -->
+                <div class="timer-widget">
+                    <i data-lucide="clock" size="14" style="color:var(--secondary);"></i>
+                    <span class="timer-display">02:14:38</span>
+                    <button class="timer-btn" title="Pause"><i data-lucide="pause" size="14"></i></button>
+                    <button class="timer-btn" title="Stop"><i data-lucide="square" size="14"></i></button>
+                </div>
+                
+                <div style="display:flex; gap:8px; align-items:center; font-size:0.75rem; color:var(--accent-success);">
+                    <i data-lucide="shield-check" size="14"></i> ENCRYPTED
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+            
+            <!-- Column 1: Active Work -->
+            <div style="display:flex; flex-direction:column; gap:24px;">
+                
+                <!-- Urgent Matters -->
+                <div class="card" style="flex-grow:1;">
+                    <div class="card-header">
+                        <span class="card-title">Active Matters (Priority)</span>
+                        <i data-lucide="filter" class="card-action" size="16"></i>
+                    </div>
+                    
+                    <div class="matter-row">
+                        <div class="matter-status st-red"></div>
+                        <div class="matter-info">
+                            <span class="matter-title">State vs. Malhotra Industries</span>
+                            <span class="matter-client">Client: R. Malhotra • Ref: CRL-442</span>
+                        </div>
+                        <div class="matter-meta">
+                            Hearing: Tomorrow<br>
+                            <span style="color:var(--accent-alert);">Docs Pending</span>
+                        </div>
+                    </div>
+
+                    <div class="matter-row">
+                        <div class="matter-status st-yellow"></div>
+                        <div class="matter-info">
+                            <span class="matter-title">TechCorp Merger Due Diligence</span>
+                            <span class="matter-client">Client: TechCorp Inc • Ref: M&A-102</span>
+                        </div>
+                        <div class="matter-meta">
+                            Deadline: 4 Days<br>
+                            Drafting
+                        </div>
+                    </div>
+
+                    <div class="matter-row">
+                        <div class="matter-status st-green"></div>
+                        <div class="matter-info">
+                            <span class="matter-title">Cryptocurrency Partition Suit</span>
+                            <span class="matter-client">Client: P. Sharma • Ref: CIV-991</span>
+                        </div>
+                        <div class="matter-meta">
+                            Decree Pending<br>
+                            Billed
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conflict Check -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Conflict Check System</span>
+                    </div>
+                    <div class="conflict-box">
+                        <p style="font-size:0.8rem; color:var(--secondary); margin-bottom:12px;">Search entity name against internal database and blacklists.</p>
+                        <div class="search-row">
+                            <input type="text" class="conflict-input" id="conflictInput" placeholder="Enter Entity Name...">
+                            <button class="btn-check" onclick="runCheck()">Run</button>
+                        </div>
+                        <div class="conflict-result" id="conflictRes">
+                            <i data-lucide="check-circle" size="16"></i> NO CONFLICT FOUND. CLEAR TO PROCEED.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Column 2: Intelligence -->
+            <div style="display:flex; flex-direction:column; gap:24px;">
+                
+                <!-- Secure Drop Feed -->
+                <div class="card">
+                    <div class="card-header" style="border-bottom-color: var(--accent-onion);">
+                        <span class="card-title" style="color:var(--accent-onion);">Whistleblower Inbox</span>
+                        <span style="font-size:0.7rem; background:var(--accent-onion); color:#fff; padding:2px 6px; border-radius:4px;">LIVE</span>
+                    </div>
+                    
+                    <div class="drop-item">
+                        <div class="drop-header">
+                            <span class="drop-id">#DROP-992A</span>
+                            <span class="drop-time">2h ago</span>
+                        </div>
+                        <p class="drop-msg">New submission regarding environmental violations in Sector 4...</p>
+                        <div class="drop-tags">
+                            <span class="tag">PDF</span>
+                            <span class="tag">Images</span>
+                            <span class="tag" style="color:var(--accent-onion);">Tor Node</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financials -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Monthly Billings</span>
+                        <span style="font-family:var(--font-mono); color:var(--primary);">OCT 2026</span>
+                    </div>
+                    <div style="padding:24px;">
+                        <div class="fin-row">
+                            <span>Billable Hours</span>
+                            <span style="color:var(--accent-tech);">142 / 160</span>
+                        </div>
+                        <div class="fin-bar-bg"><div class="fin-bar-fill" style="width:88%;"></div></div>
+
+                        <div class="fin-row">
+                            <span>Collections</span>
+                            <span style="color:var(--accent-gold);">₹ 12.4L / ₹ 15L</span>
+                        </div>
+                        <div class="fin-bar-bg"><div class="fin-bar-fill" style="width:82%; background:var(--accent-gold);"></div></div>
+                        
+                        <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--border-color); text-align:center;">
+                            <button style="background:none; border:none; color:var(--secondary); font-size:0.8rem; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;">
+                                <i data-lucide="download" size="14"></i> Generate Invoice Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        // Conflict Check Simulation
+        function runCheck() {
+            const input = document.getElementById('conflictInput');
+            const res = document.getElementById('conflictRes');
+            const btn = document.querySelector('.btn-check');
+            
+            if(!input.value) return;
+
+            btn.innerText = "Scanning...";
+            res.style.display = 'none';
+
+            setTimeout(() => {
+                btn.innerText = "RUN";
+                res.style.display = 'flex';
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
