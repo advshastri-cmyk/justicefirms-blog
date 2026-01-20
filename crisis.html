@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRISIS MODE — JusticeFirms</title>
+    <meta name="description" content="Emergency legal protocols for raids, arrests, and critical incidents." />
+    <meta name="robots" content="noindex, nofollow" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            /* Palette: Red Alert */
+            --bg-body: #000000;
+            --bg-card: #110505;
+            
+            --primary: #ffffff;
+            --secondary: #a1a1aa;
+            
+            --accent-alert: #ef4444;
+            --accent-glow: rgba(239, 68, 68, 0.2);
+            --accent-gold: #d4af37;
+            
+            --border-color: #450a0a;
+            
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-body);
+            color: var(--primary);
+            font-family: var(--font-sans);
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+            border: 4px solid var(--accent-alert); /* Visual urgency */
+        }
+
+        /* --- Pulse Animation for Borders --- */
+        @keyframes borderPulse {
+            0% { border-color: var(--accent-alert); }
+            50% { border-color: #7f1d1d; }
+            100% { border-color: var(--accent-alert); }
+        }
+        body { animation: borderPulse 2s infinite; }
+
+        /* --- Header --- */
+        .crisis-header {
+            height: 80px; display: flex; align-items: center; justify-content: space-between;
+            padding: 0 24px; border-bottom: 1px solid var(--border-color);
+            background: rgba(239, 68, 68, 0.05);
+        }
+        .alert-brand { 
+            font-family: var(--font-mono); font-weight: 700; color: var(--accent-alert);
+            display: flex; align-items: center; gap: 12px; letter-spacing: 0.05em; font-size: 1.1rem;
+        }
+        .exit-btn {
+            color: var(--secondary); text-decoration: none; font-size: 0.85rem;
+            display: flex; align-items: center; gap: 8px; transition: 0.2s;
+        }
+        .exit-btn:hover { color: var(--primary); }
+
+        /* --- Main Layout --- */
+        .crisis-container {
+            flex-grow: 1; max-width: 600px; margin: 0 auto; width: 100%;
+            padding: 40px 24px; display: flex; flex-direction: column; gap: 40px;
+        }
+
+        /* Hero Status */
+        .status-box { text-align: center; margin-bottom: 20px; }
+        .status-icon { 
+            width: 80px; height: 80px; background: rgba(239, 68, 68, 0.1); 
+            color: var(--accent-alert); border-radius: 50%; display: grid; place-items: center;
+            margin: 0 auto 24px; box-shadow: 0 0 40px var(--accent-glow);
+        }
+        .status-title { font-size: 2rem; font-weight: 700; margin-bottom: 12px; line-height: 1.1; }
+        .status-desc { color: var(--secondary); font-size: 1rem; }
+
+        /* Emergency Action Button */
+        .sos-btn {
+            width: 100%; padding: 24px; background: var(--accent-alert); color: #fff;
+            border: none; border-radius: 12px; font-size: 1.2rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer;
+            box-shadow: 0 0 30px var(--accent-glow); transition: 0.2s;
+            display: flex; align-items: center; justify-content: center; gap: 16px;
+        }
+        .sos-btn:hover { transform: scale(1.02); background: #dc2626; }
+        .sos-btn:active { transform: scale(0.98); }
+
+        /* Checklist */
+        .protocol-card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 8px; padding: 24px;
+        }
+        .protocol-header { 
+            font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-alert); 
+            text-transform: uppercase; margin-bottom: 20px; border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px; display: flex; justify-content: space-between;
+        }
+        
+        .checklist { display: flex; flex-direction: column; gap: 16px; }
+        .check-item {
+            display: flex; gap: 16px; align-items: flex-start;
+            opacity: 0.7; transition: 0.2s; cursor: pointer;
+        }
+        .check-item:hover, .check-item.checked { opacity: 1; }
+        
+        .checkbox {
+            width: 24px; height: 24px; border: 2px solid var(--secondary); border-radius: 4px;
+            flex-shrink: 0; display: grid; place-items: center; margin-top: 2px;
+        }
+        .check-item.checked .checkbox { border-color: var(--accent-alert); background: var(--accent-alert); color: #000; }
+        
+        .step-text { font-size: 1rem; font-weight: 500; }
+        .step-sub { font-size: 0.8rem; color: var(--secondary); display: block; margin-top: 4px; }
+
+        /* Rights Card */
+        .rights-box {
+            background: #1a1a1a; padding: 20px; border-radius: 8px; border-left: 4px solid var(--accent-gold);
+        }
+        .rights-title { font-family: var(--font-mono); color: var(--accent-gold); font-size: 0.8rem; margin-bottom: 12px; }
+        .rights-text { font-family: 'Times New Roman', serif; font-size: 1.1rem; line-height: 1.5; font-style: italic; }
+
+        /* Footer */
+        .crisis-footer {
+            margin-top: auto; padding: 24px; text-align: center; color: var(--secondary); font-size: 0.75rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 600px) {
+            .crisis-header { padding: 0 16px; }
+            .crisis-container { padding: 20px 16px; }
+            .status-title { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="crisis-header">
+        <div class="alert-brand">
+            <i data-lucide="siren" size="24"></i> CRISIS PROTOCOL
+        </div>
+        <a href="client_dashboard.html" class="exit-btn">
+            Exit <i data-lucide="x-circle" size="20"></i>
+        </a>
+    </header>
+
+    <div class="crisis-container">
+        
+        <div class="status-box">
+            <div class="status-icon">
+                <i data-lucide="shield-alert" size="40"></i>
+            </div>
+            <h1 class="status-title">Raid / Arrest Response</h1>
+            <p class="status-desc">Follow these steps immediately. Your location is being logged.</p>
+        </div>
+
+        <button class="sos-btn" onclick="triggerSOS(this)">
+            <i data-lucide="phone-call" size="24"></i> Alert Legal Team
+        </button>
+
+        <div class="protocol-card">
+            <div class="protocol-header">
+                <span>Priority Actions</span>
+                <span>0/4</span>
+            </div>
+            
+            <div class="checklist">
+                <div class="check-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"><i data-lucide="check" size="16"></i></div>
+                    <div>
+                        <span class="step-text">Demand Identification</span>
+                        <span class="step-sub">Ask for ID cards and Search Warrant (Hukum-nama). Take photos if allowed.</span>
+                    </div>
+                </div>
+
+                <div class="check-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"><i data-lucide="check" size="16"></i></div>
+                    <div>
+                        <span class="step-text">Do Not Unlock Devices</span>
+                        <span class="step-sub">You are not legally obligated to provide biometrics/passwords immediately without counsel.</span>
+                    </div>
+                </div>
+
+                <div class="check-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"><i data-lucide="check" size="16"></i></div>
+                    <div>
+                        <span class="step-text">Wait for Panchannama</span>
+                        <span class="step-sub">Do not sign any blank papers. Wait for the seizure list (Panchnama) to be prepared.</span>
+                    </div>
+                </div>
+
+                <div class="check-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"><i data-lucide="check" size="16"></i></div>
+                    <div>
+                        <span class="step-text">Invoke Right to Counsel</span>
+                        <span class="step-sub">State clearly: "I wish to speak to my lawyer Adv. G. Shankar."</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="rights-box">
+            <div class="rights-title">STATEMENT OF RIGHTS (READ ALOUD)</div>
+            <div class="rights-text">
+                "I am cooperating with your investigation. However, I will not answer any substantive questions until my legal counsel, JusticeFirms LLP, is present. I do not consent to any search of my digital devices or premises beyond the scope of your warrant."
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="crisis-footer">
+        <p>JUSTICEFIRMS EMERGENCY LINE: +91 98XXX XXXXX</p>
+        <p style="margin-top:8px;">This page does not constitute legal advice. Adhere to lawful orders from officers.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Checklist Logic
+        function toggleCheck(item) {
+            item.classList.toggle('checked');
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const total = document.querySelectorAll('.check-item').length;
+            const checked = document.querySelectorAll('.check-item.checked').length;
+            document.querySelector('.protocol-header span:last-child').innerText = `${checked}/${total}`;
+        }
+
+        // SOS Logic
+        function triggerSOS(btn) {
+            const originalText = btn.innerHTML;
+            
+            // Simulating API call/Geolocation
+            if (navigator.geolocation) {
+                btn.innerHTML = `<i data-lucide="loader" class="spin"></i> Locating...`;
+                lucide.createIcons();
+                
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        // Success
+                        btn.style.background = "#10b981"; // Green
+                        btn.innerHTML = `<i data-lucide="check-circle" size="24"></i> Team Dispatched`;
+                        lucide.createIcons();
+                        alert(`Alert sent with coords: ${position.coords.latitude}, ${position.coords.longitude}`);
+                    },
+                    (error) => {
+                        // Error fallback
+                        btn.innerHTML = originalText;
+                        alert("Location access denied. Please call the emergency line manually.");
+                    }
+                );
+            } else {
+                alert("Geolocation not supported.");
+            }
+        }
+
+        // Add CSS for spinner
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .spin { animation: spin 1s linear infinite; }
+            @keyframes spin { 100% { transform: rotate(360deg); } }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
