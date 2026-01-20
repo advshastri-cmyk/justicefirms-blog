@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Account Settings — JusticeFirms</title>
+    <meta name="description" content="Manage security protocols, 2FA, and notification preferences for your JusticeFirms client account." />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            /* Palette: Midnight Luxury */
+            --bg-body: #020617;
+            --bg-sidebar: #0f172a;
+            --bg-panel: #0b101a;
+            --bg-card: #1e293b;
+            
+            --primary: #ffffff;
+            --secondary: #94a3b8;
+            
+            --accent-gold: #d4af37;
+            --accent-tech: #38bdf8;
+            --accent-danger: #ef4444;
+            --accent-success: #10b981;
+            
+            --border-color: rgba(255, 255, 255, 0.08);
+            
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        html.light-mode {
+            --bg-body: #f8fafc;
+            --bg-sidebar: #e2e8f0;
+            --bg-panel: #f1f5f9;
+            --bg-card: #ffffff;
+            --primary: #0f172a;
+            --secondary: #64748b;
+            --border-color: #cbd5e1;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-body);
+            color: var(--primary);
+            font-family: var(--font-sans);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+            transition: background 0.3s ease;
+        }
+
+        /* --- Layout (Consistent with Dashboard) --- */
+        .layout-container {
+            display: grid; grid-template-columns: 260px 1fr;
+            width: 100%; height: 100%;
+        }
+
+        /* Sidebar */
+        .app-sidebar {
+            background: var(--bg-sidebar); border-right: 1px solid var(--border-color);
+            display: flex; flex-direction: column; z-index: 10;
+        }
+        .sidebar-header {
+            height: 80px; padding: 0 24px; display: flex; align-items: center; gap: 10px;
+            border-bottom: 1px solid var(--border-color); font-weight: 600; font-size: 1.1rem;
+        }
+        .nav-menu { padding: 24px 16px; flex-grow: 1; }
+        .nav-item {
+            display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+            color: var(--secondary); text-decoration: none; border-radius: 6px;
+            margin-bottom: 4px; transition: 0.2s; font-size: 0.9rem;
+        }
+        .nav-item:hover, .nav-item.active { background: rgba(255,255,255,0.05); color: var(--primary); }
+        .nav-item.active { border-left: 3px solid var(--accent-gold); border-radius: 0 6px 6px 0; background: linear-gradient(90deg, rgba(212, 175, 55, 0.1), transparent); }
+
+        /* Main */
+        .main-content {
+            background: var(--bg-panel); display: flex; flex-direction: column; overflow-y: auto;
+        }
+
+        .header-bar {
+            height: 80px; padding: 0 40px; border-bottom: 1px solid var(--border-color);
+            display: flex; align-items: center; justify-content: space-between;
+            background: var(--bg-body); position: sticky; top: 0; z-index: 5;
+        }
+        .page-title { font-size: 1.25rem; font-weight: 600; }
+
+        .settings-container {
+            max-width: 900px; margin: 40px auto; width: 100%; padding: 0 24px 60px;
+        }
+
+        /* --- Settings Sections --- */
+        .settings-group { margin-bottom: 40px; }
+        .group-title { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--secondary); margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+
+        .setting-card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 8px; overflow: hidden;
+        }
+
+        .setting-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 24px; border-bottom: 1px solid var(--border-color);
+        }
+        .setting-row:last-child { border-bottom: none; }
+
+        .setting-info h4 { font-size: 1rem; margin-bottom: 4px; }
+        .setting-info p { font-size: 0.85rem; color: var(--secondary); max-width: 500px; }
+
+        /* Controls */
+        .btn-action {
+            padding: 8px 16px; border: 1px solid var(--border-color);
+            background: transparent; color: var(--primary); border-radius: 4px;
+            cursor: pointer; font-size: 0.85rem; transition: 0.2s;
+        }
+        .btn-action:hover { border-color: var(--accent-tech); color: var(--accent-tech); }
+        
+        .btn-danger { color: var(--accent-danger); border-color: rgba(239, 68, 68, 0.3); }
+        .btn-danger:hover { background: rgba(239, 68, 68, 0.1); border-color: var(--accent-danger); }
+
+        /* Toggle Switch */
+        .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: var(--border-color); transition: .4s; border-radius: 24px;
+        }
+        .slider:before {
+            position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px;
+            background-color: white; transition: .4s; border-radius: 50%;
+        }
+        input:checked + .slider { background-color: var(--accent-success); }
+        input:checked + .slider:before { transform: translateX(20px); }
+
+        /* Session List */
+        .session-list { padding: 0; }
+        .session-item {
+            display: flex; align-items: center; gap: 16px; padding: 20px 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .device-icon { color: var(--secondary); }
+        .session-details { flex-grow: 1; }
+        .session-details h5 { font-size: 0.9rem; margin-bottom: 2px; }
+        .session-meta { font-size: 0.75rem; color: var(--secondary); font-family: var(--font-mono); }
+        .current-badge { 
+            font-size: 0.7rem; background: rgba(16, 185, 129, 0.1); color: var(--accent-success);
+            padding: 2px 6px; border-radius: 4px; margin-left: 8px;
+        }
+
+        @media (max-width: 900px) {
+            .layout-container { grid-template-columns: 1fr; }
+            .app-sidebar { display: none; }
+            .setting-row { flex-direction: column; align-items: flex-start; gap: 16px; }
+            .btn-action { width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="layout-container">
+        
+        <!-- Sidebar -->
+        <aside class="app-sidebar">
+            <div class="sidebar-header">
+                <i data-lucide="scale" color="var(--accent-gold)"></i> JusticeFirms
+            </div>
+            <nav class="nav-menu">
+                <a href="client_dashboard.html" class="nav-item"><i data-lucide="layout-dashboard" size="18"></i> Dashboard</a>
+                <a href="secure_chat.html" class="nav-item"><i data-lucide="message-square-dashed" size="18"></i> Secure Comms</a>
+                <a href="billing_finance.html" class="nav-item"><i data-lucide="receipt" size="18"></i> Retainer & Billing</a>
+                <a href="#" class="nav-item active"><i data-lucide="settings" size="18"></i> Settings</a>
+            </nav>
+        </aside>
+
+        <!-- Main -->
+        <main class="main-content">
+            <header class="header-bar">
+                <div class="page-title">Settings & Privacy</div>
+                <button id="themeToggle" style="background:none; border:none; cursor:pointer; color:var(--secondary);">
+                    <i data-lucide="moon" size="20"></i>
+                </button>
+            </header>
+
+            <div class="settings-container">
+                
+                <!-- Security -->
+                <div class="settings-group">
+                    <h3 class="group-title">Security Protocols</h3>
+                    <div class="setting-card">
+                        
+                        <div class="setting-row">
+                            <div class="setting-info">
+                                <h4>Two-Factor Authentication (2FA)</h4>
+                                <p>Require an authenticator app code for every login attempt.</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="setting-row">
+                            <div class="setting-info">
+                                <h4>Password Rotation</h4>
+                                <p>Last changed: 42 days ago. Mandatory rotation every 90 days.</p>
+                            </div>
+                            <button class="btn-action">Update Password</button>
+                        </div>
+
+                        <div class="setting-row">
+                            <div class="setting-info">
+                                <h4>Biometric Verification</h4>
+                                <p>Use Windows Hello / TouchID for quick document signing.</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Notifications -->
+                <div class="settings-group">
+                    <h3 class="group-title">Notifications</h3>
+                    <div class="setting-card">
+                        <div class="setting-row">
+                            <div class="setting-info">
+                                <h4>Case Updates</h4>
+                                <p>Receive email alerts for new filings and court dates.</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="setting-row">
+                            <div class="setting-info">
+                                <h4>Billing Alerts</h4>
+                                <p>SMS notification when retainer balance drops below 20%.</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sessions -->
+                <div class="settings-group">
+                    <h3 class="group-title">Active Sessions</h3>
+                    <div class="setting-card session-list">
+                        
+                        <div class="session-item">
+                            <i data-lucide="monitor" class="device-icon"></i>
+                            <div class="session-details">
+                                <h5>Chrome on Windows <span class="current-badge">THIS DEVICE</span></h5>
+                                <span class="session-meta">IP: 203.0.113.42 • New Delhi, IN</span>
+                            </div>
+                        </div>
+
+                        <div class="session-item">
+                            <i data-lucide="smartphone" class="device-icon"></i>
+                            <div class="session-details">
+                                <h5>Safari on iPhone 15</h5>
+                                <span class="session-meta">Active 2h ago • Prayagraj, IN</span>
+                            </div>
+                            <button class="btn-action btn-danger" style="font-size:0.75rem; padding:4px 8px;">Revoke</button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Danger Zone -->
+                <div class="settings-group">
+                    <h3 class="group-title" style="color:var(--accent-danger);">Danger Zone</h3>
+                    <div class="setting-card" style="border-color: rgba(239, 68, 68, 0.3);">
+                        <div class="setting-row">
+                            <div class="setting-info">
+                                <h4>Emergency Data Wipe</h4>
+                                <p>Immediately revoke all access and purge local cache from connected devices.</p>
+                            </div>
+                            <button class="btn-action btn-danger">Initiate Wipe</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Theme Logic
+        const themeBtn = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        if (localStorage.getItem('theme') === 'light') {
+            html.classList.add('light-mode');
+            themeBtn.innerHTML = `<i data-lucide="sun" size="20"></i>`;
+        }
+        themeBtn.addEventListener('click', () => {
+            html.classList.toggle('light-mode');
+            const isLight = html.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            themeBtn.innerHTML = `<i data-lucide="${isLight ? 'sun' : 'moon'}" size="20"></i>`;
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
