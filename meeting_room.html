@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secure Consultation — JusticeFirms</title>
+    <meta name="description" content="Encrypted video conferencing suite for attorney-client privileged meetings." />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            /* Palette: Deep Focus */
+            --bg-body: #000000;
+            --bg-interface: #0a0a0a;
+            --bg-overlay: rgba(10, 10, 10, 0.85);
+            
+            --primary: #ffffff;
+            --secondary: #94a3b8;
+            
+            --accent-gold: #d4af37;
+            --accent-tech: #38bdf8;
+            --accent-rec: #ef4444; /* Recording indicator */
+            --accent-safe: #10b981; /* Secure indicator */
+            
+            --border-color: #262626;
+            
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-body);
+            color: var(--primary);
+            font-family: var(--font-sans);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* --- Header --- */
+        .meet-header {
+            height: 60px; background: var(--bg-interface); border-bottom: 1px solid var(--border-color);
+            display: flex; align-items: center; justify-content: space-between; padding: 0 24px;
+            z-index: 10;
+        }
+        
+        .room-info { display: flex; align-items: center; gap: 16px; }
+        .room-title { font-weight: 600; font-size: 0.9rem; color: var(--primary); }
+        .room-timer { font-family: var(--font-mono); font-size: 0.8rem; color: var(--secondary); background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 4px; }
+        
+        .security-status { 
+            display: flex; align-items: center; gap: 8px; font-size: 0.75rem; 
+            text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent-safe);
+            background: rgba(16, 185, 129, 0.1); padding: 6px 12px; border-radius: 100px; border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        /* --- Main Video Area --- */
+        .video-stage {
+            flex-grow: 1; position: relative; background: #000;
+            display: grid; grid-template-columns: 1fr 300px;
+        }
+
+        /* Video Grid */
+        .video-grid {
+            padding: 20px; display: grid; gap: 20px;
+            grid-template-rows: 1fr;
+            /* Auto layout logic would go here in complex app */
+        }
+        
+        .video-card {
+            background: #1a1a1a; border-radius: 8px; overflow: hidden; position: relative;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid var(--border-color);
+        }
+        .video-placeholder {
+            width: 100px; height: 100px; background: var(--border-color); border-radius: 50%;
+            display: grid; place-items: center; font-size: 2rem; color: var(--secondary);
+        }
+        .participant-label {
+            position: absolute; bottom: 16px; left: 16px;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+            padding: 6px 12px; border-radius: 4px; font-size: 0.8rem; display: flex; align-items: center; gap: 8px;
+        }
+        .mic-icon { width: 14px; height: 14px; }
+        .mic-off { color: var(--accent-rec); }
+
+        /* Self View (PIP) */
+        .self-view {
+            position: absolute; bottom: 20px; right: 320px; /* Offset for sidebar */
+            width: 180px; height: 120px; background: #222; border: 1px solid var(--border-color);
+            border-radius: 8px; z-index: 20; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        /* --- Sidebar: Agenda & Notes --- */
+        .meet-sidebar {
+            background: var(--bg-interface); border-left: 1px solid var(--border-color);
+            display: flex; flex-direction: column;
+        }
+        
+        .sidebar-tabs {
+            display: flex; border-bottom: 1px solid var(--border-color);
+        }
+        .tab-btn {
+            flex: 1; padding: 12px; background: none; border: none; color: var(--secondary);
+            font-size: 0.8rem; cursor: pointer; border-bottom: 2px solid transparent; transition: 0.2s;
+        }
+        .tab-btn.active { color: var(--accent-gold); border-bottom-color: var(--accent-gold); background: rgba(212, 175, 55, 0.05); }
+
+        .sidebar-content { flex-grow: 1; padding: 20px; overflow-y: auto; }
+        
+        .agenda-item {
+            display: flex; gap: 12px; margin-bottom: 16px; align-items: flex-start;
+        }
+        .agenda-checkbox {
+            width: 16px; height: 16px; border: 1px solid var(--secondary); border-radius: 3px;
+            flex-shrink: 0; margin-top: 3px; cursor: pointer;
+        }
+        .agenda-checkbox.checked { background: var(--accent-gold); border-color: var(--accent-gold); }
+        .agenda-text { font-size: 0.85rem; color: var(--primary); line-height: 1.4; }
+        .agenda-text.done { text-decoration: line-through; color: var(--secondary); }
+
+        .doc-preview {
+            background: rgba(255,255,255,0.03); border: 1px solid var(--border-color);
+            padding: 12px; border-radius: 6px; margin-top: 8px; cursor: pointer;
+            display: flex; align-items: center; gap: 10px; transition: 0.2s;
+        }
+        .doc-preview:hover { border-color: var(--accent-tech); }
+        .doc-name { font-size: 0.8rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px; }
+
+        /* --- Footer Controls --- */
+        .control-bar {
+            height: 80px; background: var(--bg-interface); border-top: 1px solid var(--border-color);
+            display: flex; align-items: center; justify-content: center; gap: 24px;
+            position: relative; z-index: 30;
+        }
+        
+        .ctrl-btn {
+            width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color); color: var(--primary);
+            display: grid; place-items: center; cursor: pointer; transition: 0.2s;
+        }
+        .ctrl-btn:hover { background: rgba(255,255,255,0.1); transform: scale(1.05); }
+        
+        .ctrl-active { background: var(--primary); color: #000; border-color: var(--primary); }
+        .ctrl-danger { background: var(--accent-rec); color: #fff; border-color: var(--accent-rec); }
+        .ctrl-danger:hover { background: #dc2626; }
+
+        .end-call-wrap { position: absolute; right: 24px; }
+        .leave-btn {
+            padding: 10px 24px; background: rgba(239, 68, 68, 0.1); color: var(--accent-rec);
+            border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 4px; font-weight: 600;
+            font-size: 0.85rem; cursor: pointer; transition: 0.2s; text-decoration: none;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .leave-btn:hover { background: rgba(239, 68, 68, 0.2); }
+
+        /* Alerts */
+        .privilege-toast {
+            position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+            background: rgba(0,0,0,0.8); border: 1px solid var(--accent-gold);
+            padding: 8px 16px; border-radius: 4px; font-size: 0.8rem; color: var(--accent-gold);
+            display: flex; align-items: center; gap: 8px;
+        }
+
+        @media (max-width: 900px) {
+            .video-stage { grid-template-columns: 1fr; }
+            .meet-sidebar { display: none; }
+            .self-view { right: 20px; bottom: 100px; width: 120px; height: 80px; }
+            .control-bar { padding: 0 16px; gap: 16px; justify-content: space-evenly; }
+            .end-call-wrap { position: static; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="meet-header">
+        <div class="room-info">
+            <i data-lucide="scale" size="20" color="var(--accent-gold)"></i>
+            <div>
+                <div class="room-title">Consultation: State vs. Malhotra</div>
+                <div class="room-timer" id="callTimer">00:00:00</div>
+            </div>
+        </div>
+        <div class="security-status">
+            <i data-lucide="shield-check" size="14"></i> Privileged • No Recording
+        </div>
+    </header>
+
+    <!-- Main Stage -->
+    <div class="video-stage">
+        
+        <!-- Video Grid -->
+        <div class="video-grid">
+            <div class="video-card">
+                <!-- Simulation of Attorney Video -->
+                <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&q=80&w=800" style="width:100%; height:100%; object-fit:cover; opacity:0.8;">
+                <div class="participant-label">
+                    <i data-lucide="mic" size="14"></i> Adv. Ganga Shankar (Partner)
+                </div>
+            </div>
+        </div>
+
+        <!-- Self View -->
+        <div class="self-view">
+            <div class="video-placeholder" style="font-size:1rem; width:40px; height:40px;">You</div>
+            <div style="position:absolute; bottom:8px; left:8px; font-size:0.7rem; color:rgba(255,255,255,0.7);">R. Malhotra</div>
+        </div>
+
+        <!-- Privilege Overlay -->
+        <div class="privilege-toast">
+            <i data-lucide="lock" size="14"></i> Attorney-Client Privilege Active
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="meet-sidebar">
+            <div class="sidebar-tabs">
+                <button class="tab-btn active">Agenda</button>
+                <button class="tab-btn">Files</button>
+                <button class="tab-btn">Chat</button>
+            </div>
+            
+            <div class="sidebar-content">
+                <div class="agenda-item">
+                    <div class="agenda-checkbox checked"></div>
+                    <div class="agenda-text done">Review Bail Conditions</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-checkbox"></div>
+                    <div class="agenda-text">Discuss Rejoinder Strategy</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-checkbox"></div>
+                    <div class="agenda-text">
+                        Approve Affidavits
+                        <div class="doc-preview">
+                            <i data-lucide="file-text" size="14" color="var(--accent-tech)"></i>
+                            <span class="doc-name">Affidavit_Draft_v2.pdf</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-checkbox"></div>
+                    <div class="agenda-text">Sign Retainer Extension</div>
+                </div>
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- Controls -->
+    <footer class="control-bar">
+        <button class="ctrl-btn" onclick="toggleState(this, 'mic')"><i data-lucide="mic" size="20"></i></button>
+        <button class="ctrl-btn" onclick="toggleState(this, 'video')"><i data-lucide="video" size="20"></i></button>
+        <button class="ctrl-btn ctrl-active"><i data-lucide="monitor-up" size="20"></i></button>
+        <button class="ctrl-btn"><i data-lucide="message-square" size="20"></i></button>
+        
+        <div class="end-call-wrap">
+            <a href="client_dashboard.html" class="leave-btn">
+                <i data-lucide="phone-off" size="16"></i> Leave Chamber
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Timer Logic
+        let seconds = 0;
+        const timerEl = document.getElementById('callTimer');
+        
+        setInterval(() => {
+            seconds++;
+            const hrs = Math.floor(seconds / 3600);
+            const mins = Math.floor((seconds % 3600) / 60);
+            const secs = seconds % 60;
+            timerEl.innerText = 
+                `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }, 1000);
+
+        // Button Toggle Visuals
+        function toggleState(btn, type) {
+            btn.classList.toggle('ctrl-danger');
+            const icon = btn.querySelector('svg');
+            
+            // Simple icon swap simulation (Lucide creates new SVGs, so we'd re-render in a real app)
+            // Here we just toggle the 'off' aesthetic
+            if (btn.classList.contains('ctrl-danger')) {
+                // Ideally switch icon to mic-off or video-off
+                btn.style.opacity = '0.8';
+            } else {
+                btn.style.opacity = '1';
+            }
+        }
+    </script>
+</body>
+</html>
