@@ -1,15 +1,17 @@
 {
   "name": "JusticeFirms Journal — Indian Law Insights",
   "short_name": "JusticeFirms",
-  "start_url": "/?source=pwa",
-  "scope": "/",
+  "start_url": "https://lex.justicefirms.com/?source=pwa",
+  "scope": "https://lex.justicefirms.com/",
   "display": "standalone",
-  "display_override": ["standalone", "minimal-ui"],
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
   "background_color": "#0B0C0E",
   "theme_color": "#D4AF37",
   "orientation": "portrait-primary",
   "description": "Practical legal insights in English & Hindi on Indian criminal law, NDPS, POCSO, family law, cyber law and civil matters — authored by experienced advocates at JusticeFirms.",
-
   "icons": [
     {
       "src": "/favicon.svg",
@@ -30,14 +32,12 @@
       "purpose": "any maskable"
     }
   ],
-
   "categories": [
     "education",
     "business",
     "productivity",
     "reference"
   ],
-
   "lang": "en-IN",
   "dir": "ltr"
 }
