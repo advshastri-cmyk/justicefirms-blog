@@ -1141,7 +1141,7 @@
         }
 
         // --- 3. MODAL LOGIC ---
-        
+        // --- 3. FIXED MODAL LOGIC (With Full Page Button) ---
         function openModal(article) {
             
             // 1. Writer ka naam aur photo match karne ki list
@@ -1159,7 +1159,14 @@
             // 2. Photo dhoondo (Agar nahi mili to automatic Initials ban jayenge)
             const currentAuthorImg = authorPhotos[article.author] || `https://ui-avatars.com/api/?name=${article.author}&background=D4AF37&color=000`;
 
-            // 3. Modal ka Design (Ab photo ke saath)
+            // 3. Save Data for Full Page View (VERY IMPORTANT)
+            // Ye line data save karegi taaki agla page khul sake
+            localStorage.setItem('currentArticle', JSON.stringify({
+                ...article,
+                authorImg: currentAuthorImg // Photo ka link bhi bhej rahe hain
+            }));
+
+            // 4. Modal ka Design (Button ke saath)
             modalBody.innerHTML = `
                 <div style="display: flex; align-items: center; gap: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 24px; margin-bottom: 32px;">
                     <img src="${currentAuthorImg}" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-gold); object-position: top;">
@@ -1183,8 +1190,27 @@
                 
                 <img src="${article.image}" style="width:100%; height: auto; max-height: 400px; object-fit:cover; border-radius: 4px; margin-bottom: 40px;">
                 
-                <div style="font-size: 1.1rem; line-height: 1.8; color: var(--secondary); font-family: var(--font-sans);">
-                    ${article.content}
+                <div style="font-size: 1.1rem; line-height: 1.8; color: var(--secondary); font-family: var(--font-sans); margin-bottom: 40px;">
+                    ${article.excerpt} 
+                    <br><br>
+                    <span style="opacity: 0.7; font-style: italic;">(Continue reading below...)</span>
+                </div>
+
+                <div style="text-align: center; border-top: 1px solid var(--border-color); padding-top: 32px;">
+                    <a href="article_detail.html" style="
+                        display: inline-block;
+                        background: var(--accent-gold);
+                        color: #000;
+                        padding: 16px 40px;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        letter-spacing: 0.1em;
+                        text-decoration: none;
+                        border-radius: 2px;
+                        transition: 0.3s;
+                    " onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+                        Read Full Article &rarr;
+                    </a>
                 </div>
             `;
             
@@ -1208,7 +1234,6 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeModal();
         });
-
         // --- 4. EVENT LISTENERS ---
 
         // Category Filter
