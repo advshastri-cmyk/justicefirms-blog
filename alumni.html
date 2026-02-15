@@ -4,46 +4,47 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Alumni Network — JusticeFirms</title>
-    <meta name="description" content="The JusticeFirms Alumni Association. Connecting past associates who are now shaping the judiciary, corporate world, and public policy." />
+    <meta name="description" content="The JusticeFirms Alumni Association. Since 2000, connecting legal luminaries shaping India's judiciary, policy, and global corporations." />
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Regal serif + clean sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     
-    <!-- Icons -->
+    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
         :root {
-            /* Palette: Midnight Luxury + Platinum */
-            --bg-body: #020617;
-            --bg-glass: rgba(15, 23, 42, 0.85);
-            --bg-card: rgba(30, 41, 59, 0.4);
+            /* Ultra-premium Indian luxury palette - dark heritage mode */
+            --bg-body: #0a0f1c;               /* Deep midnight navy-black */
+            --bg-glass: rgba(10, 15, 28, 0.88);
+            --bg-card: rgba(20, 28, 50, 0.45);
             
-            --primary: #ffffff;
-            --secondary: #94a3b8;
+            --primary: #f8f1e9;               /* Warm ivory-gold text */
+            --secondary: #c9b8a8;             /* Antique gold-silver */
             
-            --accent-gold: #d4af37;
-            --accent-tech: #38bdf8;
-            --accent-platinum: #e2e8f0; /* Silver/Platinum for Alumni */
+            --accent-gold: #c9a96e;           /* Rich antique gold */
+            --accent-saffron: #b91c1c;        /* Deep saffron red hint */
+            --accent-platinum: #d4af37;       /* Bright premium gold */
             
-            --border-color: rgba(255, 255, 255, 0.08);
+            --border-color: rgba(201, 169, 110, 0.18); /* Subtle gold border */
             
-            --font-serif: 'Playfair Display', serif;
+            --font-serif: 'Cormorant Garamond', serif; /* Regal, classic Indian-inspired serif */
+            --font-heading: 'Playfair Display', serif;
             --font-sans: 'Inter', sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
             
-            --container-width: 1200px;
+            --container-width: 1280px;
         }
 
         html.light-mode {
-            --bg-body: #f8fafc;
-            --bg-glass: rgba(255, 255, 255, 0.9);
+            --bg-body: #fdfaf5;               /* Warm ivory-cream */
+            --bg-glass: rgba(253, 250, 245, 0.92);
             --bg-card: #ffffff;
-            --primary: #0f172a;
-            --secondary: #64748b;
-            --border-color: #e2e8f0;
+            --primary: #1a0f0a;
+            --secondary: #6b5e4e;
+            --border-color: rgba(185, 28, 28, 0.15);
+            --accent-gold: #b8860b;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -52,116 +53,109 @@
             background-color: var(--bg-body);
             color: var(--primary);
             font-family: var(--font-sans);
-            line-height: 1.7;
-            transition: background 0.5s ease, color 0.5s ease;
+            line-height: 1.8;
+            transition: all 0.6s ease;
         }
 
-        h1, h2, h3, h4 { font-family: var(--font-serif); }
-        .mono { font-family: var(--font-mono); font-size: 0.85rem; }
+        h1, h2, h3 { font-family: var(--font-heading); letter-spacing: 0.05em; }
+        .serif { font-family: var(--font-serif); }
 
-        /* --- Nav --- */
+        /* Nav - Fixed, glassmorphic with gold border */
         nav {
             position: fixed; top: 0; width: 100%; z-index: 1000;
-            background: var(--bg-glass); backdrop-filter: blur(20px);
+            background: var(--bg-glass); backdrop-filter: blur(24px);
             border-bottom: 1px solid var(--border-color);
         }
-        .nav-inner { height: 90px; display: flex; align-items: center; justify-content: space-between; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
-        .brand { font-family: var(--font-serif); font-size: 1.75rem; font-weight: 700; display: flex; gap: 8px; text-decoration: none; color: inherit; }
-        .brand span { color: var(--accent-gold); }
-        .nav-links { display: flex; gap: 32px; align-items: center; }
-        .nav-link { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--secondary); text-decoration: none; transition: 0.3s; }
-        .nav-link:hover { color: var(--primary); }
+        .nav-inner { height: 100px; display: flex; align-items: center; justify-content: space-between; max-width: var(--container-width); margin: 0 auto; padding: 0 40px; }
+        .brand { font-family: var(--font-heading); font-size: 2.2rem; font-weight: 700; text-decoration: none; color: var(--accent-gold); display: flex; align-items: center; gap: 12px; }
+        .brand i { color: var(--accent-platinum); }
+        .nav-links { display: flex; gap: 48px; align-items: center; }
+        .nav-link { font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--secondary); text-decoration: none; transition: 0.4s; }
+        .nav-link:hover { color: var(--accent-gold); }
 
-        /* --- Hero --- */
+        /* Hero - Grand, with subtle mandala overlay */
         .alumni-hero {
-            padding: 180px 0 120px;
+            padding: 220px 0 140px;
             text-align: center;
+            background: linear-gradient(to bottom, rgba(201,169,110,0.06) 0%, transparent 70%);
             border-bottom: 1px solid var(--border-color);
-            background: linear-gradient(180deg, rgba(226, 232, 240, 0.05) 0%, transparent 100%);
+            position: relative;
         }
-        .hero-title { font-size: 3.5rem; margin-bottom: 24px; }
-        .hero-desc { max-width: 600px; margin: 0 auto; color: var(--secondary); font-size: 1.1rem; }
+        .hero-title { font-size: 4.8rem; margin-bottom: 28px; color: var(--accent-gold); }
+        .hero-subtitle { font-size: 1.8rem; color: var(--secondary); margin-bottom: 16px; font-family: var(--font-serif); }
+        .hero-desc { max-width: 720px; margin: 0 auto 40px; color: var(--secondary); font-size: 1.15rem; }
         
-        .login-btn {
-            display: inline-flex; align-items: center; gap: 12px;
-            margin-top: 32px; padding: 12px 24px;
-            border: 1px solid var(--accent-platinum);
-            color: var(--primary); text-transform: uppercase; letter-spacing: 0.1em;
-            text-decoration: none; transition: 0.3s; font-size: 0.85rem;
-        }
-        .login-btn:hover { background: var(--accent-platinum); color: #000; }
-
-        /* --- Hall of Fame --- */
-        .hall-section { padding: 100px 0; }
-        .section-header { text-align: center; margin-bottom: 80px; }
-        .section-title { font-size: 2.5rem; margin-bottom: 16px; }
-
-        .fame-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
+        .legacy-badge {
+            font-size: 1.1rem; color: var(--accent-saffron); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 32px;
         }
 
+        .portal-btn {
+            display: inline-flex; align-items: center; gap: 14px;
+            padding: 16px 40px; border: 1px solid var(--accent-gold);
+            color: var(--accent-gold); text-transform: uppercase; letter-spacing: 0.12em;
+            text-decoration: none; transition: 0.4s; font-weight: 500;
+        }
+        .portal-btn:hover { background: var(--accent-gold); color: #0a0f1c; }
+
+        /* Hall of Fame - Ornate cards */
+        .hall-section { padding: 120px 0; }
+        .section-header { text-align: center; margin-bottom: 100px; }
+        .section-title { font-size: 3.2rem; color: var(--accent-gold); margin-bottom: 20px; }
+
+        .fame-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 60px; }
         .fame-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            text-align: center;
-            padding: 40px 24px;
-            transition: 0.3s;
-            position: relative; overflow: hidden;
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            padding: 50px 32px; text-align: center; transition: 0.5s; position: relative;
+            overflow: hidden;
         }
-        .fame-card:hover { transform: translateY(-10px); border-color: var(--accent-platinum); }
-        
-        /* Image Avatar */
+        .fame-card::before {
+            content: ''; position: absolute; inset: 0; opacity: 0.08;
+            background: radial-gradient(circle at center, var(--accent-gold) 0%, transparent 70%);
+            transition: 0.5s;
+        }
+        .fame-card:hover { transform: translateY(-12px); border-color: var(--accent-gold); }
+        .fame-card:hover::before { opacity: 0.15; }
+
         .fame-img {
-            width: 100px; height: 100px; border-radius: 50%;
-            background: var(--border-color); margin: 0 auto 24px;
-            object-fit: cover; filter: grayscale(100%); transition: 0.3s;
+            width: 140px; height: 140px; border-radius: 50%; object-fit: cover;
+            border: 3px solid var(--accent-gold); margin: 0 auto 32px;
+            filter: sepia(0.3); transition: 0.5s;
         }
-        .fame-card:hover .fame-img { filter: grayscale(0%); }
+        .fame-card:hover .fame-img { filter: sepia(0); }
 
-        .fame-name { font-size: 1.5rem; margin-bottom: 8px; }
-        .fame-role { 
-            font-size: 0.75rem; text-transform: uppercase; color: var(--accent-gold); 
-            letter-spacing: 0.1em; margin-bottom: 20px; display: block;
-        }
-        .fame-desc { font-size: 0.9rem; color: var(--secondary); line-height: 1.6; }
-        
-        .tenure-badge {
-            margin-top: 24px; display: inline-block; 
-            font-family: var(--font-mono); font-size: 0.7rem; color: var(--border-color);
-        }
+        .fame-name { font-size: 1.9rem; margin-bottom: 12px; color: var(--primary); }
+        .fame-role { font-size: 1rem; color: var(--accent-saffron); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 24px; display: block; }
+        .fame-desc { font-size: 1rem; color: var(--secondary); line-height: 1.8; }
 
-        /* --- Network Stats --- */
+        .tenure-badge { margin-top: 32px; font-size: 0.85rem; color: var(--secondary); font-family: var(--font-sans); letter-spacing: 0.1em; }
+
+        /* Stats - Grand bar with gold lines */
         .network-bar {
             background: var(--bg-card); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);
-            padding: 40px 0; margin: 80px 0;
+            padding: 80px 0; margin: 100px 0;
         }
-        .network-grid {
-            display: flex; justify-content: space-around; flex-wrap: wrap; gap: 40px;
-            max-width: var(--container-width); margin: 0 auto;
-        }
+        .network-grid { display: flex; justify-content: space-evenly; flex-wrap: wrap; gap: 60px; max-width: var(--container-width); margin: 0 auto; }
         .net-stat { text-align: center; }
-        .net-val { font-size: 2.5rem; font-family: var(--font-mono); color: var(--primary); }
-        .net-label { font-size: 0.8rem; text-transform: uppercase; color: var(--secondary); letter-spacing: 0.1em; }
+        .net-val { font-size: 4rem; font-weight: 700; color: var(--accent-gold); font-family: var(--font-heading); }
+        .net-label { font-size: 1rem; text-transform: uppercase; color: var(--secondary); letter-spacing: 0.2em; margin-top: 12px; }
 
-        /* --- Events / Referral --- */
-        .programs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        
+        /* Programs */
+        .programs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); gap: 60px; }
         .prog-card {
-            border: 1px solid var(--border-color); padding: 40px;
-            display: flex; flex-direction: column; justify-content: center;
+            border: 1px solid var(--border-color); padding: 60px 40px;
+            transition: 0.4s;
         }
-        .prog-icon { color: var(--accent-platinum); margin-bottom: 24px; }
-        .prog-title { font-size: 1.75rem; margin-bottom: 16px; }
-        .prog-text { color: var(--secondary); margin-bottom: 32px; }
-        .prog-link { 
-            color: var(--accent-gold); text-decoration: none; 
-            display: flex; align-items: center; gap: 8px; font-size: 0.9rem; 
-        }
+        .prog-card:hover { border-color: var(--accent-gold); background: rgba(201,169,110,0.04); }
+        .prog-icon { color: var(--accent-gold); margin-bottom: 32px; }
+        .prog-title { font-size: 2.1rem; margin-bottom: 20px; color: var(--primary); }
+        .prog-text { color: var(--secondary); margin-bottom: 40px; font-size: 1.05rem; }
+        .prog-link { color: var(--accent-gold); text-decoration: none; font-size: 1rem; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
+        .prog-link:hover { color: var(--accent-platinum); }
 
-        @media (max-width: 900px) {
-            .fame-grid { grid-template-columns: 1fr; }
-            .programs-grid { grid-template-columns: 1fr; }
-            .network-grid { flex-direction: column; gap: 32px; }
+        @media (max-width: 1024px) {
+            .hero-title { font-size: 3.8rem; }
+            .fame-grid, .programs-grid { grid-template-columns: 1fr; }
+            .network-grid { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
@@ -170,135 +164,132 @@
     <nav>
         <div class="nav-inner">
             <a href="justicefirms_journal.html" class="brand">
-                <i data-lucide="scale" size="24" color="var(--accent-gold)"></i>
+                <i data-lucide="scale" size="32"></i>
                 JusticeFirms
             </a>
             <div class="nav-links">
                 <a href="justicefirms_journal.html" class="nav-link">Journal</a>
                 <a href="careers.html" class="nav-link">Careers</a>
-                <button id="themeToggle" style="background:none; border:none; cursor:pointer; color:var(--secondary);">
-                    <i data-lucide="moon" size="20"></i>
+                <button id="themeToggle" style="background:none;border:none;cursor:pointer;color:var(--secondary);">
+                    <i data-lucide="moon" size="24"></i>
                 </button>
             </div>
         </div>
     </nav>
 
     <header class="alumni-hero">
-        <div class="container">
-            <h1 class="hero-title">Legacy Beyond<br>These Walls</h1>
+        <div style="max-width: var(--container-width); margin: 0 auto; padding: 0 40px;">
+            <div class="legacy-badge">ESTABLISHED 2000</div>
+            <h1 class="hero-title">Parampara<br>Par Excellence</h1>
+            <h2 class="hero-subtitle serif">A Legacy of Legal Eminence</h2>
             <p class="hero-desc">
-                JusticeFirms is more than a workplace; it is a finishing school for the legal elite. Our alumni network spans the Judiciary, Government, and the Fortune 500.
+                Since 2000, JusticeFirms has been the crucible forging India's finest legal minds. Our alumni grace the benches of Supreme & High Courts, advise ministries, and lead global enterprises—bound by an enduring bond of excellence and dharma.
             </p>
-            <a href="#" class="login-btn" onclick="alert('Redirecting to Alumni Portal...')">
-                <i data-lucide="key" size="16"></i> Alumni Portal Login
+            <a href="#" class="portal-btn" onclick="alert('Redirecting to Secure Alumni Portal...')">
+                <i data-lucide="lock-keyhole" size="20"></i> Enter Alumni Sanctum
             </a>
         </div>
     </header>
 
     <!-- Hall of Fame -->
-    <section class="container hall-section">
+    <section class="hall-section" style="max-width: var(--container-width); margin: 0 auto; padding: 0 40px;">
         <div class="section-header">
-            <h2 class="section-title">Distinguished Alumni</h2>
-            <p style="color:var(--secondary);">Leaders who began their journey with us.</p>
+            <h2 class="section-title">Venerated Alumni</h2>
+            <p style="color:var(--secondary); font-size:1.2rem;">Architects of justice and policy who trace their roots to our chambers.</p>
         </div>
 
         <div class="fame-grid">
-            
             <div class="fame-card">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200" class="fame-img" alt="Profile">
-                <h3 class="fame-name">Hon. Justice A.K. Mishra</h3>
-                <span class="fame-role">Elevated to High Court Bench</span>
-                <p class="fame-desc">
-                    Former Senior Partner at JusticeFirms. Renowned for his seminal arguments in constitutional bench matters before his elevation in 2024.
+                <img src="......................................" class="fame-img" alt="Hon. Justice A.K. Srivastava">
+                <h3 class="fame-name">Hon'ble A.K. Srivastava</h3>
+                <span class="fame-role">High Court Judge</span>
+                <p class="fame-desc serif">
+                    A pillar of constitutional jurisprudence; elevated after distinguished tenure as Senior Partner. His arguments continue to echo in landmark verdicts.
                 </p>
-                <span class="tenure-badge">TENURE: 1998 - 2024</span>
+                <span class="tenure-badge">1998 – 2024</span>
             </div>
 
             <div class="fame-card">
-                <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=200" class="fame-img" alt="Profile">
-                <h3 class="fame-name">Sarah Jenkins</h3>
-                <span class="fame-role">General Counsel, FinTech Unicorn</span>
-                <p class="fame-desc">
-                    Started as an Associate in our Corporate Wing. Now leads global compliance for one of India's largest digital payment processors.
+                <img src="............................................................." class="fame-img" alt="Sarah Jenkins">
+                <h3 class="fame-name">Sarah Nomani</h3>
+                <span class="fame-role">General Counsel, Leading FinTech</span>
+                <p class="fame-desc serif">
+                    From corporate associate to steering compliance for India's premier digital payments giant—embodying global vision rooted in Indian ethos.
                 </p>
-                <span class="tenure-badge">TENURE: 2012 - 2018</span>
+                <span class="tenure-badge">2012 – 2018</span>
             </div>
 
             <div class="fame-card">
-                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=200" class="fame-img" alt="Profile">
+                <img src="............................................................." class="fame-img" alt="Rohan Gupta">
                 <h3 class="fame-name">Rohan Gupta</h3>
-                <span class="fame-role">Policy Advisor, PMO</span>
-                <p class="fame-desc">
-                    A tech-law pioneer during his time at the firm. Now advises the Prime Minister's Office on Digital India frameworks and AI regulation.
+                <span class="fame-role">Senior Policy Advisor, Office</span>
+                <p class="fame-desc serif">
+                    Tech-law visionary; now shapes Digital India and AI governance frameworks with unmatched insight.
                 </p>
-                <span class="tenure-badge">TENURE: 2015 - 2020</span>
+                <span class="tenure-badge">2015 – 2020</span>
             </div>
-
         </div>
     </section>
 
-    <!-- Stats -->
+    <!-- Network Stats -->
     <section class="network-bar">
         <div class="network-grid">
             <div class="net-stat">
-                <div class="net-val">450+</div>
-                <div class="net-label">Alumni Worldwide</div>
+                <div class="net-val">50+</div>
+                <div class="net-label">Global Alumni</div>
             </div>
             <div class="net-stat">
-                <div class="net-val">12</div>
+                <div class="net-val">4</div>
                 <div class="net-label">Countries</div>
             </div>
             <div class="net-stat">
-                <div class="net-val">28</div>
-                <div class="net-label">Judicial Appointments</div>
+                <div class="net-val">12</div>
+                <div class="net-label">Judicial Elevations</div>
             </div>
         </div>
     </section>
 
     <!-- Programs -->
-    <section class="container hall-section">
+    <section style="max-width: var(--container-width); margin: 0 auto; padding: 120px 40px;">
         <div class="programs-grid">
-            
             <div class="prog-card">
-                <i data-lucide="calendar-heart" class="prog-icon" size="32"></i>
-                <h3 class="prog-title">Winter Gala 2026</h3>
-                <p class="prog-text">
-                    Our annual reunion dinner will be held at the Imperial Hotel, New Delhi. An evening of networking, nostalgia, and celebrating the year's achievements.
+                <i data-lucide="calendar-heart" class="prog-icon" size="48"></i>
+                <h3 class="prog-title">Varshik Sammelan 2026</h3>
+                <p class="prog-text serif">
+                    Annual grand reunion at The Imperial, New Delhi—an evening steeped in tradition, networking, and honouring milestones of our fraternity.
                 </p>
-                <a href="#" class="prog-link">RSVP via Portal <i data-lucide="arrow-right" size="16"></i></a>
+                <a href="#" class="prog-link">RSVP through Portal <i data-lucide="arrow-right" size="18"></i></a>
             </div>
 
             <div class="prog-card">
-                <i data-lucide="users-round" class="prog-icon" size="32"></i>
-                <h3 class="prog-title">Referral Network</h3>
-                <p class="prog-text">
-                    Alumni retain "Of Counsel" privileges for conflict checks and specialized referrals. Connect your current organization with JusticeFirms' expertise.
+                <i data-lucide="users-round" class="prog-icon" size="48"></i>
+                <h3 class="prog-title">Guru-Shishya Referral Circle</h3>
+                <p class="prog-text serif">
+                    Alumni enjoy lifelong "Of Counsel" status—seamless referrals, conflict guidance, and collaboration rooted in mutual respect and legacy.
                 </p>
-                <a href="#" class="prog-link">Access Directory <i data-lucide="arrow-right" size="16"></i></a>
+                <a href="#" class="prog-link">Access Directory <i data-lucide="arrow-right" size="18"></i></a>
             </div>
-
         </div>
     </section>
 
-    <footer style="text-align: center; padding: 40px; border-top: 1px solid var(--border-color); color: var(--secondary); font-size: 0.8rem;">
-        <p>© 2026 JusticeFirms Alumni Association.</p>
+    <footer style="text-align: center; padding: 80px 40px; border-top: 1px solid var(--border-color); color: var(--secondary); font-size: 0.95rem;">
+        <p>© 2026 JusticeFirms Alumni Association. Est. 2000. Satyameva Jayate.</p>
     </footer>
 
     <script>
         lucide.createIcons();
 
-        // Theme Logic
         const themeBtn = document.getElementById('themeToggle');
         const html = document.documentElement;
         if (localStorage.getItem('theme') === 'light') {
             html.classList.add('light-mode');
-            themeBtn.innerHTML = `<i data-lucide="sun" size="20"></i>`;
+            themeBtn.innerHTML = `<i data-lucide="sun" size="24"></i>`;
         }
         themeBtn.addEventListener('click', () => {
             html.classList.toggle('light-mode');
             const isLight = html.classList.contains('light-mode');
             localStorage.setItem('theme', isLight ? 'light' : 'dark');
-            themeBtn.innerHTML = `<i data-lucide="${isLight ? 'sun' : 'moon'}" size="20"></i>`;
+            themeBtn.innerHTML = `<i data-lucide="${isLight ? 'sun' : 'moon'}" size="24"></i>`;
             lucide.createIcons();
         });
     </script>
